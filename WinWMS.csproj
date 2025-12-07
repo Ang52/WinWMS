@@ -14,4 +14,40 @@
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.27" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="WinWMS\Report.rdlc">
+      <LogicalName>WinWMS.Report.rdlc</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="WinWMS\MonthlyReportForm.Designer.cs">
+      <DependentUpon>MonthlyReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\OutboundQueryForm.Designer.cs">
+      <DependentUpon>OutboundQueryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\InboundQueryForm.Designer.cs">
+      <DependentUpon>InboundQueryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\InventoryQueryForm.Designer.cs">
+      <DependentUpon>InventoryQueryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\OutboundForm.Designer.cs">
+      <DependentUpon>OutboundForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\InboundForm.Designer.cs">
+      <DependentUpon>InboundForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\WarehouseManagementForm.Designer.cs">
+      <DependentUpon>WarehouseManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\MaterialManagementForm.Designer.cs">
+      <DependentUpon>MaterialManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WinWMS\UserManagementForm.Designer.cs">
+      <DependentUpon>UserManagementForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

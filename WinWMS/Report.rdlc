@@ -107,6 +107,7 @@
                   <TextRun>
                     <Value>仓储管理月度报表</Value>
                     <Style>
+                      <FontFamily>SimSun</FontFamily>
                       <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -140,6 +141,7 @@
                   <TextRun>
                     <Value>=Parameters!ReportMonth.Value</Value>
                     <Style>
+                      <FontFamily>SimSun</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -192,6 +194,7 @@
                                 <TextRun>
                                   <Value>物料名称</Value>
                                   <Style>
+                                    <FontFamily>SimSun</FontFamily>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -224,6 +227,7 @@
                                 <TextRun>
                                   <Value>总数量</Value>
                                   <Style>
+                                    <FontFamily>SimSun</FontFamily>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -256,6 +260,7 @@
                                 <TextRun>
                                   <Value>总金额</Value>
                                   <Style>
+                                    <FontFamily>SimSun</FontFamily>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -292,7 +297,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!name.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>SimSun</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -322,7 +329,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!TotalQuantity.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>SimSun</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -353,6 +362,7 @@
                                 <TextRun>
                                   <Value>=Fields!TotalAmount.Value</Value>
                                   <Style>
+                                    <FontFamily>SimSun</FontFamily>
                                     <Format>C2</Format>
                                   </Style>
                                 </TextRun>
@@ -415,6 +425,7 @@
                   <TextRun>
                     <Value>月入库汇总</Value>
                     <Style>
+                      <FontFamily>SimSun</FontFamily>
                       <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -428,6 +439,39 @@
             <Height>0.25in</Height>
             <Width>7.5in</Width>
             <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>月出库汇总</Value>
+                    <Style>
+                      <FontFamily>SimSun</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>4.1in</Top>
+            <Height>0.25in</Height>
+            <Width>7.5in</Width>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>

@@ -1,19 +1,19 @@
-using MySql.Data.MySqlClient;
+锘縰sing MySql.Data.MySqlClient;
 using System.Data;
 
 namespace WinWMS
 {
     public class DbHelper
     {
-        // 请根据你的MySQL设置修改此连接字符串
-        private static readonly string connectionString = "server=dbserver.erosli.com;port=3306;user=WinWMS;password=Li123456;database=winwms;";
+        // 璇锋牴鎹綘鐨凪ySQL璁剧疆淇敼姝よ繛鎺ュ瓧绗︿覆
+        private static readonly string connectionString = "server=dbserver.erosli.com;port=3306;user=WinWMS;password=Li123456;database=winwms;charset=utf8;";
 
         public static MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);
         }
 
-        public static DataTable ExecuteQuery(string query, MySqlParameter[] parameters = null)
+        public static DataTable ExecuteQuery(string query, MySqlParameter[]? parameters = null)
         {
             using (MySqlConnection connection = GetConnection())
             {
@@ -33,7 +33,7 @@ namespace WinWMS
             }
         }
 
-        public static int ExecuteNonQuery(string query, MySqlParameter[] parameters = null)
+        public static int ExecuteNonQuery(string query, MySqlParameter[]? parameters = null)
         {
             using (MySqlConnection connection = GetConnection())
             {

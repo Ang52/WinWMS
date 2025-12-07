@@ -78,7 +78,7 @@
             // 
             infoManagementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { materialManagementToolStripMenuItem, warehouseManagementToolStripMenuItem });
             infoManagementToolStripMenuItem.Name = "infoManagementToolStripMenuItem";
-            infoManagementToolStripMenuItem.Size = new Size(97, 24);
+            infoManagementToolStripMenuItem.Size = new Size(83, 20);
             infoManagementToolStripMenuItem.Text = "信息管理(&I)";
             // 
             // materialManagementToolStripMenuItem
@@ -116,7 +116,7 @@
             // 
             queryAndReportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { inventoryQueryToolStripMenuItem, inboundQueryToolStripMenuItem, outboundQueryToolStripMenuItem, monthlyReportToolStripMenuItem });
             queryAndReportsToolStripMenuItem.Name = "queryAndReportsToolStripMenuItem";
-            queryAndReportsToolStripMenuItem.Size = new Size(120, 24);
+            queryAndReportsToolStripMenuItem.Size = new Size(88, 20);
             queryAndReportsToolStripMenuItem.Text = "查询与报表(&Q)";
             // 
             // inventoryQueryToolStripMenuItem
@@ -128,13 +128,13 @@
             // inboundQueryToolStripMenuItem
             // 
             inboundQueryToolStripMenuItem.Name = "inboundQueryToolStripMenuItem";
-            inboundQueryToolStripMenuItem.Size = new Size(177, 26);
+            inboundQueryToolStripMenuItem.Size = new Size(142, 22);
             inboundQueryToolStripMenuItem.Text = "入库查询(&N)";
             // 
             // outboundQueryToolStripMenuItem
             // 
             outboundQueryToolStripMenuItem.Name = "outboundQueryToolStripMenuItem";
-            outboundQueryToolStripMenuItem.Size = new Size(177, 26);
+            outboundQueryToolStripMenuItem.Size = new Size(142, 22);
             outboundQueryToolStripMenuItem.Text = "出库查询(&O)";
             // 
             // monthlyReportToolStripMenuItem

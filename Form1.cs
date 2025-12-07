@@ -11,6 +11,27 @@ namespace WinWMS
             inboundToolStripMenuItem.Click += InboundToolStripMenuItem_Click;
             outboundToolStripMenuItem.Click += OutboundToolStripMenuItem_Click;
             inventoryQueryToolStripMenuItem.Click += InventoryQueryToolStripMenuItem_Click;
+            inboundQueryToolStripMenuItem.Click += InboundQueryToolStripMenuItem_Click;
+            outboundQueryToolStripMenuItem.Click += OutboundQueryToolStripMenuItem_Click;
+            monthlyReportToolStripMenuItem.Click += MonthlyReportToolStripMenuItem_Click;
+        }
+
+        private void MonthlyReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MonthlyReportForm monthlyReportForm = new MonthlyReportForm();
+            monthlyReportForm.ShowDialog();
+        }
+
+        private void OutboundQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OutboundQueryForm outboundQueryForm = new OutboundQueryForm();
+            outboundQueryForm.ShowDialog();
+        }
+
+        private void InboundQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InboundQueryForm inboundQueryForm = new InboundQueryForm();
+            inboundQueryForm.ShowDialog();
         }
 
         private void InventoryQueryToolStripMenuItem_Click(object sender, EventArgs e)

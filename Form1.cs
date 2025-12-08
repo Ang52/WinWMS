@@ -78,6 +78,7 @@ namespace WinWMS
             lblPageTitle.Text = "欢迎使用仓储管理系统";
             mainPanel.Controls.Clear();
 
+            // 主容器面板 - 浅灰色背景
             Panel welcomePanel = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -85,106 +86,276 @@ namespace WinWMS
                 AutoScroll = true
             };
 
+            // 内容容器 - 用于整体布局
+            Panel contentContainer = new Panel
+            {
+                BackColor = Color.White,
+                AutoScroll = false
+            };
+
+            // 标题
             Label lblWelcome = new Label
             {
                 Text = "欢迎使用 WinWMS 仓储管理系统 ✨",
-                Font = new Font("Microsoft YaHei UI", 28, FontStyle.Bold),
+                Font = new Font("Microsoft YaHei UI", 24, FontStyle.Bold),
                 ForeColor = Color.FromArgb(219, 112, 147),
                 AutoSize = true,
-                Location = new Point(80, 60)
-            };
-
-            Label lblDescription = new Label
-            {
-                Text = "现代化粉色主题 · 响应式设计 · 优雅的仓储管理",
-                Font = new Font("Microsoft YaHei UI", 14),
-                ForeColor = Color.FromArgb(255, 105, 180),
-                AutoSize = true,
-                Location = new Point(80, 120)
-            };
-
-            TableLayoutPanel cardsPanel = new TableLayoutPanel
-            {
-                Location = new Point(40, 180),
-                Size = new Size(1000, 400),
-                ColumnCount = 3,
-                RowCount = 2,
-                Padding = new Padding(20)
-            };
-
-            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
-            cardsPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
-            cardsPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
-
-            cardsPanel.Controls.Add(CreateImageCard("📥", "入库管理", "快速记录物资入库信息", Color.FromArgb(255, 182, 193)), 0, 0);
-            cardsPanel.Controls.Add(CreateImageCard("📤", "出库管理", "高效处理物资出库流程", Color.FromArgb(255, 192, 203)), 1, 0);
-            cardsPanel.Controls.Add(CreateImageCard("📊", "数据查询", "实时查询库存和记录", Color.FromArgb(255, 218, 224)), 2, 0);
-            cardsPanel.Controls.Add(CreateImageCard("📈", "报表分析", "生成月度统计报表", Color.FromArgb(255, 182, 193)), 0, 1);
-            cardsPanel.Controls.Add(CreateImageCard("📦", "物资管理", "管理所有物资信息", Color.FromArgb(255, 192, 203)), 1, 1);
-            cardsPanel.Controls.Add(CreateImageCard("👥", "用户管理", "系统用户权限管理", Color.FromArgb(255, 218, 224)), 2, 1);
-
-            Label lblFooter = new Label
-            {
-                Text = "💡 提示：请从左侧菜单选择功能开始使用 | 支持多分辨率自适应",
-                Font = new Font("Microsoft YaHei UI", 11),
-                ForeColor = Color.FromArgb(180, 180, 180),
-                AutoSize = true,
-                Location = new Point(80, 600)
-            };
-
-            welcomePanel.Controls.Add(lblWelcome);
-            welcomePanel.Controls.Add(lblDescription);
-            welcomePanel.Controls.Add(cardsPanel);
-            welcomePanel.Controls.Add(lblFooter);
-            mainPanel.Controls.Add(welcomePanel);
-        }
-
-        private Panel CreateImageCard(string icon, string title, string description, Color bgColor)
-        {
-            Panel card = new Panel { Dock = DockStyle.Fill, BackColor = bgColor, Margin = new Padding(10), Cursor = Cursors.Hand };
-
-            Label lblIcon = new Label
-            {
-                Text = icon,
-                Font = new Font("Segoe UI Emoji", 48),
-                ForeColor = Color.White,
-                Size = new Size(100, 80),
                 TextAlign = ContentAlignment.MiddleCenter
             };
 
-            Label lblTitle = new Label
+            // 描述
+            Label lblDescription = new Label
             {
-                Text = title,
-                Font = new Font("Microsoft YaHei UI", 13, FontStyle.Bold),
-                ForeColor = Color.White,
-                Size = new Size(260, 25),
-                TextAlign = ContentAlignment.MiddleCenter,
-                Location = new Point(10, 100)
+                Text = "现代化粉色主题 · 响应式设计 · 优雅的仓储管理",
+                Font = new Font("Microsoft YaHei UI", 12),
+                ForeColor = Color.FromArgb(255, 105, 180),
+                AutoSize = true,
+                TextAlign = ContentAlignment.MiddleCenter
             };
 
+            // 卡片网格容器 - 固定3列2行
+            TableLayoutPanel cardsPanel = new TableLayoutPanel
+            {
+                ColumnCount = 3,
+                RowCount = 2,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
+                BackColor = Color.Transparent
+            };
+
+            // 设置列样式 - 每列33.33%
+            cardsPanel.ColumnStyles.Clear();
+            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.34F));
+
+            // 设置行样式 - 每行50%
+            cardsPanel.RowStyles.Clear();
+            cardsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            cardsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+
+            // 卡片数据
+            var cards = new[]
+            {
+                new { Icon = "📥", Title = "入库管理", Desc = "快速记录物资入库信息", Color = Color.FromArgb(255, 182, 193) },
+                new { Icon = "📤", Title = "出库管理", Desc = "高效处理物资出库流程", Color = Color.FromArgb(255, 192, 203) },
+                new { Icon = "📊", Title = "数据查询", Desc = "实时查询库存和记录", Color = Color.FromArgb(255, 218, 224) },
+                new { Icon = "📈", Title = "报表分析", Desc = "生成月度统计报表", Color = Color.FromArgb(255, 182, 193) },
+                new { Icon = "📦", Title = "物资管理", Desc = "管理所有物资信息", Color = Color.FromArgb(255, 192, 203) },
+                new { Icon = "👥", Title = "用户管理", Desc = "系统用户权限管理", Color = Color.FromArgb(255, 218, 224) }
+            };
+
+            // 添加卡片到网格 - 按行填充
+            for (int i = 0; i < cards.Length; i++)
+            {
+                int row = i / 3;
+                int col = i % 3;
+                var card = cards[i];
+                var cardPanel = CreateFixedGridCard(card.Icon, card.Title, card.Desc, card.Color);
+                cardsPanel.Controls.Add(cardPanel, col, row);
+            }
+
+            // 页脚提示
+            Label lblFooter = new Label
+            {
+                Text = "💡 提示：请从左侧菜单选择功能开始使用 | 支持多分辨率自适应",
+                Font = new Font("Microsoft YaHei UI", 10),
+                ForeColor = Color.FromArgb(180, 180, 180),
+                AutoSize = true,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
+            // 添加控件到容器
+            contentContainer.Controls.Add(lblWelcome);
+            contentContainer.Controls.Add(lblDescription);
+            contentContainer.Controls.Add(cardsPanel);
+            contentContainer.Controls.Add(lblFooter);
+
+            welcomePanel.Controls.Add(contentContainer);
+            mainPanel.Controls.Add(welcomePanel);
+
+            // 布局计算和调整
+            welcomePanel.Resize += (s, e) => 
+            {
+                UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
+            };
+
+            // 初始布局
+            welcomePanel.PerformLayout();
+            UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
+        }
+
+        private void UpdateWelcomeLayout(Panel welcomePanel, Panel contentContainer, 
+            Label lblWelcome, Label lblDescription, TableLayoutPanel cardsPanel, Label lblFooter)
+        {
+            if (welcomePanel.Width <= 0 || welcomePanel.Height <= 0) return;
+
+            // 计算可用空间
+            int availableWidth = welcomePanel.ClientSize.Width;
+            int availableHeight = welcomePanel.ClientSize.Height;
+
+            // 卡片网格尺寸计算 - 保持合理比例
+            int gridWidth = Math.Min(availableWidth - 80, 1000); // 最大宽度1000，两侧留40边距
+            int cardWidth = (gridWidth - 60) / 3; // 3列，每列间距10px，左右各10px
+            int cardHeight = (int)(cardWidth * 0.75); // 保持4:3比例
+            int gridHeight = cardHeight * 2 + 20; // 2行 + 间距
+
+            // 确保最小尺寸
+            cardWidth = Math.Max(cardWidth, 200);
+            cardHeight = Math.Max(cardHeight, 150);
+            gridWidth = cardWidth * 3 + 60;
+            gridHeight = cardHeight * 2 + 20;
+
+            // 设置卡片网格大小和位置
+            cardsPanel.Size = new Size(gridWidth, gridHeight);
+
+            // 计算内容总高度
+            int spacing = 20;
+            int totalContentHeight = lblWelcome.Height + spacing + 
+                                     lblDescription.Height + spacing * 2 + 
+                                     gridHeight + spacing * 2 + 
+                                     lblFooter.Height;
+
+            // 垂直居中
+            int topMargin = Math.Max(30, (availableHeight - totalContentHeight) / 2);
+            
+            // 设置容器大小和位置
+            contentContainer.Size = new Size(availableWidth, totalContentHeight + topMargin + 30);
+            contentContainer.Location = new Point(0, 0);
+
+            // 水平居中各个元素
+            int centerX = availableWidth / 2;
+
+            lblWelcome.Location = new Point(centerX - lblWelcome.Width / 2, topMargin);
+            lblDescription.Location = new Point(centerX - lblDescription.Width / 2, lblWelcome.Bottom + spacing);
+            cardsPanel.Location = new Point(centerX - gridWidth / 2, lblDescription.Bottom + spacing * 2);
+            lblFooter.Location = new Point(centerX - lblFooter.Width / 2, cardsPanel.Bottom + spacing * 2);
+
+            // 刷新卡片显示
+            foreach (Control card in cardsPanel.Controls)
+            {
+                if (card is Panel cardPanel && cardPanel.Tag != null)
+                {
+                    UpdateCardSize(cardPanel, cardWidth, cardHeight);
+                }
+            }
+        }
+
+        private Panel CreateFixedGridCard(string icon, string title, string description, Color bgColor)
+        {
+            Panel card = new Panel
+            {
+                BackColor = bgColor,
+                Margin = new Padding(10),
+                Cursor = Cursors.Hand,
+                Dock = DockStyle.Fill,
+                Tag = new { Icon = icon, Title = title, Description = description, BgColor = bgColor, OriginalColor = bgColor }
+            };
+
+            // 图标
+            Label lblIcon = new Label
+            {
+                Name = "lblIcon",
+                Text = icon,
+                ForeColor = Color.White,
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = Color.Transparent
+            };
+
+            // 标题
+            Label lblTitle = new Label
+            {
+                Name = "lblTitle",
+                Text = title,
+                ForeColor = Color.White,
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = Color.Transparent
+            };
+
+            // 描述
             Label lblDesc = new Label
             {
+                Name = "lblDesc",
                 Text = description,
-                Font = new Font("Microsoft YaHei UI", 9),
                 ForeColor = Color.White,
-                Size = new Size(260, 35),
+                AutoSize = false,
                 TextAlign = ContentAlignment.TopCenter,
-                Location = new Point(10, 130)
+                BackColor = Color.Transparent
             };
 
             card.Controls.Add(lblIcon);
             card.Controls.Add(lblTitle);
             card.Controls.Add(lblDesc);
 
-            card.Resize += (s, e) => lblIcon.Location = new Point((card.Width - 100) / 2, 15);
+            // 悬停效果 - 避免抖动
+            Color hoverColor = Color.FromArgb(
+                Math.Max(0, bgColor.R - 20),
+                Math.Max(0, bgColor.G - 20),
+                Math.Max(0, bgColor.B - 20)
+            );
 
-            Color hoverColor = Color.FromArgb(Math.Max(0, bgColor.R - 20), Math.Max(0, bgColor.G - 20), Math.Max(0, bgColor.B - 20));
-            card.MouseEnter += (s, e) => card.BackColor = hoverColor;
-            card.MouseLeave += (s, e) => card.BackColor = bgColor;
+            EventHandler mouseEnter = (s, e) => { card.BackColor = hoverColor; };
+            EventHandler mouseLeave = (s, e) => { card.BackColor = bgColor; };
+
+            card.MouseEnter += mouseEnter;
+            card.MouseLeave += mouseLeave;
+
+            // 子控件也响应鼠标事件，但不改变卡片大小（避免抖动）
+            foreach (Control ctrl in card.Controls)
+            {
+                ctrl.MouseEnter += mouseEnter;
+                ctrl.MouseLeave += mouseLeave;
+            }
 
             return card;
+        }
+
+        private void UpdateCardSize(Panel card, int width, int height)
+        {
+            // 更新卡片内部控件的大小和位置
+            foreach (Control ctrl in card.Controls)
+            {
+                if (ctrl is Label lbl)
+                {
+                    if (lbl.Name == "lblIcon")
+                    {
+                        lbl.Font = new Font("Segoe UI Emoji", Math.Max(32, height / 5));
+                        lbl.Size = new Size(width - 20, (int)(height * 0.45));
+                        lbl.Location = new Point(10, (int)(height * 0.1));
+                    }
+                    else if (lbl.Name == "lblTitle")
+                    {
+                        lbl.Font = new Font("Microsoft YaHei UI", Math.Max(11, width / 22), FontStyle.Bold);
+                        lbl.Size = new Size(width - 20, (int)(height * 0.15));
+                        lbl.Location = new Point(10, (int)(height * 0.55));
+                    }
+                    else if (lbl.Name == "lblDesc")
+                    {
+                        lbl.Font = new Font("Microsoft YaHei UI", Math.Max(8, width / 30));
+                        lbl.Size = new Size(width - 20, (int)(height * 0.25));
+                        lbl.Location = new Point(10, (int)(height * 0.70));
+                    }
+                }
+            }
+        }
+
+        private void RepositionContent(Panel contentPanel, Label lblWelcome, Label lblDescription, 
+            FlowLayoutPanel cardsContainer, Label lblFooter)
+        {
+            // 保留此方法以防编译错误，但不再使用
+        }
+
+        private Panel CreateResponsiveCard(string icon, string title, string description, Color bgColor)
+        {
+            // 保留此方法以防编译错误，使用新的固定网格方法
+            return CreateFixedGridCard(icon, title, description, bgColor);
+        }
+
+        private Panel CreateImageCard(string icon, string title, string description, Color bgColor)
+        {
+            // 保留旧方法以保持兼容性
+            return CreateFixedGridCard(icon, title, description, bgColor);
         }
 
         private void SetupButtonHoverEffects()

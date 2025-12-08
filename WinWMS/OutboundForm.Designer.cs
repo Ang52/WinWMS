@@ -33,6 +33,7 @@
             // 
             // formPanel
             // 
+            formPanel.Anchor = AnchorStyles.None;
             formPanel.BackColor = Color.White;
             formPanel.Controls.Add(txtRemark);
             formPanel.Controls.Add(lblRemark);
@@ -43,106 +44,113 @@
             formPanel.Controls.Add(lblWarehouse);
             formPanel.Controls.Add(cmbMaterial);
             formPanel.Controls.Add(lblMaterial);
-            formPanel.Location = new Point(50, 30);
+            formPanel.Location = new Point(250, 100);
+            formPanel.MaximumSize = new Size(600, 450);
+            formPanel.MinimumSize = new Size(450, 400);
             formPanel.Name = "formPanel";
-            formPanel.Padding = new Padding(30);
+            formPanel.Padding = new Padding(40);
             formPanel.Size = new Size(500, 400);
             formPanel.TabIndex = 0;
             // 
             // txtRemark
             // 
-            txtRemark.Font = new Font("Microsoft YaHei UI", 10F);
-            txtRemark.Location = new Point(130, 200);
+            txtRemark.BorderStyle = BorderStyle.FixedSingle;
+            txtRemark.Font = new Font("Microsoft YaHei UI", 11F);
+            txtRemark.Location = new Point(140, 195);
             txtRemark.Multiline = true;
             txtRemark.Name = "txtRemark";
-            txtRemark.PlaceholderText = "可选填写备注信息";
-            txtRemark.Size = new Size(340, 80);
+            txtRemark.PlaceholderText = "可选填写备注信息...";
+            txtRemark.Size = new Size(320, 85);
             txtRemark.TabIndex = 3;
             // 
             // lblRemark
             // 
             lblRemark.AutoSize = true;
-            lblRemark.Font = new Font("Microsoft YaHei UI", 10F);
+            lblRemark.Font = new Font("Microsoft YaHei UI", 11F);
             lblRemark.ForeColor = Color.FromArgb(64, 64, 64);
-            lblRemark.Location = new Point(30, 203);
+            lblRemark.Location = new Point(40, 198);
             lblRemark.Name = "lblRemark";
-            lblRemark.Size = new Size(58, 24);
+            lblRemark.Size = new Size(69, 20);
             lblRemark.TabIndex = 8;
             lblRemark.Text = "备注：";
             // 
             // btnOutbound
             // 
-            btnOutbound.BackColor = Color.FromArgb(0, 122, 204);
+            btnOutbound.BackColor = Color.FromArgb(255, 105, 180);  // 深粉色按钮
+            btnOutbound.Cursor = Cursors.Hand;
             btnOutbound.FlatAppearance.BorderSize = 0;
             btnOutbound.FlatStyle = FlatStyle.Flat;
-            btnOutbound.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
+            btnOutbound.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold);
             btnOutbound.ForeColor = Color.White;
-            btnOutbound.Location = new Point(130, 315);
+            btnOutbound.Location = new Point(130, 310);
             btnOutbound.Name = "btnOutbound";
-            btnOutbound.Size = new Size(240, 45);
+            btnOutbound.Size = new Size(250, 50);
             btnOutbound.TabIndex = 4;
             btnOutbound.Text = "✓ 确认出库";
             btnOutbound.UseVisualStyleBackColor = false;
             // 
             // numQuantity
             // 
-            numQuantity.Font = new Font("Microsoft YaHei UI", 10F);
-            numQuantity.Location = new Point(130, 145);
+            numQuantity.BorderStyle = BorderStyle.FixedSingle;
+            numQuantity.Font = new Font("Microsoft YaHei UI", 11F);
+            numQuantity.Location = new Point(140, 140);
             numQuantity.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numQuantity.Name = "numQuantity";
-            numQuantity.Size = new Size(340, 30);
+            numQuantity.Size = new Size(320, 26);
             numQuantity.TabIndex = 2;
             // 
             // lblQuantity
             // 
             lblQuantity.AutoSize = true;
-            lblQuantity.Font = new Font("Microsoft YaHei UI", 10F);
+            lblQuantity.Font = new Font("Microsoft YaHei UI", 11F);
             lblQuantity.ForeColor = Color.FromArgb(64, 64, 64);
-            lblQuantity.Location = new Point(30, 148);
+            lblQuantity.Location = new Point(40, 143);
             lblQuantity.Name = "lblQuantity";
-            lblQuantity.Size = new Size(93, 24);
+            lblQuantity.Size = new Size(99, 20);
             lblQuantity.TabIndex = 7;
             lblQuantity.Text = "出库数量：";
             // 
             // cmbWarehouse
             // 
             cmbWarehouse.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbWarehouse.Font = new Font("Microsoft YaHei UI", 10F);
+            cmbWarehouse.FlatStyle = FlatStyle.Flat;
+            cmbWarehouse.Font = new Font("Microsoft YaHei UI", 11F);
             cmbWarehouse.FormattingEnabled = true;
-            cmbWarehouse.Location = new Point(130, 90);
+            cmbWarehouse.Location = new Point(140, 88);
             cmbWarehouse.Name = "cmbWarehouse";
-            cmbWarehouse.Size = new Size(340, 32);
+            cmbWarehouse.Size = new Size(320, 28);
             cmbWarehouse.TabIndex = 1;
             // 
             // lblWarehouse
             // 
             lblWarehouse.AutoSize = true;
-            lblWarehouse.Font = new Font("Microsoft YaHei UI", 10F);
+            lblWarehouse.Font = new Font("Microsoft YaHei UI", 11F);
             lblWarehouse.ForeColor = Color.FromArgb(64, 64, 64);
-            lblWarehouse.Location = new Point(30, 93);
+            lblWarehouse.Location = new Point(40, 91);
             lblWarehouse.Name = "lblWarehouse";
-            lblWarehouse.Size = new Size(93, 24);
+            lblWarehouse.Size = new Size(99, 20);
             lblWarehouse.TabIndex = 6;
             lblWarehouse.Text = "出库仓库：";
             // 
             // cmbMaterial
             // 
             cmbMaterial.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbMaterial.Font = new Font("Microsoft YaHei UI", 10F);
+            cmbMaterial.FlatStyle = FlatStyle.Flat;
+            cmbMaterial.Font = new Font("Microsoft YaHei UI", 11F);
             cmbMaterial.FormattingEnabled = true;
-            cmbMaterial.Location = new Point(130, 35);
+            cmbMaterial.Location = new Point(140, 38);
             cmbMaterial.Name = "cmbMaterial";
-            cmbMaterial.Size = new Size(340, 32);
+            cmbMaterial.Size = new Size(320, 28);
             cmbMaterial.TabIndex = 0;
             // 
             // lblMaterial
             // 
             lblMaterial.AutoSize = true;
-            lblMaterial.Font = new Font("Microsoft YaHei UI", 10F);
+            lblMaterial.Font = new Font("Microsoft YaHei UI", 11F);
             lblMaterial.ForeColor = Color.FromArgb(64, 64, 64);
-            lblMaterial.Location = new Point(30, 38);
+            lblMaterial.Location = new Point(40, 41);
             lblMaterial.Name = "lblMaterial";
-            lblMaterial.Size = new Size(93, 24);
+            lblMaterial.Size = new Size(99, 20);
             lblMaterial.TabIndex = 5;
             lblMaterial.Text = "物料名称：";
             // 
@@ -150,10 +158,11 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(245, 245, 245);
+            BackColor = Color.FromArgb(255, 240, 245);  // 浅粉色背景
             ClientSize = new Size(1000, 600);
             Controls.Add(formPanel);
             Font = new Font("Microsoft YaHei UI", 9F);
+            MinimumSize = new Size(800, 500);
             Name = "OutboundForm";
             Text = "出库操作";
             formPanel.ResumeLayout(false);

@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -20,9 +20,20 @@ namespace WinWMS
 
         private void LoadWarehouses()
         {
-            string query = "SELECT id, name, location, created_at FROM warehouses";
+            string query = @"SELECT 
+                id, 
+                name AS '仓库名称', 
+                location AS '位置', 
+                created_at AS '创建时间' 
+            FROM warehouses";
             DataTable dt = DbHelper.ExecuteQuery(query);
             dataGridView1.DataSource = dt;
+            
+            // 隐藏ID列
+            if (dataGridView1.Columns["id"] != null)
+            {
+                dataGridView1.Columns["id"].Visible = false;
+            }
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -30,8 +41,8 @@ namespace WinWMS
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = dataGridView1.SelectedRows[0];
-                txtName.Text = row.Cells["name"].Value.ToString();
-                txtLocation.Text = row.Cells["location"].Value.ToString();
+                txtName.Text = row.Cells["仓库名称"].Value?.ToString() ?? "";
+                txtLocation.Text = row.Cells["位置"].Value?.ToString() ?? "";
             }
         }
 

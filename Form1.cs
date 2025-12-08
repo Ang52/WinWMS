@@ -42,7 +42,6 @@
 
         private void ShowWelcomePage()
         {
-            // 关闭之前的子窗体
             if (currentChildForm != null)
             {
                 currentChildForm.Close();
@@ -51,103 +50,113 @@
             }
 
             lblPageTitle.Text = "欢迎使用仓储管理系统";
-
-            // 清空主面板
             mainPanel.Controls.Clear();
 
-            // 创建欢迎面板
             Panel welcomePanel = new Panel
             {
                 Dock = DockStyle.Fill,
-                BackColor = Color.White
-            };
-
-            // 欢迎标题
-            Label lblWelcome = new Label
-            {
-                Text = "欢迎使用 WinWMS 仓储管理系统",
-                Font = new Font("Microsoft YaHei UI", 24, FontStyle.Bold),
-                ForeColor = Color.FromArgb(0, 122, 204),
-                AutoSize = true,
-                Location = new Point(100, 80)
-            };
-
-            // 系统描述
-            Label lblDescription = new Label
-            {
-                Text = "现代化的仓储管理解决方案",
-                Font = new Font("Microsoft YaHei UI", 14),
-                ForeColor = Color.FromArgb(128, 128, 128),
-                AutoSize = true,
-                Location = new Point(100, 140)
-            };
-
-            // 功能卡片容器
-            FlowLayoutPanel cardsPanel = new FlowLayoutPanel
-            {
-                Location = new Point(50, 200),
-                Size = new Size(700, 300),
+                BackColor = Color.White,
                 AutoScroll = true
             };
 
-            // 添加功能卡片
-            cardsPanel.Controls.Add(CreateFeatureCard("📥 入库管理", "快速记录物资入库信息"));
-            cardsPanel.Controls.Add(CreateFeatureCard("📤 出库管理", "高效处理物资出库流程"));
-            cardsPanel.Controls.Add(CreateFeatureCard("📊 数据查询", "实时查询库存和记录"));
-            cardsPanel.Controls.Add(CreateFeatureCard("📈 报表分析", "生成月度统计报表"));
+            Label lblWelcome = new Label
+            {
+                Text = "欢迎使用 WinWMS 仓储管理系统 ✨",
+                Font = new Font("Microsoft YaHei UI", 28, FontStyle.Bold),
+                ForeColor = Color.FromArgb(219, 112, 147),
+                AutoSize = true,
+                Location = new Point(80, 60)
+            };
 
-            // 底部信息
+            Label lblDescription = new Label
+            {
+                Text = "现代化粉色主题 · 响应式设计 · 优雅的仓储管理解决方案",
+                Font = new Font("Microsoft YaHei UI", 14),
+                ForeColor = Color.FromArgb(255, 105, 180),
+                AutoSize = true,
+                Location = new Point(80, 120)
+            };
+
+            TableLayoutPanel cardsPanel = new TableLayoutPanel
+            {
+                Location = new Point(40, 180),
+                Size = new Size(1000, 400),
+                ColumnCount = 3,
+                RowCount = 2,
+                Padding = new Padding(20)
+            };
+
+            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            cardsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            cardsPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
+            cardsPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
+
+            cardsPanel.Controls.Add(CreateImageCard("📥", "入库管理", "快速记录物资入库信息", Color.FromArgb(255, 182, 193)), 0, 0);
+            cardsPanel.Controls.Add(CreateImageCard("📤", "出库管理", "高效处理物资出库流程", Color.FromArgb(255, 192, 203)), 1, 0);
+            cardsPanel.Controls.Add(CreateImageCard("📊", "数据查询", "实时查询库存和记录", Color.FromArgb(255, 218, 224)), 2, 0);
+            cardsPanel.Controls.Add(CreateImageCard("📈", "报表分析", "生成月度统计报表", Color.FromArgb(255, 182, 193)), 0, 1);
+            cardsPanel.Controls.Add(CreateImageCard("📦", "物资管理", "管理所有物资信息", Color.FromArgb(255, 192, 203)), 1, 1);
+            cardsPanel.Controls.Add(CreateImageCard("👥", "用户管理", "系统用户权限管理", Color.FromArgb(255, 218, 224)), 2, 1);
+
             Label lblFooter = new Label
             {
-                Text = "请从左侧菜单选择功能开始使用",
-                Font = new Font("Microsoft YaHei UI", 10),
-                ForeColor = Color.FromArgb(150, 150, 150),
+                Text = "💡 提示：请从左侧菜单选择功能开始使用 | 支持多分辨率自适应",
+                Font = new Font("Microsoft YaHei UI", 11),
+                ForeColor = Color.FromArgb(180, 180, 180),
                 AutoSize = true,
-                Location = new Point(100, 450)
+                Location = new Point(80, 600)
             };
 
             welcomePanel.Controls.Add(lblWelcome);
             welcomePanel.Controls.Add(lblDescription);
             welcomePanel.Controls.Add(cardsPanel);
             welcomePanel.Controls.Add(lblFooter);
-
             mainPanel.Controls.Add(welcomePanel);
         }
 
-        private Panel CreateFeatureCard(string title, string description)
+        private Panel CreateImageCard(string icon, string title, string description, Color bgColor)
         {
-            Panel card = new Panel
+            Panel card = new Panel { Dock = DockStyle.Fill, BackColor = bgColor, Margin = new Padding(10), Cursor = Cursors.Hand };
+
+            Label lblIcon = new Label
             {
-                Size = new Size(300, 120),
-                BackColor = Color.FromArgb(240, 248, 255),
-                Margin = new Padding(10),
-                Padding = new Padding(20)
+                Text = icon,
+                Font = new Font("Segoe UI Emoji", 48),
+                ForeColor = Color.White,
+                Size = new Size(100, 80),
+                TextAlign = ContentAlignment.MiddleCenter
             };
 
             Label lblTitle = new Label
             {
                 Text = title,
-                Font = new Font("Microsoft YaHei UI", 12, FontStyle.Bold),
-                ForeColor = Color.FromArgb(0, 122, 204),
-                AutoSize = true,
-                Location = new Point(20, 20)
+                Font = new Font("Microsoft YaHei UI", 13, FontStyle.Bold),
+                ForeColor = Color.White,
+                Size = new Size(260, 25),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Location = new Point(10, 100)
             };
 
             Label lblDesc = new Label
             {
                 Text = description,
                 Font = new Font("Microsoft YaHei UI", 9),
-                ForeColor = Color.FromArgb(100, 100, 100),
-                AutoSize = true,
-                Location = new Point(20, 55)
+                ForeColor = Color.White,
+                Size = new Size(260, 35),
+                TextAlign = ContentAlignment.TopCenter,
+                Location = new Point(10, 130)
             };
 
+            card.Controls.Add(lblIcon);
             card.Controls.Add(lblTitle);
             card.Controls.Add(lblDesc);
 
-            // 添加悬停效果
-            card.MouseEnter += (s, e) => card.BackColor = Color.FromArgb(230, 244, 255);
-            card.MouseLeave += (s, e) => card.BackColor = Color.FromArgb(240, 248, 255);
+            card.Resize += (s, e) => lblIcon.Location = new Point((card.Width - 100) / 2, 15);
+
+            Color hoverColor = Color.FromArgb(Math.Max(0, bgColor.R - 20), Math.Max(0, bgColor.G - 20), Math.Max(0, bgColor.B - 20));
+            card.MouseEnter += (s, e) => card.BackColor = hoverColor;
+            card.MouseLeave += (s, e) => card.BackColor = bgColor;
 
             return card;
         }
@@ -165,6 +174,10 @@
                 }
             }
 
+            // 为退出按钮添加特殊悬停效果
+            btnExit.MouseEnter += (s, e) => btnExit.BackColor = Color.FromArgb(220, 20, 60);  // 深红色
+            btnExit.MouseLeave += (s, e) => btnExit.BackColor = Color.FromArgb(255, 182, 193);
+
             // 为主页按钮添加特殊处理
             btnHome.Click += (s, e) => ShowWelcomePage();
         }
@@ -173,7 +186,7 @@
         {
             if (sender is Button btn && btn != currentActiveButton)
             {
-                btn.BackColor = Color.FromArgb(62, 62, 66);
+                btn.BackColor = Color.FromArgb(255, 105, 180);  // 深粉色悬停
             }
         }
 
@@ -181,7 +194,7 @@
         {
             if (sender is Button btn && btn != currentActiveButton)
             {
-                btn.BackColor = Color.FromArgb(45, 45, 48);
+                btn.BackColor = Color.FromArgb(255, 182, 193);  // 恢复粉色
             }
         }
 
@@ -192,11 +205,11 @@
                 // 重置之前激活的按钮
                 if (currentActiveButton != null)
                 {
-                    currentActiveButton.BackColor = Color.FromArgb(45, 45, 48);
+                    currentActiveButton.BackColor = Color.FromArgb(255, 182, 193);
                 }
                 
                 // 设置当前按钮为激活状态
-                btn.BackColor = Color.FromArgb(62, 62, 66);
+                btn.BackColor = Color.FromArgb(255, 105, 180);  // 深粉色激活
                 currentActiveButton = btn;
             }
         }

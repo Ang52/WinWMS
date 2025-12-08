@@ -31,8 +31,7 @@
             sidebarPanel = new Panel();
             btnExit = new Button();
             btnUserManagement = new Button();
-            btnWarehouseUnit = new Button();
-            btnMaterialCategory = new Button();
+            btnWarehouseManagement = new Button();
             btnMaterialManagement = new Button();
             btnOutboundQuery = new Button();
             btnInboundQuery = new Button();
@@ -49,18 +48,19 @@
             btnBack = new Button();
             mainPanel = new Panel();
             statusStrip1 = new StatusStrip();
+            statusLabel = new ToolStripStatusLabel();
             sidebarPanel.SuspendLayout();
             logoPanel.SuspendLayout();
             topPanel.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // sidebarPanel
             // 
-            sidebarPanel.BackColor = Color.FromArgb(45, 45, 48);
+            sidebarPanel.BackColor = Color.FromArgb(255, 182, 193);
             sidebarPanel.Controls.Add(btnExit);
             sidebarPanel.Controls.Add(btnUserManagement);
-            sidebarPanel.Controls.Add(btnWarehouseUnit);
-            sidebarPanel.Controls.Add(btnMaterialCategory);
+            sidebarPanel.Controls.Add(btnWarehouseManagement);
             sidebarPanel.Controls.Add(btnMaterialManagement);
             sidebarPanel.Controls.Add(btnOutboundQuery);
             sidebarPanel.Controls.Add(btnInboundQuery);
@@ -73,7 +73,7 @@
             sidebarPanel.Dock = DockStyle.Left;
             sidebarPanel.Location = new Point(0, 0);
             sidebarPanel.Name = "sidebarPanel";
-            sidebarPanel.Size = new Size(200, 600);
+            sidebarPanel.Size = new Size(220, 600);
             sidebarPanel.TabIndex = 0;
             // 
             // btnExit
@@ -81,13 +81,13 @@
             btnExit.Dock = DockStyle.Bottom;
             btnExit.FlatAppearance.BorderSize = 0;
             btnExit.FlatStyle = FlatStyle.Flat;
-            btnExit.Font = new Font("Microsoft YaHei UI", 10F);
+            btnExit.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnExit.ForeColor = Color.White;
             btnExit.Location = new Point(0, 555);
             btnExit.Name = "btnExit";
-            btnExit.Padding = new Padding(10, 0, 0, 0);
-            btnExit.Size = new Size(200, 45);
-            btnExit.TabIndex = 12;
+            btnExit.Padding = new Padding(15, 0, 0, 0);
+            btnExit.Size = new Size(220, 45);
+            btnExit.TabIndex = 11;
             btnExit.Text = "🚪  退出系统";
             btnExit.TextAlign = ContentAlignment.MiddleLeft;
             btnExit.UseVisualStyleBackColor = true;
@@ -98,62 +98,46 @@
             btnUserManagement.Dock = DockStyle.Top;
             btnUserManagement.FlatAppearance.BorderSize = 0;
             btnUserManagement.FlatStyle = FlatStyle.Flat;
-            btnUserManagement.Font = new Font("Microsoft YaHei UI", 10F);
+            btnUserManagement.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnUserManagement.ForeColor = Color.White;
-            btnUserManagement.Location = new Point(0, 555);
+            btnUserManagement.Location = new Point(0, 510);
             btnUserManagement.Name = "btnUserManagement";
-            btnUserManagement.Padding = new Padding(10, 0, 0, 0);
-            btnUserManagement.Size = new Size(200, 45);
-            btnUserManagement.TabIndex = 11;
+            btnUserManagement.Padding = new Padding(15, 0, 0, 0);
+            btnUserManagement.Size = new Size(220, 45);
+            btnUserManagement.TabIndex = 10;
             btnUserManagement.Text = "👥  用户管理";
             btnUserManagement.TextAlign = ContentAlignment.MiddleLeft;
             btnUserManagement.UseVisualStyleBackColor = true;
             btnUserManagement.Click += UserManagementToolStripMenuItem_Click;
             // 
-            // btnWarehouseUnit
+            // btnWarehouseManagement
             // 
-            btnWarehouseUnit.Dock = DockStyle.Top;
-            btnWarehouseUnit.FlatAppearance.BorderSize = 0;
-            btnWarehouseUnit.FlatStyle = FlatStyle.Flat;
-            btnWarehouseUnit.Font = new Font("Microsoft YaHei UI", 10F);
-            btnWarehouseUnit.ForeColor = Color.White;
-            btnWarehouseUnit.Location = new Point(0, 510);
-            btnWarehouseUnit.Name = "btnWarehouseUnit";
-            btnWarehouseUnit.Padding = new Padding(10, 0, 0, 0);
-            btnWarehouseUnit.Size = new Size(200, 45);
-            btnWarehouseUnit.TabIndex = 10;
-            btnWarehouseUnit.Text = "⚙️  仓库管理";
-            btnWarehouseUnit.TextAlign = ContentAlignment.MiddleLeft;
-            btnWarehouseUnit.UseVisualStyleBackColor = true;
-            btnWarehouseUnit.Click += WarehouseManagementToolStripMenuItem_Click;
-            // 
-            // btnMaterialCategory
-            // 
-            btnMaterialCategory.Dock = DockStyle.Top;
-            btnMaterialCategory.FlatAppearance.BorderSize = 0;
-            btnMaterialCategory.FlatStyle = FlatStyle.Flat;
-            btnMaterialCategory.Font = new Font("Microsoft YaHei UI", 10F);
-            btnMaterialCategory.ForeColor = Color.White;
-            btnMaterialCategory.Location = new Point(0, 465);
-            btnMaterialCategory.Name = "btnMaterialCategory";
-            btnMaterialCategory.Padding = new Padding(10, 0, 0, 0);
-            btnMaterialCategory.Size = new Size(200, 45);
-            btnMaterialCategory.TabIndex = 9;
-            btnMaterialCategory.Text = "⚙️  物资单位";
-            btnMaterialCategory.TextAlign = ContentAlignment.MiddleLeft;
-            btnMaterialCategory.UseVisualStyleBackColor = true;
+            btnWarehouseManagement.Dock = DockStyle.Top;
+            btnWarehouseManagement.FlatAppearance.BorderSize = 0;
+            btnWarehouseManagement.FlatStyle = FlatStyle.Flat;
+            btnWarehouseManagement.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
+            btnWarehouseManagement.ForeColor = Color.White;
+            btnWarehouseManagement.Location = new Point(0, 465);
+            btnWarehouseManagement.Name = "btnWarehouseManagement";
+            btnWarehouseManagement.Padding = new Padding(15, 0, 0, 0);
+            btnWarehouseManagement.Size = new Size(220, 45);
+            btnWarehouseManagement.TabIndex = 9;
+            btnWarehouseManagement.Text = "🏭  仓库管理";
+            btnWarehouseManagement.TextAlign = ContentAlignment.MiddleLeft;
+            btnWarehouseManagement.UseVisualStyleBackColor = true;
+            btnWarehouseManagement.Click += WarehouseManagementToolStripMenuItem_Click;
             // 
             // btnMaterialManagement
             // 
             btnMaterialManagement.Dock = DockStyle.Top;
             btnMaterialManagement.FlatAppearance.BorderSize = 0;
             btnMaterialManagement.FlatStyle = FlatStyle.Flat;
-            btnMaterialManagement.Font = new Font("Microsoft YaHei UI", 10F);
+            btnMaterialManagement.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnMaterialManagement.ForeColor = Color.White;
             btnMaterialManagement.Location = new Point(0, 420);
             btnMaterialManagement.Name = "btnMaterialManagement";
-            btnMaterialManagement.Padding = new Padding(10, 0, 0, 0);
-            btnMaterialManagement.Size = new Size(200, 45);
+            btnMaterialManagement.Padding = new Padding(15, 0, 0, 0);
+            btnMaterialManagement.Size = new Size(220, 45);
             btnMaterialManagement.TabIndex = 8;
             btnMaterialManagement.Text = "📦  物资管理";
             btnMaterialManagement.TextAlign = ContentAlignment.MiddleLeft;
@@ -165,12 +149,12 @@
             btnOutboundQuery.Dock = DockStyle.Top;
             btnOutboundQuery.FlatAppearance.BorderSize = 0;
             btnOutboundQuery.FlatStyle = FlatStyle.Flat;
-            btnOutboundQuery.Font = new Font("Microsoft YaHei UI", 10F);
+            btnOutboundQuery.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnOutboundQuery.ForeColor = Color.White;
             btnOutboundQuery.Location = new Point(0, 375);
             btnOutboundQuery.Name = "btnOutboundQuery";
-            btnOutboundQuery.Padding = new Padding(10, 0, 0, 0);
-            btnOutboundQuery.Size = new Size(200, 45);
+            btnOutboundQuery.Padding = new Padding(15, 0, 0, 0);
+            btnOutboundQuery.Size = new Size(220, 45);
             btnOutboundQuery.TabIndex = 7;
             btnOutboundQuery.Text = "📊  出库查询";
             btnOutboundQuery.TextAlign = ContentAlignment.MiddleLeft;
@@ -182,12 +166,12 @@
             btnInboundQuery.Dock = DockStyle.Top;
             btnInboundQuery.FlatAppearance.BorderSize = 0;
             btnInboundQuery.FlatStyle = FlatStyle.Flat;
-            btnInboundQuery.Font = new Font("Microsoft YaHei UI", 10F);
+            btnInboundQuery.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnInboundQuery.ForeColor = Color.White;
             btnInboundQuery.Location = new Point(0, 330);
             btnInboundQuery.Name = "btnInboundQuery";
-            btnInboundQuery.Padding = new Padding(10, 0, 0, 0);
-            btnInboundQuery.Size = new Size(200, 45);
+            btnInboundQuery.Padding = new Padding(15, 0, 0, 0);
+            btnInboundQuery.Size = new Size(220, 45);
             btnInboundQuery.TabIndex = 6;
             btnInboundQuery.Text = "📊  入库查询";
             btnInboundQuery.TextAlign = ContentAlignment.MiddleLeft;
@@ -199,12 +183,12 @@
             btnInventoryQuery.Dock = DockStyle.Top;
             btnInventoryQuery.FlatAppearance.BorderSize = 0;
             btnInventoryQuery.FlatStyle = FlatStyle.Flat;
-            btnInventoryQuery.Font = new Font("Microsoft YaHei UI", 10F);
+            btnInventoryQuery.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnInventoryQuery.ForeColor = Color.White;
             btnInventoryQuery.Location = new Point(0, 285);
             btnInventoryQuery.Name = "btnInventoryQuery";
-            btnInventoryQuery.Padding = new Padding(10, 0, 0, 0);
-            btnInventoryQuery.Size = new Size(200, 45);
+            btnInventoryQuery.Padding = new Padding(15, 0, 0, 0);
+            btnInventoryQuery.Size = new Size(220, 45);
             btnInventoryQuery.TabIndex = 5;
             btnInventoryQuery.Text = "📊  库存查询";
             btnInventoryQuery.TextAlign = ContentAlignment.MiddleLeft;
@@ -216,12 +200,12 @@
             btnMonthlyReport.Dock = DockStyle.Top;
             btnMonthlyReport.FlatAppearance.BorderSize = 0;
             btnMonthlyReport.FlatStyle = FlatStyle.Flat;
-            btnMonthlyReport.Font = new Font("Microsoft YaHei UI", 10F);
+            btnMonthlyReport.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnMonthlyReport.ForeColor = Color.White;
             btnMonthlyReport.Location = new Point(0, 240);
             btnMonthlyReport.Name = "btnMonthlyReport";
-            btnMonthlyReport.Padding = new Padding(10, 0, 0, 0);
-            btnMonthlyReport.Size = new Size(200, 45);
+            btnMonthlyReport.Padding = new Padding(15, 0, 0, 0);
+            btnMonthlyReport.Size = new Size(220, 45);
             btnMonthlyReport.TabIndex = 4;
             btnMonthlyReport.Text = "📈  月度报表";
             btnMonthlyReport.TextAlign = ContentAlignment.MiddleLeft;
@@ -233,12 +217,12 @@
             btnOutbound.Dock = DockStyle.Top;
             btnOutbound.FlatAppearance.BorderSize = 0;
             btnOutbound.FlatStyle = FlatStyle.Flat;
-            btnOutbound.Font = new Font("Microsoft YaHei UI", 10F);
+            btnOutbound.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnOutbound.ForeColor = Color.White;
             btnOutbound.Location = new Point(0, 195);
             btnOutbound.Name = "btnOutbound";
-            btnOutbound.Padding = new Padding(10, 0, 0, 0);
-            btnOutbound.Size = new Size(200, 45);
+            btnOutbound.Padding = new Padding(15, 0, 0, 0);
+            btnOutbound.Size = new Size(220, 45);
             btnOutbound.TabIndex = 3;
             btnOutbound.Text = "📤  出库";
             btnOutbound.TextAlign = ContentAlignment.MiddleLeft;
@@ -250,12 +234,12 @@
             btnInbound.Dock = DockStyle.Top;
             btnInbound.FlatAppearance.BorderSize = 0;
             btnInbound.FlatStyle = FlatStyle.Flat;
-            btnInbound.Font = new Font("Microsoft YaHei UI", 10F);
+            btnInbound.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnInbound.ForeColor = Color.White;
             btnInbound.Location = new Point(0, 150);
             btnInbound.Name = "btnInbound";
-            btnInbound.Padding = new Padding(10, 0, 0, 0);
-            btnInbound.Size = new Size(200, 45);
+            btnInbound.Padding = new Padding(15, 0, 0, 0);
+            btnInbound.Size = new Size(220, 45);
             btnInbound.TabIndex = 2;
             btnInbound.Text = "📥  入库";
             btnInbound.TextAlign = ContentAlignment.MiddleLeft;
@@ -264,16 +248,16 @@
             // 
             // btnHome
             // 
-            btnHome.BackColor = Color.FromArgb(62, 62, 66);
+            btnHome.BackColor = Color.FromArgb(255, 105, 180);
             btnHome.Dock = DockStyle.Top;
             btnHome.FlatAppearance.BorderSize = 0;
             btnHome.FlatStyle = FlatStyle.Flat;
-            btnHome.Font = new Font("Microsoft YaHei UI", 10F);
+            btnHome.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnHome.ForeColor = Color.White;
             btnHome.Location = new Point(0, 105);
             btnHome.Name = "btnHome";
-            btnHome.Padding = new Padding(10, 0, 0, 0);
-            btnHome.Size = new Size(200, 45);
+            btnHome.Padding = new Padding(15, 0, 0, 0);
+            btnHome.Size = new Size(220, 45);
             btnHome.TabIndex = 1;
             btnHome.Text = "🏠  首页";
             btnHome.TextAlign = ContentAlignment.MiddleLeft;
@@ -281,56 +265,59 @@
             // 
             // logoPanel
             // 
-            logoPanel.BackColor = Color.FromArgb(0, 122, 204);
+            logoPanel.BackColor = Color.FromArgb(219, 112, 147);
             logoPanel.Controls.Add(lblSystemName);
             logoPanel.Controls.Add(lblLogo);
             logoPanel.Dock = DockStyle.Top;
             logoPanel.Location = new Point(0, 0);
             logoPanel.Name = "logoPanel";
-            logoPanel.Size = new Size(200, 105);
+            logoPanel.Size = new Size(220, 105);
             logoPanel.TabIndex = 0;
             // 
             // lblSystemName
             // 
-            lblSystemName.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
+            lblSystemName.Dock = DockStyle.Bottom;
+            lblSystemName.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold);
             lblSystemName.ForeColor = Color.White;
-            lblSystemName.Location = new Point(0, 55);
+            lblSystemName.Location = new Point(0, 60);
             lblSystemName.Name = "lblSystemName";
-            lblSystemName.Size = new Size(200, 30);
+            lblSystemName.Size = new Size(220, 45);
             lblSystemName.TabIndex = 1;
             lblSystemName.Text = "仓储管理系统";
             lblSystemName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblLogo
             // 
-            lblLogo.Font = new Font("Microsoft YaHei UI", 20F, FontStyle.Bold);
+            lblLogo.Dock = DockStyle.Top;
+            lblLogo.Font = new Font("Microsoft YaHei UI", 22F, FontStyle.Bold);
             lblLogo.ForeColor = Color.White;
-            lblLogo.Location = new Point(0, 15);
+            lblLogo.Location = new Point(0, 0);
             lblLogo.Name = "lblLogo";
-            lblLogo.Size = new Size(200, 40);
+            lblLogo.Size = new Size(220, 60);
             lblLogo.TabIndex = 0;
             lblLogo.Text = "🏢 WMS";
             lblLogo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // topPanel
             // 
-            topPanel.BackColor = Color.FromArgb(62, 62, 66);
+            topPanel.BackColor = Color.FromArgb(255, 182, 193);
             topPanel.Controls.Add(lblPageTitle);
             topPanel.Controls.Add(btnBack);
             topPanel.Dock = DockStyle.Top;
-            topPanel.Location = new Point(200, 0);
+            topPanel.Location = new Point(220, 0);
+            topPanel.MinimumSize = new Size(600, 60);
             topPanel.Name = "topPanel";
-            topPanel.Size = new Size(829, 60);
+            topPanel.Size = new Size(980, 60);
             topPanel.TabIndex = 1;
             // 
             // lblPageTitle
             // 
             lblPageTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblPageTitle.Font = new Font("Microsoft YaHei UI", 16F, FontStyle.Bold);
+            lblPageTitle.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold);
             lblPageTitle.ForeColor = Color.White;
             lblPageTitle.Location = new Point(60, 0);
             lblPageTitle.Name = "lblPageTitle";
-            lblPageTitle.Size = new Size(769, 60);
+            lblPageTitle.Size = new Size(920, 60);
             lblPageTitle.TabIndex = 1;
             lblPageTitle.Text = "欢迎使用仓储管理系统";
             lblPageTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -339,7 +326,7 @@
             // 
             btnBack.FlatAppearance.BorderSize = 0;
             btnBack.FlatStyle = FlatStyle.Flat;
-            btnBack.Font = new Font("Microsoft YaHei UI", 16F);
+            btnBack.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Bold);
             btnBack.ForeColor = Color.White;
             btnBack.Location = new Point(10, 10);
             btnBack.Name = "btnBack";
@@ -351,39 +338,54 @@
             // 
             // mainPanel
             // 
-            mainPanel.BackColor = Color.FromArgb(240, 240, 240);
-            mainPanel.Dock = DockStyle.Fill;
-            mainPanel.Location = new Point(200, 60);
+            mainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            mainPanel.AutoScroll = true;
+            mainPanel.BackColor = Color.FromArgb(255, 240, 245);
+            mainPanel.Location = new Point(220, 60);
+            mainPanel.MinimumSize = new Size(600, 400);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(829, 518);
+            mainPanel.Size = new Size(980, 518);
             mainPanel.TabIndex = 2;
+            mainPanel.Paint += mainPanel_Paint;
             // 
             // statusStrip1
             // 
-            statusStrip1.BackColor = Color.FromArgb(45, 45, 48);
+            statusStrip1.BackColor = Color.FromArgb(255, 182, 193);
             statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Location = new Point(200, 578);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
+            statusStrip1.Location = new Point(220, 574);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(829, 22);
+            statusStrip1.Size = new Size(980, 26);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            statusLabel.Font = new Font("Microsoft YaHei UI", 9F);
+            statusLabel.ForeColor = Color.White;
+            statusLabel.Name = "statusLabel";
+            statusLabel.Size = new Size(223, 20);
+            statusLabel.Text = "就绪 | WinWMS v2.0 | .NET 8.0";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(240, 240, 240);
-            ClientSize = new Size(1029, 600);
+            BackColor = Color.FromArgb(255, 240, 245);
+            ClientSize = new Size(1200, 600);
             Controls.Add(mainPanel);
             Controls.Add(statusStrip1);
             Controls.Add(topPanel);
             Controls.Add(sidebarPanel);
+            MinimumSize = new Size(1000, 600);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "仓储管理系统 - WMS";
             sidebarPanel.ResumeLayout(false);
             logoPanel.ResumeLayout(false);
             topPanel.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -401,8 +403,7 @@
         private Button btnInboundQuery;
         private Button btnOutboundQuery;
         private Button btnMaterialManagement;
-        private Button btnWarehouseUnit;
-        private Button btnMaterialCategory;
+        private Button btnWarehouseManagement;
         private Button btnUserManagement;
         private Button btnMonthlyReport;
         private Button btnExit;
@@ -411,5 +412,6 @@
         private Button btnBack;
         private Panel mainPanel;
         private StatusStrip statusStrip1;
+        private ToolStripStatusLabel statusLabel;
     }
 }

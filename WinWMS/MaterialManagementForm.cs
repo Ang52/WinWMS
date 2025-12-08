@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -20,9 +20,22 @@ namespace WinWMS
 
         private void LoadMaterials()
         {
-            string query = "SELECT id, material_code, name, spec, unit, created_at FROM materials";
+            string query = @"SELECT 
+                id, 
+                material_code AS '物料编码', 
+                name AS '名称', 
+                spec AS '规格', 
+                unit AS '单位', 
+                created_at AS '创建时间' 
+            FROM materials";
             DataTable dt = DbHelper.ExecuteQuery(query);
             dataGridView1.DataSource = dt;
+            
+            // 隐藏ID列
+            if (dataGridView1.Columns["id"] != null)
+            {
+                dataGridView1.Columns["id"].Visible = false;
+            }
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -30,10 +43,10 @@ namespace WinWMS
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = dataGridView1.SelectedRows[0];
-                txtMaterialCode.Text = row.Cells["material_code"].Value.ToString();
-                txtName.Text = row.Cells["name"].Value.ToString();
-                txtSpec.Text = row.Cells["spec"].Value.ToString();
-                txtUnit.Text = row.Cells["unit"].Value.ToString();
+                txtMaterialCode.Text = row.Cells["物料编码"].Value?.ToString() ?? "";
+                txtName.Text = row.Cells["名称"].Value?.ToString() ?? "";
+                txtSpec.Text = row.Cells["规格"].Value?.ToString() ?? "";
+                txtUnit.Text = row.Cells["单位"].Value?.ToString() ?? "";
             }
         }
 

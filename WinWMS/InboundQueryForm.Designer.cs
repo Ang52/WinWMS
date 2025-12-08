@@ -57,47 +57,48 @@
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(240, 240, 240);
-            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(64, 64, 64);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(240, 240, 240);
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 182, 193);  // 粉色表头
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 182, 193);
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.ColumnHeadersHeight = 45;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 10F);
             dataGridViewCellStyle2.ForeColor = Color.FromArgb(64, 64, 64);
-            dataGridViewCellStyle2.Padding = new Padding(5, 0, 5, 0);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle2.Padding = new Padding(5);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 218, 224);  // 浅粉色选中
             dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(64, 64, 64);
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.FromArgb(230, 230, 230);
-            dataGridView1.Location = new Point(0, 70);
+            dataGridView1.GridColor = Color.FromArgb(255, 218, 224);  // 浅粉色网格线
+            dataGridView1.Location = new Point(20, 100);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 10F);
             dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 218, 224);
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 35;
+            dataGridView1.RowTemplate.Height = 40;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1000, 530);
+            dataGridView1.Size = new Size(960, 480);
             dataGridView1.TabIndex = 0;
             // 
             // topPanel
             // 
+            topPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             topPanel.BackColor = Color.White;
             topPanel.Controls.Add(btnSearch);
             topPanel.Controls.Add(cmbWarehouse);
@@ -108,24 +109,24 @@
             topPanel.Controls.Add(lblEndDate);
             topPanel.Controls.Add(dtpStartDate);
             topPanel.Controls.Add(lblStartDate);
-            topPanel.Dock = DockStyle.Top;
-            topPanel.Location = new Point(0, 0);
+            topPanel.Location = new Point(20, 20);
             topPanel.Name = "topPanel";
             topPanel.Padding = new Padding(20, 15, 20, 15);
-            topPanel.Size = new Size(1000, 70);
+            topPanel.Size = new Size(960, 65);
             topPanel.TabIndex = 10;
             // 
             // btnSearch
             // 
             btnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSearch.BackColor = Color.FromArgb(0, 122, 204);
+            btnSearch.BackColor = Color.FromArgb(255, 105, 180);  // 深粉色按钮
+            btnSearch.Cursor = Cursors.Hand;
             btnSearch.FlatAppearance.BorderSize = 0;
             btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnSearch.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(880, 18);
+            btnSearch.Location = new Point(835, 13);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(100, 34);
+            btnSearch.Size = new Size(105, 38);
             btnSearch.TabIndex = 1;
             btnSearch.Text = "🔍 查询";
             btnSearch.UseVisualStyleBackColor = false;
@@ -134,22 +135,22 @@
             // 
             cmbWarehouse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmbWarehouse.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbWarehouse.Font = new Font("Microsoft YaHei UI", 9F);
+            cmbWarehouse.Font = new Font("Microsoft YaHei UI", 10F);
             cmbWarehouse.FormattingEnabled = true;
-            cmbWarehouse.Location = new Point(715, 22);
+            cmbWarehouse.Location = new Point(670, 18);
             cmbWarehouse.Name = "cmbWarehouse";
-            cmbWarehouse.Size = new Size(140, 28);
+            cmbWarehouse.Size = new Size(140, 27);
             cmbWarehouse.TabIndex = 5;
             // 
             // lblWarehouse
             // 
             lblWarehouse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblWarehouse.AutoSize = true;
-            lblWarehouse.Font = new Font("Microsoft YaHei UI", 9F);
+            lblWarehouse.Font = new Font("Microsoft YaHei UI", 10F);
             lblWarehouse.ForeColor = Color.FromArgb(64, 64, 64);
-            lblWarehouse.Location = new Point(657, 26);
+            lblWarehouse.Location = new Point(605, 21);
             lblWarehouse.Name = "lblWarehouse";
-            lblWarehouse.Size = new Size(56, 20);
+            lblWarehouse.Size = new Size(65, 20);
             lblWarehouse.TabIndex = 9;
             lblWarehouse.Text = "仓库：";
             // 
@@ -157,62 +158,62 @@
             // 
             cmbMaterial.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmbMaterial.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbMaterial.Font = new Font("Microsoft YaHei UI", 9F);
+            cmbMaterial.Font = new Font("Microsoft YaHei UI", 10F);
             cmbMaterial.FormattingEnabled = true;
-            cmbMaterial.Location = new Point(490, 22);
+            cmbMaterial.Location = new Point(455, 18);
             cmbMaterial.Name = "cmbMaterial";
-            cmbMaterial.Size = new Size(140, 28);
+            cmbMaterial.Size = new Size(130, 27);
             cmbMaterial.TabIndex = 4;
             // 
             // lblMaterial
             // 
             lblMaterial.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblMaterial.AutoSize = true;
-            lblMaterial.Font = new Font("Microsoft YaHei UI", 9F);
+            lblMaterial.Font = new Font("Microsoft YaHei UI", 10F);
             lblMaterial.ForeColor = Color.FromArgb(64, 64, 64);
-            lblMaterial.Location = new Point(432, 26);
+            lblMaterial.Location = new Point(390, 21);
             lblMaterial.Name = "lblMaterial";
-            lblMaterial.Size = new Size(56, 20);
+            lblMaterial.Size = new Size(65, 20);
             lblMaterial.TabIndex = 8;
             lblMaterial.Text = "物料：";
             // 
             // dtpEndDate
             // 
-            dtpEndDate.CalendarFont = new Font("Microsoft YaHei UI", 9F);
-            dtpEndDate.Font = new Font("Microsoft YaHei UI", 9F);
-            dtpEndDate.Location = new Point(260, 22);
+            dtpEndDate.CalendarFont = new Font("Microsoft YaHei UI", 10F);
+            dtpEndDate.Font = new Font("Microsoft YaHei UI", 10F);
+            dtpEndDate.Location = new Point(230, 18);
             dtpEndDate.Name = "dtpEndDate";
-            dtpEndDate.Size = new Size(150, 27);
+            dtpEndDate.Size = new Size(140, 25);
             dtpEndDate.TabIndex = 3;
             // 
             // lblEndDate
             // 
             lblEndDate.AutoSize = true;
-            lblEndDate.Font = new Font("Microsoft YaHei UI", 9F);
+            lblEndDate.Font = new Font("Microsoft YaHei UI", 10F);
             lblEndDate.ForeColor = Color.FromArgb(64, 64, 64);
-            lblEndDate.Location = new Point(232, 26);
+            lblEndDate.Location = new Point(195, 21);
             lblEndDate.Name = "lblEndDate";
-            lblEndDate.Size = new Size(27, 20);
+            lblEndDate.Size = new Size(35, 20);
             lblEndDate.TabIndex = 7;
             lblEndDate.Text = "至";
             // 
             // dtpStartDate
             // 
-            dtpStartDate.CalendarFont = new Font("Microsoft YaHei UI", 9F);
-            dtpStartDate.Font = new Font("Microsoft YaHei UI", 9F);
-            dtpStartDate.Location = new Point(75, 22);
+            dtpStartDate.CalendarFont = new Font("Microsoft YaHei UI", 10F);
+            dtpStartDate.Font = new Font("Microsoft YaHei UI", 10F);
+            dtpStartDate.Location = new Point(80, 18);
             dtpStartDate.Name = "dtpStartDate";
-            dtpStartDate.Size = new Size(150, 27);
+            dtpStartDate.Size = new Size(105, 25);
             dtpStartDate.TabIndex = 2;
             // 
             // lblStartDate
             // 
             lblStartDate.AutoSize = true;
-            lblStartDate.Font = new Font("Microsoft YaHei UI", 9F);
+            lblStartDate.Font = new Font("Microsoft YaHei UI", 10F);
             lblStartDate.ForeColor = Color.FromArgb(64, 64, 64);
-            lblStartDate.Location = new Point(20, 26);
+            lblStartDate.Location = new Point(15, 21);
             lblStartDate.Name = "lblStartDate";
-            lblStartDate.Size = new Size(56, 20);
+            lblStartDate.Size = new Size(65, 20);
             lblStartDate.TabIndex = 6;
             lblStartDate.Text = "日期：";
             // 
@@ -220,11 +221,12 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(245, 245, 245);
+            BackColor = Color.FromArgb(255, 240, 245);  // 浅粉色背景
             ClientSize = new Size(1000, 600);
             Controls.Add(dataGridView1);
             Controls.Add(topPanel);
             Font = new Font("Microsoft YaHei UI", 9F);
+            MinimumSize = new Size(800, 500);
             Name = "InboundQueryForm";
             Text = "入库查询";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

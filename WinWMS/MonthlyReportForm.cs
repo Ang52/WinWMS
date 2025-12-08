@@ -42,10 +42,10 @@ namespace WinWMS
             // Add report title
             Label titleLabel = new Label
             {
-                Text = "仓储管理月度报表",
-                Font = new Font("Microsoft YaHei UI", 20, FontStyle.Bold),
+                Text = "📋 仓储管理月度报表",
+                Font = new Font("Microsoft YaHei UI", 22, FontStyle.Bold),
                 AutoSize = true,
-                ForeColor = Color.FromArgb(44, 62, 80),
+                ForeColor = Color.FromArgb(219, 112, 147),  // 玫瑰粉
                 Margin = new Padding(0, 0, 0, 10)
             };
             mainContainer.Controls.Add(titleLabel);
@@ -53,10 +53,10 @@ namespace WinWMS
             // Add month label
             Label monthLabel = new Label
             {
-                Text = $"报表月份：{selectedMonth.ToString("yyyy年MM月")}",
-                Font = new Font("Microsoft YaHei UI", 12),
+                Text = $"📅 报表月份：{selectedMonth.ToString("yyyy年MM月")}",
+                Font = new Font("Microsoft YaHei UI", 13),
                 AutoSize = true,
-                ForeColor = Color.FromArgb(127, 140, 141),
+                ForeColor = Color.FromArgb(255, 105, 180),  // 深粉色
                 Margin = new Padding(0, 0, 0, 30)
             };
             mainContainer.Controls.Add(monthLabel);
@@ -68,31 +68,31 @@ namespace WinWMS
 
             // Generate Inbound Summary Section
             Panel inboundSection = CreateReportSection(
-                "入库汇总",
+                "📥 入库汇总",
                 inboundData,
                 new[] { "物料名称", "总数量", "总金额（元）" },
                 new[] { "name", "TotalQuantity", "TotalAmount" },
-                new[] { 300, 150, 200 }
+                new[] { 350, 150, 200 }
             );
             mainContainer.Controls.Add(inboundSection);
 
             // Generate Outbound Summary Section
             Panel outboundSection = CreateReportSection(
-                "出库汇总",
+                "📤 出库汇总",
                 outboundData,
                 new[] { "物料名称", "总数量", "总金额（元）" },
                 new[] { "name", "TotalQuantity", "TotalAmount" },
-                new[] { 300, 150, 200 }
+                new[] { 350, 150, 200 }
             );
             mainContainer.Controls.Add(outboundSection);
 
             // Generate Inventory Summary Section
             Panel inventorySection = CreateReportSection(
-                "库存汇总",
+                "📦 库存汇总",
                 inventoryData,
                 new[] { "物料名称", "仓库", "数量", "单价（元）", "总金额（元）" },
                 new[] { "name", "Warehouse", "quantity", "unit_price", "total_amount" },
-                new[] { 200, 180, 100, 130, 140 }
+                new[] { 220, 180, 100, 130, 140 }
             );
             mainContainer.Controls.Add(inventorySection);
 
@@ -109,40 +109,49 @@ namespace WinWMS
                 totalWidth += width;
             }
 
-            // Create section container
+            // Create section container with shadow effect
             Panel sectionPanel = new Panel
             {
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Width = totalWidth,
-                Margin = new Padding(0, 0, 0, 30)
+                Width = totalWidth + 20,
+                Margin = new Padding(0, 0, 0, 35),
+                Padding = new Padding(10),
+                BackColor = Color.White
             };
 
             int yPos = 0;
 
-            // Add section title
+            // Add section title with colored background
+            Panel titlePanel = new Panel
+            {
+                Width = totalWidth,
+                Height = 45,
+                Location = new Point(10, yPos),
+                BackColor = Color.FromArgb(255, 182, 193)  // 粉色标题背景
+            };
+            
             Label sectionTitle = new Label
             {
                 Text = title,
                 Font = new Font("Microsoft YaHei UI", 14, FontStyle.Bold),
-                AutoSize = false,
-                Width = totalWidth,
-                Height = 35,
-                Location = new Point(0, yPos),
-                ForeColor = Color.FromArgb(52, 73, 94),
-                TextAlign = ContentAlignment.MiddleLeft
+                Dock = DockStyle.Fill,
+                ForeColor = Color.White,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Padding = new Padding(15, 0, 0, 0)
             };
-            sectionPanel.Controls.Add(sectionTitle);
-            yPos += 40;
+            titlePanel.Controls.Add(sectionTitle);
+            sectionPanel.Controls.Add(titlePanel);
+            yPos += 50;
 
             // Create table using TableLayoutPanel
             TableLayoutPanel table = new TableLayoutPanel
             {
-                Location = new Point(0, yPos),
+                Location = new Point(10, yPos),
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
-                BackColor = Color.FromArgb(189, 195, 199)
+                BackColor = Color.FromArgb(255, 218, 224)  // 浅粉色边框
             };
 
             // Set column styles
@@ -154,17 +163,17 @@ namespace WinWMS
 
             // Add header row
             table.RowCount = 1;
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 45));
             
             for (int i = 0; i < columnHeaders.Length; i++)
             {
                 Label headerLabel = new Label
                 {
                     Text = columnHeaders[i],
-                    Font = new Font("Microsoft YaHei UI", 10, FontStyle.Bold),
+                    Font = new Font("Microsoft YaHei UI", 11, FontStyle.Bold),
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.MiddleCenter,
-                    BackColor = Color.FromArgb(52, 152, 219),
+                    BackColor = Color.FromArgb(255, 182, 193),  // 粉色表头
                     ForeColor = Color.White,
                     Margin = new Padding(0)
                 };
@@ -178,7 +187,7 @@ namespace WinWMS
                 foreach (DataRow row in data.Rows)
                 {
                     table.RowCount++;
-                    table.RowStyles.Add(new RowStyle(SizeType.Absolute, 35));
+                    table.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
 
                     for (int i = 0; i < columnFields.Length; i++)
                     {
@@ -202,11 +211,11 @@ namespace WinWMS
                         Label cellLabel = new Label
                         {
                             Text = displayValue,
-                            Font = new Font("Microsoft YaHei UI", 9),
+                            Font = new Font("Microsoft YaHei UI", 10),
                             Dock = DockStyle.Fill,
                             TextAlign = ContentAlignment.MiddleCenter,
-                            BackColor = rowIndex % 2 == 0 ? Color.White : Color.FromArgb(236, 240, 241),
-                            ForeColor = Color.FromArgb(52, 73, 94),
+                            BackColor = rowIndex % 2 == 0 ? Color.White : Color.FromArgb(255, 240, 245),  // 交替粉白色
+                            ForeColor = Color.FromArgb(64, 64, 64),
                             Margin = new Padding(0)
                         };
                         table.Controls.Add(cellLabel, i, rowIndex);
@@ -218,16 +227,16 @@ namespace WinWMS
             {
                 // No data row
                 table.RowCount++;
-                table.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+                table.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
                 
                 Label noDataLabel = new Label
                 {
-                    Text = "暂无数据",
-                    Font = new Font("Microsoft YaHei UI", 10),
+                    Text = "💭 暂无数据",
+                    Font = new Font("Microsoft YaHei UI", 11),
                     Dock = DockStyle.Fill,
                     TextAlign = ContentAlignment.MiddleCenter,
                     BackColor = Color.White,
-                    ForeColor = Color.Gray,
+                    ForeColor = Color.FromArgb(150, 150, 150),
                     Margin = new Padding(0)
                 };
                 table.SetColumnSpan(noDataLabel, columnHeaders.Length);
@@ -235,7 +244,7 @@ namespace WinWMS
             }
 
             sectionPanel.Controls.Add(table);
-            sectionPanel.Height = yPos + table.Height + 10;
+            sectionPanel.Height = yPos + table.Height + 20;
 
             return sectionPanel;
         }

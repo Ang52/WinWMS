@@ -46,47 +46,48 @@
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(240, 240, 240);
-            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(64, 64, 64);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(240, 240, 240);
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 182, 193);  // 粉色表头
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 182, 193);
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.ColumnHeadersHeight = 45;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 10F);
             dataGridViewCellStyle2.ForeColor = Color.FromArgb(64, 64, 64);
-            dataGridViewCellStyle2.Padding = new Padding(5, 0, 5, 0);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle2.Padding = new Padding(5);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(255, 218, 224);  // 浅粉色选中
             dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(64, 64, 64);
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.FromArgb(230, 230, 230);
-            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.GridColor = Color.FromArgb(255, 218, 224);  // 浅粉色网格线
+            dataGridView1.Location = new Point(20, 20);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 10F);
             dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 218, 224);
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 35;
+            dataGridView1.RowTemplate.Height = 40;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1000, 430);
+            dataGridView1.Size = new Size(960, 390);
             dataGridView1.TabIndex = 0;
             // 
             // bottomPanel
             // 
+            bottomPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             bottomPanel.BackColor = Color.White;
             bottomPanel.Controls.Add(btnDelete);
             bottomPanel.Controls.Add(btnUpdate);
@@ -97,24 +98,24 @@
             bottomPanel.Controls.Add(lblPassword);
             bottomPanel.Controls.Add(txtUsername);
             bottomPanel.Controls.Add(lblUsername);
-            bottomPanel.Dock = DockStyle.Bottom;
-            bottomPanel.Location = new Point(0, 430);
+            bottomPanel.Location = new Point(20, 430);
             bottomPanel.Name = "bottomPanel";
-            bottomPanel.Padding = new Padding(20);
-            bottomPanel.Size = new Size(1000, 170);
+            bottomPanel.Padding = new Padding(25, 20, 25, 20);
+            bottomPanel.Size = new Size(960, 150);
             bottomPanel.TabIndex = 1;
             // 
             // btnDelete
             // 
             btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnDelete.BackColor = Color.FromArgb(220, 53, 69);
+            btnDelete.BackColor = Color.FromArgb(219, 112, 147);  // 玫瑰粉删除按钮
+            btnDelete.Cursor = Cursors.Hand;
             btnDelete.FlatAppearance.BorderSize = 0;
             btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnDelete.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(845, 110);
+            btnDelete.Location = new Point(815, 95);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(100, 35);
+            btnDelete.Size = new Size(115, 40);
             btnDelete.TabIndex = 8;
             btnDelete.Text = "🗑️ 删除";
             btnDelete.UseVisualStyleBackColor = false;
@@ -122,14 +123,15 @@
             // btnUpdate
             // 
             btnUpdate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnUpdate.BackColor = Color.FromArgb(255, 193, 7);
+            btnUpdate.BackColor = Color.FromArgb(255, 182, 193);  // 粉色更新按钮
+            btnUpdate.Cursor = Cursors.Hand;
             btnUpdate.FlatAppearance.BorderSize = 0;
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnUpdate.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(720, 110);
+            btnUpdate.Location = new Point(670, 95);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(100, 35);
+            btnUpdate.Size = new Size(115, 40);
             btnUpdate.TabIndex = 7;
             btnUpdate.Text = "✏️ 更新";
             btnUpdate.UseVisualStyleBackColor = false;
@@ -137,77 +139,83 @@
             // btnAdd
             // 
             btnAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAdd.BackColor = Color.FromArgb(40, 167, 69);
+            btnAdd.BackColor = Color.FromArgb(255, 105, 180);  // 深粉色添加按钮
+            btnAdd.Cursor = Cursors.Hand;
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnAdd.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnAdd.ForeColor = Color.White;
-            btnAdd.Location = new Point(595, 110);
+            btnAdd.Location = new Point(525, 95);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(100, 35);
+            btnAdd.Size = new Size(115, 40);
             btnAdd.TabIndex = 6;
             btnAdd.Text = "➕ 添加";
             btnAdd.UseVisualStyleBackColor = false;
             // 
             // cmbRole
             // 
+            cmbRole.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbRole.Font = new Font("Microsoft YaHei UI", 9F);
+            cmbRole.FlatStyle = FlatStyle.Flat;
+            cmbRole.Font = new Font("Microsoft YaHei UI", 10F);
             cmbRole.FormattingEnabled = true;
             cmbRole.Items.AddRange(new object[] { "admin", "user" });
-            cmbRole.Location = new Point(590, 35);
+            cmbRole.Location = new Point(605, 27);
             cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(355, 28);
+            cmbRole.Size = new Size(325, 27);
             cmbRole.TabIndex = 5;
             // 
             // lblRole
             // 
+            lblRole.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblRole.AutoSize = true;
-            lblRole.Font = new Font("Microsoft YaHei UI", 9F);
+            lblRole.Font = new Font("Microsoft YaHei UI", 10F);
             lblRole.ForeColor = Color.FromArgb(64, 64, 64);
-            lblRole.Location = new Point(528, 38);
+            lblRole.Location = new Point(538, 30);
             lblRole.Name = "lblRole";
-            lblRole.Size = new Size(56, 20);
+            lblRole.Size = new Size(65, 20);
             lblRole.TabIndex = 4;
             lblRole.Text = "角色：";
             // 
             // txtPassword
             // 
-            txtPassword.Font = new Font("Microsoft YaHei UI", 9F);
-            txtPassword.Location = new Point(110, 82);
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.Font = new Font("Microsoft YaHei UI", 10F);
+            txtPassword.Location = new Point(115, 75);
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "留空则不修改密码";
-            txtPassword.Size = new Size(380, 27);
+            txtPassword.Size = new Size(375, 25);
             txtPassword.TabIndex = 3;
             txtPassword.UseSystemPasswordChar = true;
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Font = new Font("Microsoft YaHei UI", 9F);
+            lblPassword.Font = new Font("Microsoft YaHei UI", 10F);
             lblPassword.ForeColor = Color.FromArgb(64, 64, 64);
-            lblPassword.Location = new Point(30, 85);
+            lblPassword.Location = new Point(30, 78);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(56, 20);
+            lblPassword.Size = new Size(79, 20);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "密码：";
             // 
             // txtUsername
             // 
-            txtUsername.Font = new Font("Microsoft YaHei UI", 9F);
-            txtUsername.Location = new Point(110, 32);
+            txtUsername.BorderStyle = BorderStyle.FixedSingle;
+            txtUsername.Font = new Font("Microsoft YaHei UI", 10F);
+            txtUsername.Location = new Point(115, 27);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(380, 27);
+            txtUsername.Size = new Size(375, 25);
             txtUsername.TabIndex = 1;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Font = new Font("Microsoft YaHei UI", 9F);
+            lblUsername.Font = new Font("Microsoft YaHei UI", 10F);
             lblUsername.ForeColor = Color.FromArgb(64, 64, 64);
-            lblUsername.Location = new Point(30, 35);
+            lblUsername.Location = new Point(30, 30);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(70, 20);
+            lblUsername.Size = new Size(79, 20);
             lblUsername.TabIndex = 0;
             lblUsername.Text = "用户名：";
             // 
@@ -215,11 +223,12 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(245, 245, 245);
+            BackColor = Color.FromArgb(255, 240, 245);  // 浅粉色背景
             ClientSize = new Size(1000, 600);
             Controls.Add(bottomPanel);
             Controls.Add(dataGridView1);
             Font = new Font("Microsoft YaHei UI", 9F);
+            MinimumSize = new Size(800, 500);
             Name = "UserManagementForm";
             Text = "用户管理";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

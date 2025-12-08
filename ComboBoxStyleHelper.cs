@@ -27,6 +27,9 @@ namespace WinWMS
             // 启用自绘模式
             comboBox.DrawMode = DrawMode.OwnerDrawFixed;
             
+            // 设置下拉列表高度（显示更多项）
+            comboBox.MaxDropDownItems = 10;
+            
             // 绑定绘制事件
             comboBox.DrawItem += ComboBox_DrawItem;
         }
@@ -61,10 +64,19 @@ namespace WinWMS
             // 处理不同的数据源类型
             if (cmb.Items[e.Index] is DataRowView drv)
             {
-                // DataTable 数据源
-                if (drv.Row.Table.Columns.Contains("name"))
+                // DataTable 数据源 - 优先使用 DisplayMember 指定的字段
+                if (!string.IsNullOrEmpty(cmb.DisplayMember) && 
+                    drv.Row.Table.Columns.Contains(cmb.DisplayMember))
+                {
+                    text = drv[cmb.DisplayMember]?.ToString() ?? "";
+                }
+                else if (drv.Row.Table.Columns.Contains("name"))
                 {
                     text = drv["name"]?.ToString() ?? "";
+                }
+                else if (drv.Row.Table.Columns.Contains("display_spec"))
+                {
+                    text = drv["display_spec"]?.ToString() ?? "";
                 }
                 else
                 {

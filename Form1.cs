@@ -78,7 +78,7 @@ namespace WinWMS
             lblPageTitle.Text = "欢迎使用仓储管理系统";
             mainPanel.Controls.Clear();
 
-            // 主容器面板 - 浅灰色背景，填充整个区域
+            // 主容器面板 - 启用自动滚动
             Panel welcomePanel = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -86,12 +86,12 @@ namespace WinWMS
                 AutoScroll = true
             };
 
-            // 内容容器 - 用于整体布局，也填充整个区域
+            // 内容容器 - 使用绝对定位
             Panel contentContainer = new Panel
             {
-                Dock = DockStyle.Fill,  // 使用Dock填充，自动适应父容器
                 BackColor = Color.White,
-                AutoScroll = false
+                AutoScroll = false,
+                Location = new Point(0, 0)
             };
 
             // 标题
@@ -174,75 +174,120 @@ namespace WinWMS
             welcomePanel.Controls.Add(contentContainer);
             mainPanel.Controls.Add(welcomePanel);
 
-            // 布局计算和调整
+            // 窗口大小改变时更新布局
             welcomePanel.Resize += (s, e) => 
             {
                 UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
             };
 
-            // 容器大小改变时也更新布局
-            contentContainer.Resize += (s, e) =>
+            // 使用 Timer 延迟初始化，确保控件完全加载
+            System.Windows.Forms.Timer initTimer = new System.Windows.Forms.Timer();
+            initTimer.Interval = 50;
+            initTimer.Tick += (s, e) =>
             {
-                UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
+                initTimer.Stop();
+                initTimer.Dispose();
+                if (!welcomePanel.IsDisposed && welcomePanel.IsHandleCreated)
+                {
+                    UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
+                }
             };
-
-            // 初始布局 - 在句柄创建后执行
-            contentContainer.HandleCreated += (s, e) =>
-            {
-                UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
-            };
+            initTimer.Start();
         }
 
         private void UpdateWelcomeLayout(Panel welcomePanel, Panel contentContainer, 
             Label lblWelcome, Label lblDescription, TableLayoutPanel cardsPanel, Label lblFooter)
         {
+            // 安全检查
+            if (welcomePanel == null || welcomePanel.IsDisposed || !welcomePanel.IsHandleCreated) return;
+            if (contentContainer == null || contentContainer.IsDisposed) return;
             if (welcomePanel.Width <= 0 || welcomePanel.Height <= 0) return;
-            if (contentContainer.Width <= 0 || contentContainer.Height <= 0) return;
 
-            // 计算可用空间 - 使用容器的实际客户端大小
-            int availableWidth = contentContainer.ClientSize.Width;
-            int availableHeight = contentContainer.ClientSize.Height;
-
-            // 卡片网格尺寸计算 - 保持合理比例
-            int gridWidth = Math.Min(availableWidth - 80, 1000); // 最大宽度1000，两侧留40边距
-            int cardWidth = (gridWidth - 60) / 3; // 3列，每列间距10px，左右各10px
-            int cardHeight = (int)(cardWidth * 0.75); // 保持4:3比例
-            int gridHeight = cardHeight * 2 + 20; // 2行 + 间距
-
-            // 确保最小尺寸
-            cardWidth = Math.Max(cardWidth, 200);
-            cardHeight = Math.Max(cardHeight, 150);
-            gridWidth = cardWidth * 3 + 60;
-            gridHeight = cardHeight * 2 + 20;
-
-            // 设置卡片网格大小
-            cardsPanel.Size = new Size(gridWidth, gridHeight);
-
-            // 计算内容总高度
-            int spacing = 20;
-            int totalContentHeight = lblWelcome.Height + spacing + 
-                                     lblDescription.Height + spacing * 2 + 
-                                     gridHeight + spacing * 2 + 
-                                     lblFooter.Height;
-
-            // 垂直居中
-            int topMargin = Math.Max(30, (availableHeight - totalContentHeight) / 2);
-            
-            // 水平居中各个元素
-            int centerX = availableWidth / 2;
-
-            lblWelcome.Location = new Point(centerX - lblWelcome.Width / 2, topMargin);
-            lblDescription.Location = new Point(centerX - lblDescription.Width / 2, lblWelcome.Bottom + spacing);
-            cardsPanel.Location = new Point(centerX - gridWidth / 2, lblDescription.Bottom + spacing * 2);
-            lblFooter.Location = new Point(centerX - lblFooter.Width / 2, cardsPanel.Bottom + spacing * 2);
-
-            // 刷新卡片显示
-            foreach (Control card in cardsPanel.Controls)
+            try
             {
-                if (card is Panel cardPanel && cardPanel.Tag != null)
+                contentContainer.SuspendLayout();
+
+                // 获取可用空间
+                int availableWidth = Math.Max(600, welcomePanel.ClientSize.Width);
+                int availableHeight = Math.Max(400, welcomePanel.ClientSize.Height);
+
+                // 计算缩放比例 - 基于可用宽度
+                float scale = availableWidth / 1000.0f;
+                scale = Math.Max(0.6f, Math.Min(1.2f, scale));
+
+                // 动态调整标题字体
+                int titleSize = Math.Max(14, Math.Min(28, (int)(24 * scale)));
+                lblWelcome.Font = new Font("Microsoft YaHei UI", titleSize, FontStyle.Bold);
+
+                // 动态调整描述字体
+                int descSize = Math.Max(9, Math.Min(14, (int)(12 * scale)));
+                lblDescription.Font = new Font("Microsoft YaHei UI", descSize);
+
+                // 动态调整页脚字体
+                int footerSize = Math.Max(8, Math.Min(11, (int)(10 * scale)));
+                lblFooter.Font = new Font("Microsoft YaHei UI", footerSize);
+
+                // 计算卡片尺寸
+                int maxGridWidth = Math.Min(availableWidth - 80, 1000);
+                int cardWidth = Math.Max(180, (maxGridWidth - 60) / 3);
+                int cardHeight = (int)(cardWidth * 0.75);
+                
+                // 根据缩放调整最小尺寸
+                cardWidth = Math.Max((int)(180 * scale), cardWidth);
+                cardHeight = Math.Max((int)(135 * scale), cardHeight);
+                
+                int gridWidth = cardWidth * 3 + 60;
+                int gridHeight = cardHeight * 2 + 20;
+
+                // 设置卡片网格大小
+                cardsPanel.Size = new Size(gridWidth, gridHeight);
+
+                // 计算间距
+                int spacing = Math.Max(10, (int)(20 * scale));
+
+                // 计算总高度
+                int totalHeight = 
+                    lblWelcome.Height + spacing +
+                    lblDescription.Height + (spacing * 2) +
+                    gridHeight + (spacing * 2) +
+                    lblFooter.Height + 80;
+
+                // 计算垂直位置
+                int topMargin = Math.Max(30, (availableHeight - totalHeight) / 2);
+                if (totalHeight > availableHeight)
                 {
-                    UpdateCardSize(cardPanel, cardWidth, cardHeight);
+                    topMargin = 30;
                 }
+
+                // 水平居中
+                int centerX = availableWidth / 2;
+
+                // 设置各元素位置
+                lblWelcome.Location = new Point(Math.Max(0, centerX - lblWelcome.Width / 2), topMargin);
+                lblDescription.Location = new Point(Math.Max(0, centerX - lblDescription.Width / 2), lblWelcome.Bottom + spacing);
+                cardsPanel.Location = new Point(Math.Max(0, centerX - gridWidth / 2), lblDescription.Bottom + (spacing * 2));
+                lblFooter.Location = new Point(Math.Max(0, centerX - lblFooter.Width / 2), cardsPanel.Bottom + (spacing * 2));
+
+                // 设置容器大小 - 关键修复
+                int containerHeight = Math.Max(lblFooter.Bottom + 60, totalHeight);
+                contentContainer.Size = new Size(availableWidth, containerHeight);
+
+                // 更新卡片大小
+                foreach (Control ctrl in cardsPanel.Controls)
+                {
+                    if (ctrl is Panel cardPanel)
+                    {
+                        UpdateCardSize(cardPanel, cardWidth, cardHeight);
+                    }
+                }
+            }
+            catch
+            {
+                // 忽略布局错误
+            }
+            finally
+            {
+                contentContainer.ResumeLayout(true);
             }
         }
 

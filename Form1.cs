@@ -1,16 +1,42 @@
-﻿namespace WinWMS
+﻿using System.Runtime.InteropServices;
+
+namespace WinWMS
 {
     public partial class Form1 : Form
     {
         private Button? currentActiveButton;
         private Form? currentChildForm;
 
+        // Windows API for title bar color
+        [DllImport("dwmapi.dll")]
+        private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+        private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+        private const int DWMWA_CAPTION_COLOR = 35;
+
         public Form1()
         {
             InitializeComponent();
+            SetTitleBarColor();
             SetupButtonHoverEffects();
             currentActiveButton = btnHome;
             ShowWelcomePage();
+        }
+
+        private void SetTitleBarColor()
+        {
+            if (OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000))
+            {
+                // 粉色 RGB(255, 182, 193) 转换为 BGR 格式
+                int color = 0x00C1B6FF; // BGR格式: BB GG RR
+                DwmSetWindowAttribute(this.Handle, DWMWA_CAPTION_COLOR, ref color, sizeof(int));
+            }
+        }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            SetTitleBarColor();
         }
 
         // 在主面板中显示子窗体
@@ -70,7 +96,7 @@
 
             Label lblDescription = new Label
             {
-                Text = "现代化粉色主题 · 响应式设计 · 优雅的仓储管理解决方案",
+                Text = "现代化粉色主题 · 响应式设计 · 优雅的仓储管理",
                 Font = new Font("Microsoft YaHei UI", 14),
                 ForeColor = Color.FromArgb(255, 105, 180),
                 AutoSize = true,
@@ -186,7 +212,7 @@
         {
             if (sender is Button btn && btn != currentActiveButton)
             {
-                btn.BackColor = Color.FromArgb(255, 105, 180);  // 深粉色悬停
+                btn.BackColor = Color.FromArgb(255, 200, 210);  // 微微发白的浅粉色悬停
             }
         }
 
@@ -207,9 +233,9 @@
                 {
                     currentActiveButton.BackColor = Color.FromArgb(255, 182, 193);
                 }
-                
+
                 // 设置当前按钮为激活状态
-                btn.BackColor = Color.FromArgb(255, 105, 180);  // 深粉色激活
+                btn.BackColor = Color.FromArgb(255, 200, 210);  // 微微发白的浅粉色激活
                 currentActiveButton = btn;
             }
         }
@@ -261,7 +287,7 @@
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确定要退出系统吗？", "退出确认", 
+            if (MessageBox.Show("确定要退出系统吗？", "退出确认",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Close();

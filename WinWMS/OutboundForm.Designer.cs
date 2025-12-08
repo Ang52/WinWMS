@@ -62,6 +62,7 @@
             txtRemark.PlaceholderText = "可选填写备注信息...";
             txtRemark.Size = new Size(320, 85);
             txtRemark.TabIndex = 3;
+            txtRemark.BackColor = Color.White;
             // 
             // lblRemark
             // 
@@ -113,13 +114,13 @@
             // cmbWarehouse
             // 
             cmbWarehouse.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbWarehouse.FlatStyle = FlatStyle.Flat;
             cmbWarehouse.Font = new Font("Microsoft YaHei UI", 11F);
             cmbWarehouse.FormattingEnabled = true;
             cmbWarehouse.Location = new Point(140, 88);
             cmbWarehouse.Name = "cmbWarehouse";
             cmbWarehouse.Size = new Size(320, 28);
             cmbWarehouse.TabIndex = 1;
+            cmbWarehouse.BackColor = Color.White;
             // 
             // lblWarehouse
             // 
@@ -135,13 +136,13 @@
             // cmbMaterial
             // 
             cmbMaterial.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbMaterial.FlatStyle = FlatStyle.Flat;
             cmbMaterial.Font = new Font("Microsoft YaHei UI", 11F);
             cmbMaterial.FormattingEnabled = true;
             cmbMaterial.Location = new Point(140, 38);
             cmbMaterial.Name = "cmbMaterial";
             cmbMaterial.Size = new Size(320, 28);
             cmbMaterial.TabIndex = 0;
+            cmbMaterial.BackColor = Color.White;
             // 
             // lblMaterial
             // 

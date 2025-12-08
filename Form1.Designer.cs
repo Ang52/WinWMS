@@ -248,7 +248,7 @@
             // 
             // btnHome
             // 
-            btnHome.BackColor = Color.FromArgb(255, 105, 180);
+            btnHome.BackColor = Color.FromArgb(255, 200, 210);
             btnHome.Dock = DockStyle.Top;
             btnHome.FlatAppearance.BorderSize = 0;
             btnHome.FlatStyle = FlatStyle.Flat;
@@ -265,7 +265,7 @@
             // 
             // logoPanel
             // 
-            logoPanel.BackColor = Color.FromArgb(219, 112, 147);
+            logoPanel.BackColor = Color.FromArgb(255, 160, 175);
             logoPanel.Controls.Add(lblSystemName);
             logoPanel.Controls.Add(lblLogo);
             logoPanel.Dock = DockStyle.Top;
@@ -346,7 +346,6 @@
             mainPanel.Name = "mainPanel";
             mainPanel.Size = new Size(980, 518);
             mainPanel.TabIndex = 2;
-            mainPanel.Paint += mainPanel_Paint;
             // 
             // statusStrip1
             // 
@@ -371,7 +370,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(255, 240, 245);
+            BackColor = Color.FromArgb(255, 182, 193);
             ClientSize = new Size(1200, 600);
             Controls.Add(mainPanel);
             Controls.Add(statusStrip1);

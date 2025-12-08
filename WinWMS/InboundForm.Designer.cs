@@ -2,15 +2,8 @@
 {
     partial class InboundForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,180 +15,189 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblPrice = new System.Windows.Forms.Label();
-            this.lblQuantity = new System.Windows.Forms.Label();
-            this.lblWarehouse = new System.Windows.Forms.Label();
-            this.cmbMaterial = new System.Windows.Forms.ComboBox();
-            this.lblMaterial = new System.Windows.Forms.Label();
-            this.cmbWarehouse = new System.Windows.Forms.ComboBox();
-            this.numQuantity = new System.Windows.Forms.NumericUpDown();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.btnInbound = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
-            this.SuspendLayout();
+            formPanel = new Panel();
+            btnInbound = new Button();
+            txtPrice = new TextBox();
+            lblPrice = new Label();
+            numQuantity = new NumericUpDown();
+            lblQuantity = new Label();
+            cmbWarehouse = new ComboBox();
+            lblWarehouse = new Label();
+            cmbMaterial = new ComboBox();
+            lblMaterial = new Label();
+            txtRemark = new TextBox();
+            lblRemark = new Label();
+            formPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
+            SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // formPanel
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.lblPrice, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblQuantity, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblWarehouse, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.cmbMaterial, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblMaterial, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cmbWarehouse, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.numQuantity, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtPrice, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnInbound, 1, 4);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 237);
-            this.tableLayoutPanel1.TabIndex = 9;
-            // 
-            // lblPrice
-            // 
-            this.lblPrice.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(3, 131);
-            this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(56, 17);
-            this.lblPrice.TabIndex = 8;
-            this.lblPrice.Text = "入库单价";
-            // 
-            // lblQuantity
-            // 
-            this.lblQuantity.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(3, 91);
-            this.lblQuantity.Name = "lblQuantity";
-            this.lblQuantity.Size = new System.Drawing.Size(32, 17);
-            this.lblQuantity.TabIndex = 7;
-            this.lblQuantity.Text = "数量";
-            // 
-            // lblWarehouse
-            // 
-            this.lblWarehouse.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblWarehouse.AutoSize = true;
-            this.lblWarehouse.Location = new System.Drawing.Point(3, 51);
-            this.lblWarehouse.Name = "lblWarehouse";
-            this.lblWarehouse.Size = new System.Drawing.Size(32, 17);
-            this.lblWarehouse.TabIndex = 6;
-            this.lblWarehouse.Text = "仓库";
-            // 
-            // cmbMaterial
-            // 
-            this.cmbMaterial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMaterial.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cmbMaterial.FormattingEnabled = true;
-            this.cmbMaterial.Location = new System.Drawing.Point(65, 7);
-            this.cmbMaterial.Name = "cmbMaterial";
-            this.cmbMaterial.Size = new System.Drawing.Size(262, 25);
-            this.cmbMaterial.TabIndex = 0;
-            // 
-            // lblMaterial
-            // 
-            this.lblMaterial.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblMaterial.AutoSize = true;
-            this.lblMaterial.Location = new System.Drawing.Point(3, 11);
-            this.lblMaterial.Name = "lblMaterial";
-            this.lblMaterial.Size = new System.Drawing.Size(32, 17);
-            this.lblMaterial.TabIndex = 5;
-            this.lblMaterial.Text = "物料";
-            // 
-            // cmbWarehouse
-            // 
-            this.cmbWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbWarehouse.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cmbWarehouse.FormattingEnabled = true;
-            this.cmbWarehouse.Location = new System.Drawing.Point(65, 47);
-            this.cmbWarehouse.Name = "cmbWarehouse";
-            this.cmbWarehouse.Size = new System.Drawing.Size(262, 25);
-            this.cmbWarehouse.TabIndex = 1;
-            // 
-            // numQuantity
-            // 
-            this.numQuantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numQuantity.Location = new System.Drawing.Point(65, 88);
-            this.numQuantity.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numQuantity.Name = "numQuantity";
-            this.numQuantity.Size = new System.Drawing.Size(262, 23);
-            this.numQuantity.TabIndex = 2;
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPrice.Location = new System.Drawing.Point(65, 128);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(262, 23);
-            this.txtPrice.TabIndex = 3;
+            formPanel.BackColor = Color.White;
+            formPanel.Controls.Add(txtRemark);
+            formPanel.Controls.Add(lblRemark);
+            formPanel.Controls.Add(btnInbound);
+            formPanel.Controls.Add(txtPrice);
+            formPanel.Controls.Add(lblPrice);
+            formPanel.Controls.Add(numQuantity);
+            formPanel.Controls.Add(lblQuantity);
+            formPanel.Controls.Add(cmbWarehouse);
+            formPanel.Controls.Add(lblWarehouse);
+            formPanel.Controls.Add(cmbMaterial);
+            formPanel.Controls.Add(lblMaterial);
+            formPanel.Location = new Point(50, 30);
+            formPanel.Name = "formPanel";
+            formPanel.Padding = new Padding(30);
+            formPanel.Size = new Size(500, 450);
+            formPanel.TabIndex = 0;
             // 
             // btnInbound
             // 
-            this.btnInbound.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnInbound.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnInbound.FlatAppearance.BorderSize = 0;
-            this.btnInbound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInbound.Location = new System.Drawing.Point(146, 183);
-            this.btnInbound.Name = "btnInbound";
-            this.btnInbound.Size = new System.Drawing.Size(100, 30);
-            this.btnInbound.TabIndex = 4;
-            this.btnInbound.Text = "执行入库";
-            this.btnInbound.UseVisualStyleBackColor = false;
+            btnInbound.BackColor = Color.FromArgb(0, 122, 204);
+            btnInbound.FlatAppearance.BorderSize = 0;
+            btnInbound.FlatStyle = FlatStyle.Flat;
+            btnInbound.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
+            btnInbound.ForeColor = Color.White;
+            btnInbound.Location = new Point(130, 370);
+            btnInbound.Name = "btnInbound";
+            btnInbound.Size = new Size(240, 45);
+            btnInbound.TabIndex = 5;
+            btnInbound.Text = "✓ 确认入库";
+            btnInbound.UseVisualStyleBackColor = false;
+            // 
+            // txtPrice
+            // 
+            txtPrice.Font = new Font("Microsoft YaHei UI", 10F);
+            txtPrice.Location = new Point(130, 200);
+            txtPrice.Name = "txtPrice";
+            txtPrice.Size = new Size(340, 30);
+            txtPrice.TabIndex = 3;
+            // 
+            // lblPrice
+            // 
+            lblPrice.AutoSize = true;
+            lblPrice.Font = new Font("Microsoft YaHei UI", 10F);
+            lblPrice.ForeColor = Color.FromArgb(64, 64, 64);
+            lblPrice.Location = new Point(30, 203);
+            lblPrice.Name = "lblPrice";
+            lblPrice.Size = new Size(93, 24);
+            lblPrice.TabIndex = 8;
+            lblPrice.Text = "入库单价：";
+            // 
+            // numQuantity
+            // 
+            numQuantity.Font = new Font("Microsoft YaHei UI", 10F);
+            numQuantity.Location = new Point(130, 145);
+            numQuantity.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            numQuantity.Name = "numQuantity";
+            numQuantity.Size = new Size(340, 30);
+            numQuantity.TabIndex = 2;
+            // 
+            // lblQuantity
+            // 
+            lblQuantity.AutoSize = true;
+            lblQuantity.Font = new Font("Microsoft YaHei UI", 10F);
+            lblQuantity.ForeColor = Color.FromArgb(64, 64, 64);
+            lblQuantity.Location = new Point(30, 148);
+            lblQuantity.Name = "lblQuantity";
+            lblQuantity.Size = new Size(93, 24);
+            lblQuantity.TabIndex = 7;
+            lblQuantity.Text = "入库数量：";
+            // 
+            // cmbWarehouse
+            // 
+            cmbWarehouse.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbWarehouse.Font = new Font("Microsoft YaHei UI", 10F);
+            cmbWarehouse.FormattingEnabled = true;
+            cmbWarehouse.Location = new Point(130, 90);
+            cmbWarehouse.Name = "cmbWarehouse";
+            cmbWarehouse.Size = new Size(340, 32);
+            cmbWarehouse.TabIndex = 1;
+            // 
+            // lblWarehouse
+            // 
+            lblWarehouse.AutoSize = true;
+            lblWarehouse.Font = new Font("Microsoft YaHei UI", 10F);
+            lblWarehouse.ForeColor = Color.FromArgb(64, 64, 64);
+            lblWarehouse.Location = new Point(30, 93);
+            lblWarehouse.Name = "lblWarehouse";
+            lblWarehouse.Size = new Size(93, 24);
+            lblWarehouse.TabIndex = 6;
+            lblWarehouse.Text = "入库仓库：";
+            // 
+            // cmbMaterial
+            // 
+            cmbMaterial.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMaterial.Font = new Font("Microsoft YaHei UI", 10F);
+            cmbMaterial.FormattingEnabled = true;
+            cmbMaterial.Location = new Point(130, 35);
+            cmbMaterial.Name = "cmbMaterial";
+            cmbMaterial.Size = new Size(340, 32);
+            cmbMaterial.TabIndex = 0;
+            // 
+            // lblMaterial
+            // 
+            lblMaterial.AutoSize = true;
+            lblMaterial.Font = new Font("Microsoft YaHei UI", 10F);
+            lblMaterial.ForeColor = Color.FromArgb(64, 64, 64);
+            lblMaterial.Location = new Point(30, 38);
+            lblMaterial.Name = "lblMaterial";
+            lblMaterial.Size = new Size(93, 24);
+            lblMaterial.TabIndex = 5;
+            lblMaterial.Text = "物料名称：";
+            // 
+            // txtRemark
+            // 
+            txtRemark.Font = new Font("Microsoft YaHei UI", 10F);
+            txtRemark.Location = new Point(130, 255);
+            txtRemark.Multiline = true;
+            txtRemark.Name = "txtRemark";
+            txtRemark.PlaceholderText = "可选填写备注信息";
+            txtRemark.Size = new Size(340, 80);
+            txtRemark.TabIndex = 4;
+            // 
+            // lblRemark
+            // 
+            lblRemark.AutoSize = true;
+            lblRemark.Font = new Font("Microsoft YaHei UI", 10F);
+            lblRemark.ForeColor = Color.FromArgb(64, 64, 64);
+            lblRemark.Location = new Point(30, 258);
+            lblRemark.Name = "lblRemark";
+            lblRemark.Size = new Size(58, 24);
+            lblRemark.TabIndex = 9;
+            lblRemark.Text = "备注：";
             // 
             // InboundForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(354, 261);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.Name = "InboundForm";
-            this.Text = "入库操作";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 245, 245);
+            ClientSize = new Size(1000, 600);
+            Controls.Add(formPanel);
+            Font = new Font("Microsoft YaHei UI", 9F);
+            Name = "InboundForm";
+            Text = "入库操作";
+            formPanel.ResumeLayout(false);
+            formPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbMaterial;
-        private System.Windows.Forms.ComboBox cmbWarehouse;
-        private System.Windows.Forms.NumericUpDown numQuantity;
-        private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.Button btnInbound;
-        private System.Windows.Forms.Label lblMaterial;
-        private System.Windows.Forms.Label lblWarehouse;
-        private System.Windows.Forms.Label lblQuantity;
-        private System.Windows.Forms.Label lblPrice;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private Panel formPanel;
+        private ComboBox cmbMaterial;
+        private ComboBox cmbWarehouse;
+        private NumericUpDown numQuantity;
+        private TextBox txtPrice;
+        private TextBox txtRemark;
+        private Button btnInbound;
+        private Label lblMaterial;
+        private Label lblWarehouse;
+        private Label lblQuantity;
+        private Label lblPrice;
+        private Label lblRemark;
     }
 }

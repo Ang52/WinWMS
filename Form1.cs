@@ -3,6 +3,7 @@
     public partial class Form1 : Form
     {
         private Button? currentActiveButton;
+        private Form? currentChildForm;
 
         public Form1()
         {
@@ -12,8 +13,45 @@
             ShowWelcomePage();
         }
 
+        // 在主面板中显示子窗体
+        private void ShowFormInPanel(Form childForm, string title)
+        {
+            // 关闭之前的子窗体
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+                currentChildForm.Dispose();
+            }
+
+            // 更新标题
+            lblPageTitle.Text = title;
+
+            // 清空主面板
+            mainPanel.Controls.Clear();
+
+            // 配置子窗体
+            currentChildForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+
+            // 添加到主面板
+            mainPanel.Controls.Add(childForm);
+            childForm.Show();
+        }
+
         private void ShowWelcomePage()
         {
+            // 关闭之前的子窗体
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+                currentChildForm.Dispose();
+                currentChildForm = null;
+            }
+
+            lblPageTitle.Text = "欢迎使用仓储管理系统";
+
             // 清空主面板
             mainPanel.Controls.Clear();
 
@@ -165,65 +203,47 @@
 
         private void MonthlyReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "月度报表";
-            MonthlyReportForm monthlyReportForm = new MonthlyReportForm();
-            monthlyReportForm.ShowDialog();
+            ShowFormInPanel(new MonthlyReportForm(), "月度报表");
         }
 
         private void OutboundQueryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "出库查询";
-            OutboundQueryForm outboundQueryForm = new OutboundQueryForm();
-            outboundQueryForm.ShowDialog();
+            ShowFormInPanel(new OutboundQueryForm(), "出库查询");
         }
 
         private void InboundQueryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "入库查询";
-            InboundQueryForm inboundQueryForm = new InboundQueryForm();
-            inboundQueryForm.ShowDialog();
+            ShowFormInPanel(new InboundQueryForm(), "入库查询");
         }
 
         private void InventoryQueryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "库存查询";
-            InventoryQueryForm inventoryQueryForm = new InventoryQueryForm();
-            inventoryQueryForm.ShowDialog();
+            ShowFormInPanel(new InventoryQueryForm(), "库存查询");
         }
 
         private void OutboundToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "出库管理";
-            OutboundForm outboundForm = new OutboundForm();
-            outboundForm.ShowDialog();
+            ShowFormInPanel(new OutboundForm(), "出库管理");
         }
 
         private void InboundToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "入库管理";
-            InboundForm inboundForm = new InboundForm();
-            inboundForm.ShowDialog();
+            ShowFormInPanel(new InboundForm(), "入库管理");
         }
 
         private void WarehouseManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "仓库管理";
-            WarehouseManagementForm warehouseForm = new WarehouseManagementForm();
-            warehouseForm.ShowDialog();
+            ShowFormInPanel(new WarehouseManagementForm(), "仓库管理");
         }
 
         private void MaterialManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "物资管理";
-            MaterialManagementForm materialForm = new MaterialManagementForm();
-            materialForm.ShowDialog();
+            ShowFormInPanel(new MaterialManagementForm(), "物料管理");
         }
 
         private void UserManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lblPageTitle.Text = "用户管理";
-            UserManagementForm userForm = new UserManagementForm();
-            userForm.ShowDialog();
+            ShowFormInPanel(new UserManagementForm(), "用户管理");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

@@ -2,15 +2,8 @@
 {
     partial class MaterialManagementForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,257 +15,251 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblUnit = new System.Windows.Forms.Label();
-            this.lblSpec = new System.Windows.Forms.Label();
-            this.lblName = new System.Windows.Forms.Label();
-            this.txtMaterialCode = new System.Windows.Forms.TextBox();
-            this.lblMaterialCode = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.txtSpec = new System.Windows.Forms.TextBox();
-            this.txtUnit = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            dataGridView1 = new DataGridView();
+            bottomPanel = new Panel();
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnAdd = new Button();
+            txtUnit = new TextBox();
+            lblUnit = new Label();
+            txtSpec = new TextBox();
+            lblSpec = new Label();
+            txtName = new TextBox();
+            lblName = new Label();
+            txtMaterialCode = new TextBox();
+            lblMaterialCode = new Label();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            bottomPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightPink;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 260);
-            this.dataGridView1.TabIndex = 0;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(240, 240, 240);
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(240, 240, 240);
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle2.Padding = new Padding(5, 0, 5, 0);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.FromArgb(230, 230, 230);
+            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 35;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(1000, 400);
+            dataGridView1.TabIndex = 0;
             // 
-            // panel1
+            // bottomPanel
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Location = new System.Drawing.Point(12, 278);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 160);
-            this.panel1.TabIndex = 12;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
-            this.tableLayoutPanel1.Controls.Add(this.lblUnit, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblSpec, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblName, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtMaterialCode, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblMaterialCode, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtSpec, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtUnit, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(776, 160);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // lblUnit
-            // 
-            this.lblUnit.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblUnit.AutoSize = true;
-            this.lblUnit.Location = new System.Drawing.Point(3, 114);
-            this.lblUnit.Name = "lblUnit";
-            this.lblUnit.Size = new System.Drawing.Size(56, 17);
-            this.lblUnit.TabIndex = 11;
-            this.lblUnit.Text = "计量单位";
-            // 
-            // lblSpec
-            // 
-            this.lblSpec.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblSpec.AutoSize = true;
-            this.lblSpec.Location = new System.Drawing.Point(3, 79);
-            this.lblSpec.Name = "lblSpec";
-            this.lblSpec.Size = new System.Drawing.Size(32, 17);
-            this.lblSpec.TabIndex = 10;
-            this.lblSpec.Text = "规格";
-            // 
-            // lblName
-            // 
-            this.lblName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(3, 44);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(32, 17);
-            this.lblName.TabIndex = 9;
-            this.lblName.Text = "名称";
-            // 
-            // txtMaterialCode
-            // 
-            this.txtMaterialCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMaterialCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMaterialCode.Location = new System.Drawing.Point(80, 6);
-            this.txtMaterialCode.Name = "txtMaterialCode";
-            this.txtMaterialCode.Size = new System.Drawing.Size(343, 23);
-            this.txtMaterialCode.TabIndex = 4;
-            // 
-            // lblMaterialCode
-            // 
-            this.lblMaterialCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblMaterialCode.AutoSize = true;
-            this.lblMaterialCode.Location = new System.Drawing.Point(3, 9);
-            this.lblMaterialCode.Name = "lblMaterialCode";
-            this.lblMaterialCode.Size = new System.Drawing.Size(56, 17);
-            this.lblMaterialCode.TabIndex = 8;
-            this.lblMaterialCode.Text = "物资编号";
-            // 
-            // txtName
-            // 
-            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtName.Location = new System.Drawing.Point(80, 41);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(343, 23);
-            this.txtName.TabIndex = 5;
-            // 
-            // txtSpec
-            // 
-            this.txtSpec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSpec.Location = new System.Drawing.Point(80, 76);
-            this.txtSpec.Name = "txtSpec";
-            this.txtSpec.Size = new System.Drawing.Size(343, 23);
-            this.txtSpec.TabIndex = 6;
-            // 
-            // txtUnit
-            // 
-            this.txtUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUnit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUnit.Location = new System.Drawing.Point(80, 111);
-            this.txtUnit.Name = "txtUnit";
-            this.txtUnit.Size = new System.Drawing.Size(343, 23);
-            this.txtUnit.TabIndex = 7;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.btnAdd);
-            this.flowLayoutPanel1.Controls.Add(this.btnUpdate);
-            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(429, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.tableLayoutPanel1.SetRowSpan(this.flowLayoutPanel1, 4);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(344, 134);
-            this.flowLayoutPanel1.TabIndex = 12;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Location = new System.Drawing.Point(10, 8);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(10, 8, 10, 8);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(85, 30);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.Text = "添加";
-            this.btnAdd.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Location = new System.Drawing.Point(115, 8);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(10, 8, 10, 8);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(85, 30);
-            this.btnUpdate.TabIndex = 2;
-            this.btnUpdate.Text = "更新";
-            this.btnUpdate.UseVisualStyleBackColor = false;
+            bottomPanel.BackColor = Color.White;
+            bottomPanel.Controls.Add(btnDelete);
+            bottomPanel.Controls.Add(btnUpdate);
+            bottomPanel.Controls.Add(btnAdd);
+            bottomPanel.Controls.Add(txtUnit);
+            bottomPanel.Controls.Add(lblUnit);
+            bottomPanel.Controls.Add(txtSpec);
+            bottomPanel.Controls.Add(lblSpec);
+            bottomPanel.Controls.Add(txtName);
+            bottomPanel.Controls.Add(lblName);
+            bottomPanel.Controls.Add(txtMaterialCode);
+            bottomPanel.Controls.Add(lblMaterialCode);
+            bottomPanel.Dock = DockStyle.Bottom;
+            bottomPanel.Location = new Point(0, 400);
+            bottomPanel.Name = "bottomPanel";
+            bottomPanel.Padding = new Padding(20);
+            bottomPanel.Size = new Size(1000, 200);
+            bottomPanel.TabIndex = 1;
             // 
             // btnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(220, 8);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(10, 8, 10, 8);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(85, 30);
-            this.btnDelete.TabIndex = 3;
-            this.btnDelete.Text = "删除";
-            this.btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnDelete.BackColor = Color.FromArgb(220, 53, 69);
+            btnDelete.FlatAppearance.BorderSize = 0;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(845, 140);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(100, 35);
+            btnDelete.TabIndex = 10;
+            btnDelete.Text = "🗑️ 删除";
+            btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnUpdate.BackColor = Color.FromArgb(255, 193, 7);
+            btnUpdate.FlatAppearance.BorderSize = 0;
+            btnUpdate.FlatStyle = FlatStyle.Flat;
+            btnUpdate.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(720, 140);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(100, 35);
+            btnUpdate.TabIndex = 9;
+            btnUpdate.Text = "✏️ 更新";
+            btnUpdate.UseVisualStyleBackColor = false;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAdd.BackColor = Color.FromArgb(40, 167, 69);
+            btnAdd.FlatAppearance.BorderSize = 0;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(595, 140);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(100, 35);
+            btnAdd.TabIndex = 8;
+            btnAdd.Text = "➕ 添加";
+            btnAdd.UseVisualStyleBackColor = false;
+            // 
+            // txtUnit
+            // 
+            txtUnit.Font = new Font("Microsoft YaHei UI", 9F);
+            txtUnit.Location = new Point(590, 85);
+            txtUnit.Name = "txtUnit";
+            txtUnit.Size = new Size(355, 27);
+            txtUnit.TabIndex = 7;
+            // 
+            // lblUnit
+            // 
+            lblUnit.AutoSize = true;
+            lblUnit.Font = new Font("Microsoft YaHei UI", 9F);
+            lblUnit.ForeColor = Color.FromArgb(64, 64, 64);
+            lblUnit.Location = new Point(500, 88);
+            lblUnit.Name = "lblUnit";
+            lblUnit.Size = new Size(84, 20);
+            lblUnit.TabIndex = 6;
+            lblUnit.Text = "计量单位：";
+            // 
+            // txtSpec
+            // 
+            txtSpec.Font = new Font("Microsoft YaHei UI", 9F);
+            txtSpec.Location = new Point(590, 32);
+            txtSpec.Name = "txtSpec";
+            txtSpec.Size = new Size(355, 27);
+            txtSpec.TabIndex = 5;
+            // 
+            // lblSpec
+            // 
+            lblSpec.AutoSize = true;
+            lblSpec.Font = new Font("Microsoft YaHei UI", 9F);
+            lblSpec.ForeColor = Color.FromArgb(64, 64, 64);
+            lblSpec.Location = new Point(528, 35);
+            lblSpec.Name = "lblSpec";
+            lblSpec.Size = new Size(56, 20);
+            lblSpec.TabIndex = 4;
+            lblSpec.Text = "规格：";
+            // 
+            // txtName
+            // 
+            txtName.Font = new Font("Microsoft YaHei UI", 9F);
+            txtName.Location = new Point(120, 85);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(350, 27);
+            txtName.TabIndex = 3;
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.Font = new Font("Microsoft YaHei UI", 9F);
+            lblName.ForeColor = Color.FromArgb(64, 64, 64);
+            lblName.Location = new Point(30, 88);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(84, 20);
+            lblName.TabIndex = 2;
+            lblName.Text = "物料名称：";
+            // 
+            // txtMaterialCode
+            // 
+            txtMaterialCode.Font = new Font("Microsoft YaHei UI", 9F);
+            txtMaterialCode.Location = new Point(120, 32);
+            txtMaterialCode.Name = "txtMaterialCode";
+            txtMaterialCode.Size = new Size(350, 27);
+            txtMaterialCode.TabIndex = 1;
+            // 
+            // lblMaterialCode
+            // 
+            lblMaterialCode.AutoSize = true;
+            lblMaterialCode.Font = new Font("Microsoft YaHei UI", 9F);
+            lblMaterialCode.ForeColor = Color.FromArgb(64, 64, 64);
+            lblMaterialCode.Location = new Point(30, 35);
+            lblMaterialCode.Name = "lblMaterialCode";
+            lblMaterialCode.Size = new Size(84, 20);
+            lblMaterialCode.TabIndex = 0;
+            lblMaterialCode.Text = "物资编号：";
             // 
             // MaterialManagementForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dataGridView1);
-            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.Name = "MaterialManagementForm";
-            this.Text = "物料管理";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 245, 245);
+            ClientSize = new Size(1000, 600);
+            Controls.Add(bottomPanel);
+            Controls.Add(dataGridView1);
+            Font = new Font("Microsoft YaHei UI", 9F);
+            Name = "MaterialManagementForm";
+            Text = "物料管理";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            bottomPanel.ResumeLayout(false);
+            bottomPanel.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.TextBox txtMaterialCode;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtSpec;
-        private System.Windows.Forms.TextBox txtUnit;
-        private System.Windows.Forms.Label lblMaterialCode;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblSpec;
-        private System.Windows.Forms.Label lblUnit;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private DataGridView dataGridView1;
+        private Panel bottomPanel;
+        private Button btnAdd;
+        private Button btnUpdate;
+        private Button btnDelete;
+        private TextBox txtMaterialCode;
+        private TextBox txtName;
+        private TextBox txtSpec;
+        private TextBox txtUnit;
+        private Label lblMaterialCode;
+        private Label lblName;
+        private Label lblSpec;
+        private Label lblUnit;
     }
 }

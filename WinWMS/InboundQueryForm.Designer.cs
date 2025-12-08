@@ -42,11 +42,8 @@
             lblEndDate = new Label();
             dtpStartDate = new DateTimePicker();
             lblStartDate = new Label();
-            titlePanel = new Panel();
-            lblTitle = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             topPanel.SuspendLayout();
-            titlePanel.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -80,7 +77,7 @@
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.FromArgb(230, 230, 230);
-            dataGridView1.Location = new Point(0, 130);
+            dataGridView1.Location = new Point(0, 70);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -96,7 +93,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 35;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1000, 470);
+            dataGridView1.Size = new Size(1000, 530);
             dataGridView1.TabIndex = 0;
             // 
             // topPanel
@@ -112,7 +109,7 @@
             topPanel.Controls.Add(dtpStartDate);
             topPanel.Controls.Add(lblStartDate);
             topPanel.Dock = DockStyle.Top;
-            topPanel.Location = new Point(0, 60);
+            topPanel.Location = new Point(0, 0);
             topPanel.Name = "topPanel";
             topPanel.Padding = new Padding(20, 15, 20, 15);
             topPanel.Size = new Size(1000, 70);
@@ -219,28 +216,6 @@
             lblStartDate.TabIndex = 6;
             lblStartDate.Text = "日期：";
             // 
-            // titlePanel
-            // 
-            titlePanel.BackColor = Color.FromArgb(62, 62, 66);
-            titlePanel.Controls.Add(lblTitle);
-            titlePanel.Dock = DockStyle.Top;
-            titlePanel.Location = new Point(0, 0);
-            titlePanel.Name = "titlePanel";
-            titlePanel.Size = new Size(1000, 60);
-            titlePanel.TabIndex = 11;
-            // 
-            // lblTitle
-            // 
-            lblTitle.Dock = DockStyle.Fill;
-            lblTitle.Font = new Font("Microsoft YaHei UI", 14F, FontStyle.Bold);
-            lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(0, 0);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(1000, 60);
-            lblTitle.TabIndex = 0;
-            lblTitle.Text = "入库查询";
-            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // InboundQueryForm
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
@@ -249,15 +224,12 @@
             ClientSize = new Size(1000, 600);
             Controls.Add(dataGridView1);
             Controls.Add(topPanel);
-            Controls.Add(titlePanel);
             Font = new Font("Microsoft YaHei UI", 9F);
             Name = "InboundQueryForm";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "入库查询";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             topPanel.ResumeLayout(false);
             topPanel.PerformLayout();
-            titlePanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -274,7 +246,5 @@
         private Label lblMaterial;
         private Label lblWarehouse;
         private Panel topPanel;
-        private Panel titlePanel;
-        private Label lblTitle;
     }
 }

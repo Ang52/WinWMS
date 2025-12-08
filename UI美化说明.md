@@ -32,14 +32,9 @@
 - **主内容区域**
   - 浅灰色背景 `Color.FromArgb(240, 240, 240)`
   - 填充剩余空间
+  - **所有子窗体嵌入显示，不再弹出独立窗口**
 
 ### 2. 查询表单美化 (入库查询/出库查询)
-
-#### 标题栏
-- 深灰色背景 `Color.FromArgb(62, 62, 66)`
-- 白色粗体文字
-- 居中显示
-- 高度：60px
 
 #### 搜索控制面板
 - 白色背景
@@ -69,6 +64,30 @@
   - 隐藏行标题
   - 全行选择模式
 
+### 3. 入库/出库表单美化
+
+#### 设计特点
+- 居中白色卡片式设计
+- 浅灰色背景区域
+- 大字体清晰标签
+- 统一的输入框样式
+- 大尺寸确认按钮
+- 蓝色确认按钮 `Color.FromArgb(0, 122, 204)`
+- 带图标的按钮文字（✓ 确认入库/出库）
+- 添加备注多行输入框
+
+### 4. 物料管理/用户管理表单美化
+
+#### 布局设计
+- 上方：现代化表格显示数据
+- 下方：白色编辑面板
+- 两列布局：左侧输入框，右侧按钮
+
+#### 按钮配色
+- 添加按钮：绿色 `Color.FromArgb(40, 167, 69)` ➕
+- 更新按钮：黄色 `Color.FromArgb(255, 193, 7)` ✏️
+- 删除按钮：红色 `Color.FromArgb(220, 53, 69)` 🗑️
+
 ## 🎯 导航菜单结构
 
 ```
@@ -97,6 +116,9 @@
 | 标题栏背景 | #3E3E42 | 中灰色 |
 | 主内容背景 | #F0F0F0 | 浅灰色 |
 | 按钮主色 | #007ACC | 蓝色 |
+| 添加按钮 | #28A745 | 绿色 |
+| 更新按钮 | #FFC107 | 黄色 |
+| 删除按钮 | #DC3545 | 红色 |
 | 表格选中 | #E6F4FF | 淡蓝色 |
 | 文字主色 | #404040 | 深灰色 |
 | 网格线 | #E6E6E6 | 浅灰色 |
@@ -115,12 +137,19 @@
 3. **选中反馈**：淡蓝色背景
 4. **只读模式**：防止误操作
 
+### 窗体嵌入显示
+1. **无边框模式**：子窗体去除边框
+2. **填充显示**：Dock.Fill 填充主面板
+3. **TopLevel = false**：嵌入式显示
+4. **自动切换**：点击导航自动切换内容
+
 ## 📱 响应式设计
 
 - 所有面板使用 Dock 属性自动调整
 - DataGridView 锚定到窗体边缘，自动调整大小
 - 搜索按钮右对齐，适应不同窗口宽度
 - 列宽自动填充（AutoSizeColumnsMode.Fill）
+- 主面板自动适应不同分辨率
 
 ## 🔧 技术实现
 
@@ -138,6 +167,13 @@ CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
 // 悬停效果处理
 btn.MouseEnter += NavButton_MouseEnter;
 btn.MouseLeave += NavButton_MouseLeave;
+
+// 窗体嵌入显示
+childForm.TopLevel = false;
+childForm.FormBorderStyle = FormBorderStyle.None;
+childForm.Dock = DockStyle.Fill;
+mainPanel.Controls.Add(childForm);
+childForm.Show();
 ```
 
 ## 📋 使用建议
@@ -147,6 +183,7 @@ btn.MouseLeave += NavButton_MouseLeave;
 3. **字体选择**：Microsoft YaHei UI，提供良好的中文显示效果
 4. **间距规范**：保持 20px 的标准边距
 5. **按钮高度**：统一使用 34-45px 高度
+6. **表单卡片**：使用白色卡片式设计，浅灰色背景
 
 ## 🚀 后续优化建议
 
@@ -172,22 +209,35 @@ btn.MouseLeave += NavButton_MouseLeave;
 
 ## ✅ 已完成的窗体
 
-- ✅ Form1（主窗体）
-- ✅ InboundQueryForm（入库查询）
-- ✅ OutboundQueryForm（出库查询）
+- ✅ Form1（主窗体） - 左侧导航，嵌入式显示
+- ✅ InboundQueryForm（入库查询） - 现代化表格
+- ✅ OutboundQueryForm（出库查询） - 现代化表格
+- ✅ InboundForm（入库表单） - 卡片式设计
+- ✅ OutboundForm（出库表单） - 卡片式设计
+- ✅ MaterialManagementForm（物料管理） - 表格+编辑面板
+- ✅ UserManagementForm（用户管理） - 表格+编辑面板
 
 ## 📌 待优化窗体
 
-- ⏳ InboundForm（入库表单）
-- ⏳ OutboundForm（出库表单）
-- ⏳ MaterialManagementForm（物料管理）
 - ⏳ WarehouseManagementForm（仓库管理）
-- ⏳ UserManagementForm（用户管理）
 - ⏳ InventoryQueryForm（库存查询）
 - ⏳ MonthlyReportForm（月度报表）
+
+## 🎊 重要更新
+
+### 嵌入式窗体显示
+所有功能窗体现在都嵌入在主窗体的右侧内容区域显示，不再弹出独立窗口。这提供了：
+- 更统一的用户体验
+- 更现代的应用界面
+- 更好的空间利用
+- 流畅的页面切换
+
+### 使用方法
+点击左侧导航按钮，对应的功能界面会自动在右侧主内容区域显示。顶部标题栏会实时显示当前功能名称。
 
 ---
 
 **更新日期**: 2024
-**版本**: v1.0
+**版本**: v2.0
 **设计参考**: CargoSystem UI
+**主要更新**: 嵌入式窗体显示 + 全面UI美化

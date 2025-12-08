@@ -78,7 +78,7 @@ namespace WinWMS
             lblPageTitle.Text = "欢迎使用仓储管理系统";
             mainPanel.Controls.Clear();
 
-            // 主容器面板 - 浅灰色背景
+            // 主容器面板 - 浅灰色背景，填充整个区域
             Panel welcomePanel = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -86,9 +86,10 @@ namespace WinWMS
                 AutoScroll = true
             };
 
-            // 内容容器 - 用于整体布局
+            // 内容容器 - 用于整体布局，也填充整个区域
             Panel contentContainer = new Panel
             {
+                Dock = DockStyle.Fill,  // 使用Dock填充，自动适应父容器
                 BackColor = Color.White,
                 AutoScroll = false
             };
@@ -179,19 +180,28 @@ namespace WinWMS
                 UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
             };
 
-            // 初始布局
-            welcomePanel.PerformLayout();
-            UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
+            // 容器大小改变时也更新布局
+            contentContainer.Resize += (s, e) =>
+            {
+                UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
+            };
+
+            // 初始布局 - 在句柄创建后执行
+            contentContainer.HandleCreated += (s, e) =>
+            {
+                UpdateWelcomeLayout(welcomePanel, contentContainer, lblWelcome, lblDescription, cardsPanel, lblFooter);
+            };
         }
 
         private void UpdateWelcomeLayout(Panel welcomePanel, Panel contentContainer, 
             Label lblWelcome, Label lblDescription, TableLayoutPanel cardsPanel, Label lblFooter)
         {
             if (welcomePanel.Width <= 0 || welcomePanel.Height <= 0) return;
+            if (contentContainer.Width <= 0 || contentContainer.Height <= 0) return;
 
-            // 计算可用空间
-            int availableWidth = welcomePanel.ClientSize.Width;
-            int availableHeight = welcomePanel.ClientSize.Height;
+            // 计算可用空间 - 使用容器的实际客户端大小
+            int availableWidth = contentContainer.ClientSize.Width;
+            int availableHeight = contentContainer.ClientSize.Height;
 
             // 卡片网格尺寸计算 - 保持合理比例
             int gridWidth = Math.Min(availableWidth - 80, 1000); // 最大宽度1000，两侧留40边距
@@ -205,7 +215,7 @@ namespace WinWMS
             gridWidth = cardWidth * 3 + 60;
             gridHeight = cardHeight * 2 + 20;
 
-            // 设置卡片网格大小和位置
+            // 设置卡片网格大小
             cardsPanel.Size = new Size(gridWidth, gridHeight);
 
             // 计算内容总高度
@@ -218,10 +228,6 @@ namespace WinWMS
             // 垂直居中
             int topMargin = Math.Max(30, (availableHeight - totalContentHeight) / 2);
             
-            // 设置容器大小和位置
-            contentContainer.Size = new Size(availableWidth, totalContentHeight + topMargin + 30);
-            contentContainer.Location = new Point(0, 0);
-
             // 水平居中各个元素
             int centerX = availableWidth / 2;
 

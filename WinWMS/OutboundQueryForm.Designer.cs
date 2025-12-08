@@ -28,175 +28,253 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.cmbWarehouse = new System.Windows.Forms.ComboBox();
-            this.lblWarehouse = new System.Windows.Forms.Label();
-            this.cmbMaterial = new System.Windows.Forms.ComboBox();
-            this.lblMaterial = new System.Windows.Forms.Label();
-            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
-            this.lblEndDate = new System.Windows.Forms.Label();
-            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
-            this.lblStartDate = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            dataGridView1 = new DataGridView();
+            topPanel = new Panel();
+            btnSearch = new Button();
+            cmbWarehouse = new ComboBox();
+            lblWarehouse = new Label();
+            cmbMaterial = new ComboBox();
+            lblMaterial = new Label();
+            dtpEndDate = new DateTimePicker();
+            lblEndDate = new Label();
+            dtpStartDate = new DateTimePicker();
+            lblStartDate = new Label();
+            titlePanel = new Panel();
+            lblTitle = new Label();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            topPanel.SuspendLayout();
+            titlePanel.SuspendLayout();
+            SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightPink;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 70);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 368);
-            this.dataGridView1.TabIndex = 0;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(240, 240, 240);
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(240, 240, 240);
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersHeight = 40;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle2.Padding = new Padding(5, 0, 5, 0);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.GridColor = Color.FromArgb(230, 230, 230);
+            dataGridView1.Location = new Point(0, 130);
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(230, 244, 255);
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 35;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(1000, 470);
+            dataGridView1.TabIndex = 0;
             // 
-            // panel1
+            // topPanel
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Controls.Add(this.cmbWarehouse);
-            this.panel1.Controls.Add(this.lblWarehouse);
-            this.panel1.Controls.Add(this.cmbMaterial);
-            this.panel1.Controls.Add(this.lblMaterial);
-            this.panel1.Controls.Add(this.dtpEndDate);
-            this.panel1.Controls.Add(this.lblEndDate);
-            this.panel1.Controls.Add(this.dtpStartDate);
-            this.panel1.Controls.Add(this.lblStartDate);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 52);
-            this.panel1.TabIndex = 10;
+            topPanel.BackColor = Color.White;
+            topPanel.Controls.Add(btnSearch);
+            topPanel.Controls.Add(cmbWarehouse);
+            topPanel.Controls.Add(lblWarehouse);
+            topPanel.Controls.Add(cmbMaterial);
+            topPanel.Controls.Add(lblMaterial);
+            topPanel.Controls.Add(dtpEndDate);
+            topPanel.Controls.Add(lblEndDate);
+            topPanel.Controls.Add(dtpStartDate);
+            topPanel.Controls.Add(lblStartDate);
+            topPanel.Dock = DockStyle.Top;
+            topPanel.Location = new Point(0, 60);
+            topPanel.Name = "topPanel";
+            topPanel.Padding = new Padding(20, 15, 20, 15);
+            topPanel.Size = new Size(1000, 70);
+            topPanel.TabIndex = 10;
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(680, 11);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(85, 30);
-            this.btnSearch.TabIndex = 1;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSearch.BackColor = Color.FromArgb(0, 122, 204);
+            btnSearch.FlatAppearance.BorderSize = 0;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            btnSearch.ForeColor = Color.White;
+            btnSearch.Location = new Point(880, 18);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(100, 34);
+            btnSearch.TabIndex = 1;
+            btnSearch.Text = "🔍 查询";
+            btnSearch.UseVisualStyleBackColor = false;
             // 
             // cmbWarehouse
             // 
-            this.cmbWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbWarehouse.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cmbWarehouse.FormattingEnabled = true;
-            this.cmbWarehouse.Location = new System.Drawing.Point(540, 15);
-            this.cmbWarehouse.Name = "cmbWarehouse";
-            this.cmbWarehouse.Size = new System.Drawing.Size(121, 25);
-            this.cmbWarehouse.TabIndex = 5;
+            cmbWarehouse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cmbWarehouse.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbWarehouse.Font = new Font("Microsoft YaHei UI", 9F);
+            cmbWarehouse.FormattingEnabled = true;
+            cmbWarehouse.Location = new Point(715, 22);
+            cmbWarehouse.Name = "cmbWarehouse";
+            cmbWarehouse.Size = new Size(140, 28);
+            cmbWarehouse.TabIndex = 5;
             // 
             // lblWarehouse
             // 
-            this.lblWarehouse.AutoSize = true;
-            this.lblWarehouse.Location = new System.Drawing.Point(490, 18);
-            this.lblWarehouse.Name = "lblWarehouse";
-            this.lblWarehouse.Size = new System.Drawing.Size(32, 17);
-            this.lblWarehouse.TabIndex = 9;
-            this.lblWarehouse.Text = "仓库";
+            lblWarehouse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblWarehouse.AutoSize = true;
+            lblWarehouse.Font = new Font("Microsoft YaHei UI", 9F);
+            lblWarehouse.ForeColor = Color.FromArgb(64, 64, 64);
+            lblWarehouse.Location = new Point(657, 26);
+            lblWarehouse.Name = "lblWarehouse";
+            lblWarehouse.Size = new Size(56, 20);
+            lblWarehouse.TabIndex = 9;
+            lblWarehouse.Text = "仓库：";
             // 
             // cmbMaterial
             // 
-            this.cmbMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMaterial.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cmbMaterial.FormattingEnabled = true;
-            this.cmbMaterial.Location = new System.Drawing.Point(350, 15);
-            this.cmbMaterial.Name = "cmbMaterial";
-            this.cmbMaterial.Size = new System.Drawing.Size(121, 25);
-            this.cmbMaterial.TabIndex = 4;
+            cmbMaterial.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cmbMaterial.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMaterial.Font = new Font("Microsoft YaHei UI", 9F);
+            cmbMaterial.FormattingEnabled = true;
+            cmbMaterial.Location = new Point(490, 22);
+            cmbMaterial.Name = "cmbMaterial";
+            cmbMaterial.Size = new Size(140, 28);
+            cmbMaterial.TabIndex = 4;
             // 
             // lblMaterial
             // 
-            this.lblMaterial.AutoSize = true;
-            this.lblMaterial.Location = new System.Drawing.Point(300, 18);
-            this.lblMaterial.Name = "lblMaterial";
-            this.lblMaterial.Size = new System.Drawing.Size(32, 17);
-            this.lblMaterial.TabIndex = 8;
-            this.lblMaterial.Text = "物料";
+            lblMaterial.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblMaterial.AutoSize = true;
+            lblMaterial.Font = new Font("Microsoft YaHei UI", 9F);
+            lblMaterial.ForeColor = Color.FromArgb(64, 64, 64);
+            lblMaterial.Location = new Point(432, 26);
+            lblMaterial.Name = "lblMaterial";
+            lblMaterial.Size = new Size(56, 20);
+            lblMaterial.TabIndex = 8;
+            lblMaterial.Text = "物料：";
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(160, 16);
-            this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(130, 23);
-            this.dtpEndDate.TabIndex = 3;
+            dtpEndDate.CalendarFont = new Font("Microsoft YaHei UI", 9F);
+            dtpEndDate.Font = new Font("Microsoft YaHei UI", 9F);
+            dtpEndDate.Location = new Point(260, 22);
+            dtpEndDate.Name = "dtpEndDate";
+            dtpEndDate.Size = new Size(150, 27);
+            dtpEndDate.TabIndex = 3;
             // 
             // lblEndDate
             // 
-            this.lblEndDate.AutoSize = true;
-            this.lblEndDate.Location = new System.Drawing.Point(120, 18);
-            this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(20, 17);
-            this.lblEndDate.TabIndex = 7;
-            this.lblEndDate.Text = "至";
+            lblEndDate.AutoSize = true;
+            lblEndDate.Font = new Font("Microsoft YaHei UI", 9F);
+            lblEndDate.ForeColor = Color.FromArgb(64, 64, 64);
+            lblEndDate.Location = new Point(232, 26);
+            lblEndDate.Name = "lblEndDate";
+            lblEndDate.Size = new Size(27, 20);
+            lblEndDate.TabIndex = 7;
+            lblEndDate.Text = "至";
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(3, 16);
-            this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(130, 23);
-            this.dtpStartDate.TabIndex = 2;
+            dtpStartDate.CalendarFont = new Font("Microsoft YaHei UI", 9F);
+            dtpStartDate.Font = new Font("Microsoft YaHei UI", 9F);
+            dtpStartDate.Location = new Point(75, 22);
+            dtpStartDate.Name = "dtpStartDate";
+            dtpStartDate.Size = new Size(150, 27);
+            dtpStartDate.TabIndex = 2;
             // 
             // lblStartDate
             // 
-            this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Location = new System.Drawing.Point(3, 0);
-            this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(56, 17);
-            this.lblStartDate.TabIndex = 6;
-            this.lblStartDate.Text = "出库日期";
+            lblStartDate.AutoSize = true;
+            lblStartDate.Font = new Font("Microsoft YaHei UI", 9F);
+            lblStartDate.ForeColor = Color.FromArgb(64, 64, 64);
+            lblStartDate.Location = new Point(20, 26);
+            lblStartDate.Name = "lblStartDate";
+            lblStartDate.Size = new Size(56, 20);
+            lblStartDate.TabIndex = 6;
+            lblStartDate.Text = "日期：";
+            // 
+            // titlePanel
+            // 
+            titlePanel.BackColor = Color.FromArgb(62, 62, 66);
+            titlePanel.Controls.Add(lblTitle);
+            titlePanel.Dock = DockStyle.Top;
+            titlePanel.Location = new Point(0, 0);
+            titlePanel.Name = "titlePanel";
+            titlePanel.Size = new Size(1000, 60);
+            titlePanel.TabIndex = 11;
+            // 
+            // lblTitle
+            // 
+            lblTitle.Dock = DockStyle.Fill;
+            lblTitle.Font = new Font("Microsoft YaHei UI", 14F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.Location = new Point(0, 0);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(1000, 60);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "出库查询";
+            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // OutboundQueryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dataGridView1);
-            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.Name = "OutboundQueryForm";
-            this.Text = "出库查询";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 245, 245);
+            ClientSize = new Size(1000, 600);
+            Controls.Add(dataGridView1);
+            Controls.Add(topPanel);
+            Controls.Add(titlePanel);
+            Font = new Font("Microsoft YaHei UI", 9F);
+            Name = "OutboundQueryForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "出库查询";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            topPanel.ResumeLayout(false);
+            topPanel.PerformLayout();
+            titlePanel.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DateTimePicker dtpStartDate;
-        private System.Windows.Forms.DateTimePicker dtpEndDate;
-        private System.Windows.Forms.ComboBox cmbMaterial;
-        private System.Windows.Forms.ComboBox cmbWarehouse;
-        private System.Windows.Forms.Label lblStartDate;
-        private System.Windows.Forms.Label lblEndDate;
-        private System.Windows.Forms.Label lblMaterial;
-        private System.Windows.Forms.Label lblWarehouse;
-        private System.Windows.Forms.Panel panel1;
+        private DataGridView dataGridView1;
+        private Button btnSearch;
+        private DateTimePicker dtpStartDate;
+        private DateTimePicker dtpEndDate;
+        private ComboBox cmbMaterial;
+        private ComboBox cmbWarehouse;
+        private Label lblStartDate;
+        private Label lblEndDate;
+        private Label lblMaterial;
+        private Label lblWarehouse;
+        private Panel topPanel;
+        private Panel titlePanel;
+        private Label lblTitle;
     }
 }

@@ -27,9 +27,11 @@
             lblWarehouse = new Label();
             cmbMaterial = new ComboBox();
             lblMaterial = new Label();
+            pnlRemarkBorder = new Panel();
             txtRemark = new TextBox();
             lblRemark = new Label();
             formPanel.SuspendLayout();
+            pnlRemarkBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
             SuspendLayout();
             // 
@@ -37,7 +39,7 @@
             // 
             formPanel.Anchor = AnchorStyles.None;
             formPanel.BackColor = Color.White;
-            formPanel.Controls.Add(txtRemark);
+            formPanel.Controls.Add(pnlRemarkBorder);
             formPanel.Controls.Add(lblRemark);
             formPanel.Controls.Add(btnInbound);
             formPanel.Controls.Add(txtPrice);
@@ -157,15 +159,26 @@
             lblMaterial.TabIndex = 5;
             lblMaterial.Text = "物料名称：";
             // 
+            // pnlRemarkBorder
+            // 
+            pnlRemarkBorder.BackColor = Color.FromArgb(180, 180, 180);  // 灰色边框
+            pnlRemarkBorder.Controls.Add(txtRemark);
+            pnlRemarkBorder.Location = new Point(140, 245);
+            pnlRemarkBorder.Name = "pnlRemarkBorder";
+            pnlRemarkBorder.Padding = new Padding(2);  // 2像素边框厚度
+            pnlRemarkBorder.Size = new Size(320, 90);
+            pnlRemarkBorder.TabIndex = 10;
+            // 
             // txtRemark
             // 
-            txtRemark.BorderStyle = BorderStyle.FixedSingle;
+            txtRemark.BorderStyle = BorderStyle.None;
+            txtRemark.Dock = DockStyle.Fill;
             txtRemark.Font = new Font("Microsoft YaHei UI", 11F);
-            txtRemark.Location = new Point(140, 245);
+            txtRemark.Location = new Point(2, 2);
             txtRemark.Multiline = true;
             txtRemark.Name = "txtRemark";
             txtRemark.PlaceholderText = "可选填写备注信息...";
-            txtRemark.Size = new Size(320, 90);
+            txtRemark.Size = new Size(316, 86);
             txtRemark.TabIndex = 4;
             txtRemark.BackColor = Color.White;
             // 
@@ -193,6 +206,8 @@
             Text = "入库操作";
             formPanel.ResumeLayout(false);
             formPanel.PerformLayout();
+            pnlRemarkBorder.ResumeLayout(false);
+            pnlRemarkBorder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
             ResumeLayout(false);
         }
@@ -204,6 +219,7 @@
         private ComboBox cmbWarehouse;
         private NumericUpDown numQuantity;
         private TextBox txtPrice;
+        private Panel pnlRemarkBorder;
         private TextBox txtRemark;
         private Button btnInbound;
         private Label lblMaterial;

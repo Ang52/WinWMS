@@ -18,6 +18,7 @@
         private void InitializeComponent()
         {
             formPanel = new Panel();
+            pnlRemarkBorder = new Panel();
             txtRemark = new TextBox();
             lblRemark = new Label();
             btnOutbound = new Button();
@@ -28,6 +29,7 @@
             cmbMaterial = new ComboBox();
             lblMaterial = new Label();
             formPanel.SuspendLayout();
+            pnlRemarkBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
             SuspendLayout();
             // 
@@ -35,7 +37,7 @@
             // 
             formPanel.Anchor = AnchorStyles.None;
             formPanel.BackColor = Color.White;
-            formPanel.Controls.Add(txtRemark);
+            formPanel.Controls.Add(pnlRemarkBorder);
             formPanel.Controls.Add(lblRemark);
             formPanel.Controls.Add(btnOutbound);
             formPanel.Controls.Add(numQuantity);
@@ -52,15 +54,26 @@
             formPanel.Size = new Size(500, 400);
             formPanel.TabIndex = 0;
             // 
+            // pnlRemarkBorder
+            // 
+            pnlRemarkBorder.BackColor = Color.FromArgb(180, 180, 180);  // 灰色边框
+            pnlRemarkBorder.Controls.Add(txtRemark);
+            pnlRemarkBorder.Location = new Point(140, 195);
+            pnlRemarkBorder.Name = "pnlRemarkBorder";
+            pnlRemarkBorder.Padding = new Padding(2);  // 2像素边框厚度
+            pnlRemarkBorder.Size = new Size(320, 85);
+            pnlRemarkBorder.TabIndex = 9;
+            // 
             // txtRemark
             // 
-            txtRemark.BorderStyle = BorderStyle.FixedSingle;
+            txtRemark.BorderStyle = BorderStyle.None;
+            txtRemark.Dock = DockStyle.Fill;
             txtRemark.Font = new Font("Microsoft YaHei UI", 11F);
-            txtRemark.Location = new Point(140, 195);
+            txtRemark.Location = new Point(2, 2);
             txtRemark.Multiline = true;
             txtRemark.Name = "txtRemark";
             txtRemark.PlaceholderText = "可选填写备注信息...";
-            txtRemark.Size = new Size(320, 85);
+            txtRemark.Size = new Size(316, 81);
             txtRemark.TabIndex = 3;
             txtRemark.BackColor = Color.White;
             // 
@@ -168,6 +181,8 @@
             Text = "出库操作";
             formPanel.ResumeLayout(false);
             formPanel.PerformLayout();
+            pnlRemarkBorder.ResumeLayout(false);
+            pnlRemarkBorder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
             ResumeLayout(false);
         }
@@ -178,6 +193,7 @@
         private ComboBox cmbMaterial;
         private ComboBox cmbWarehouse;
         private NumericUpDown numQuantity;
+        private Panel pnlRemarkBorder;
         private TextBox txtRemark;
         private Button btnOutbound;
         private Label lblMaterial;

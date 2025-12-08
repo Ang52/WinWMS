@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+ï»¿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +12,11 @@ namespace WinWMS
         public InboundQueryForm()
         {
             InitializeComponent();
+            
+            // åº”ç”¨ç»Ÿä¸€çš„ComboBoxæ ·å¼
+            ComboBoxStyleHelper.ApplyStyle(cmbMaterial);
+            ComboBoxStyleHelper.ApplyStyle(cmbWarehouse);
+            
             LoadMaterials();
             LoadWarehouses();
             LoadInboundRecords();
@@ -25,7 +30,7 @@ namespace WinWMS
             DataTable dt = DbHelper.ExecuteQuery(query);
             DataRow dr = dt.NewRow();
             dr["id"] = 0;
-            dr["name"] = "ËùÓĞÎïÁÏ";
+            dr["name"] = "æ‰€æœ‰ç‰©æ–™";
             dt.Rows.InsertAt(dr, 0);
             cmbMaterial.DataSource = dt;
             cmbMaterial.DisplayMember = "name";
@@ -38,7 +43,7 @@ namespace WinWMS
             DataTable dt = DbHelper.ExecuteQuery(query);
             DataRow dr = dt.NewRow();
             dr["id"] = 0;
-            dr["name"] = "ËùÓĞ²Ö¿â";
+            dr["name"] = "æ‰€æœ‰ä»“åº“";
             dt.Rows.InsertAt(dr, 0);
             cmbWarehouse.DataSource = dt;
             cmbWarehouse.DisplayMember = "name";
@@ -49,15 +54,15 @@ namespace WinWMS
         {
             StringBuilder query = new StringBuilder(@"
                 SELECT 
-                    m.material_code AS 'Îï×Ê±àºÅ',
-                    m.name AS 'Ãû³Æ',
-                    m.spec AS '¹æ¸ñ',
-                    w.name AS '²Ö¿â',
-                    ir.quantity AS 'Èë¿âÊıÁ¿',
-                    ir.price AS 'Èë¿âµ¥¼Û',
-                    (ir.quantity * ir.price) AS '×Ü½ğ¶î',
-                    u.username AS '²Ù×÷Ô±',
-                    ir.inbound_date AS 'Èë¿âÊ±¼ä'
+                    m.material_code AS 'ç‰©èµ„ç¼–å·',
+                    m.name AS 'åç§°',
+                    m.spec AS 'è§„æ ¼',
+                    w.name AS 'ä»“åº“',
+                    ir.quantity AS 'å…¥åº“æ•°é‡',
+                    ir.price AS 'å…¥åº“å•ä»·',
+                    (ir.quantity * ir.price) AS 'æ€»é‡‘é¢',
+                    u.username AS 'æ“ä½œå‘˜',
+                    ir.inbound_date AS 'å…¥åº“æ—¶é—´'
                 FROM inbound_records ir
                 JOIN materials m ON ir.material_id = m.id
                 JOIN warehouses w ON ir.warehouse_id = w.id

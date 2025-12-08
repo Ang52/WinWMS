@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -10,6 +10,11 @@ namespace WinWMS
         public InboundForm()
         {
             InitializeComponent();
+            
+            // 应用统一的ComboBox样式
+            ComboBoxStyleHelper.ApplyStyle(cmbMaterial);
+            ComboBoxStyleHelper.ApplyStyle(cmbWarehouse);
+            
             LoadMaterials();
             LoadWarehouses();
 
@@ -92,7 +97,7 @@ namespace WinWMS
                 DbHelper.ExecuteNonQuery(insertInventoryQuery, insertParams);
             }
 
-            MessageBox.Show("���ɹ���");
+            MessageBox.Show("入库成功！");
             this.Close();
         }
     }

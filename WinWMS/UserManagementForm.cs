@@ -10,6 +10,10 @@ namespace WinWMS
         public UserManagementForm()
         {
             InitializeComponent();
+            
+            // 应用统一的ComboBox样式
+            ComboBoxStyleHelper.ApplyStyle(cmbRole);
+            
             LoadUsers();
 
             btnAdd.Click += BtnAdd_Click;

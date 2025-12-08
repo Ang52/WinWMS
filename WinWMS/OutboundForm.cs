@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -10,6 +10,11 @@ namespace WinWMS
         public OutboundForm()
         {
             InitializeComponent();
+            
+            // 应用统一的ComboBox样式
+            ComboBoxStyleHelper.ApplyStyle(cmbMaterial);
+            ComboBoxStyleHelper.ApplyStyle(cmbWarehouse);
+            
             LoadMaterials();
             LoadWarehouses();
 
@@ -53,7 +58,7 @@ namespace WinWMS
                 int currentQuantity = Convert.ToInt32(dt.Rows[0]["quantity"]);
                 if (currentQuantity < quantity)
                 {
-                    MessageBox.Show("��治�㣡");
+                    MessageBox.Show("库存不足！");
                     return;
                 }
 
@@ -80,12 +85,12 @@ namespace WinWMS
                 };
                 DbHelper.ExecuteNonQuery(updateInventoryQuery, updateParams);
 
-                MessageBox.Show("����ɹ���");
+                MessageBox.Show("出库成功！");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("��治�㣡");
+                MessageBox.Show("库存不足！");
             }
         }
     }

@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+ï»¿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +12,10 @@ namespace WinWMS
         public InventoryQueryForm()
         {
             InitializeComponent();
+            
+            // åº”ç”¨ç»Ÿä¸€çš„ComboBoxæ ·å¼
+            ComboBoxStyleHelper.ApplyStyle(cmbWarehouse);
+            
             LoadWarehouses();
             LoadInventory();
 
@@ -24,7 +28,7 @@ namespace WinWMS
             DataTable dt = DbHelper.ExecuteQuery(query);
             DataRow dr = dt.NewRow();
             dr["id"] = 0;
-            dr["name"] = "ËùÓĞ²Ö¿â";
+            dr["name"] = "æ‰€æœ‰ä»“åº“";
             dt.Rows.InsertAt(dr, 0);
             cmbWarehouse.DataSource = dt;
             cmbWarehouse.DisplayMember = "name";
@@ -35,14 +39,14 @@ namespace WinWMS
         {
             StringBuilder query = new StringBuilder(@"
                 SELECT 
-                    m.material_code AS 'Îï×Ê±àºÅ',
-                    m.name AS 'Ãû³Æ',
-                    m.spec AS '¹æ¸ñ',
-                    w.name AS '²Ö¿â',
-                    i.quantity AS 'ÊıÁ¿',
-                    i.unit_price AS 'µ¥¼Û',
-                    i.total_amount AS '×Ü½ğ¶î',
-                    i.last_updated AS '×îºó¸üĞÂÊ±¼ä'
+                    m.material_code AS 'ç‰©èµ„ç¼–å·',
+                    m.name AS 'åç§°',
+                    m.spec AS 'è§„æ ¼',
+                    w.name AS 'ä»“åº“',
+                    i.quantity AS 'æ•°é‡',
+                    i.unit_price AS 'å•ä»·',
+                    i.total_amount AS 'æ€»é‡‘é¢',
+                    i.last_updated AS 'æœ€åæ›´æ–°æ—¶é—´'
                 FROM inventory i
                 JOIN materials m ON i.material_id = m.id
                 JOIN warehouses w ON i.warehouse_id = w.id

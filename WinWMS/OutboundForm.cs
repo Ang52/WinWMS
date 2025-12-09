@@ -253,17 +253,62 @@ namespace WinWMS
                         return;
                     }
 
-                    // 2. Add outbound record
-                    string outboundQuery = "INSERT INTO outbound_records (material_id, warehouse_id, quantity, remark, outbound_date, user_id) VALUES (@material_id, @warehouse_id, @quantity, @remark, NOW(), 1)";
+                    // 2. 按批次出库（先进先出 FIFO）
+                    int remainingQuantity = quantity;
+                    decimal totalOutboundAmount = 0;
+                    
+                    // 获取所有可用批次（按入库日期排序）
+                    string batchQuery = @"SELECT id, batch_no, quantity, unit_price 
+                                        FROM inventory_batches 
+                                        WHERE material_id = @material_id 
+                                        AND warehouse_id = @warehouse_id 
+                                        AND quantity > 0 
+                                        ORDER BY inbound_date ASC";
+                    MySqlParameter[] batchParams = {
+                        new MySqlParameter("@material_id", materialId),
+                        new MySqlParameter("@warehouse_id", warehouseId)
+                    };
+                    DataTable batchDt = DbHelper.ExecuteQuery(batchQuery, batchParams);
+
+                    // 逐批次扣减
+                    foreach (DataRow batchRow in batchDt.Rows)
+                    {
+                        if (remainingQuantity <= 0) break;
+
+                        int batchId = Convert.ToInt32(batchRow["id"]);
+                        int batchQuantity = Convert.ToInt32(batchRow["quantity"]);
+                        decimal batchPrice = Convert.ToDecimal(batchRow["unit_price"]);
+                        
+                        int deductQuantity = Math.Min(remainingQuantity, batchQuantity);
+                        int newBatchQuantity = batchQuantity - deductQuantity;
+                        
+                        // 更新批次数量
+                        string updateBatchQuery = "UPDATE inventory_batches SET quantity = @quantity WHERE id = @id";
+                        MySqlParameter[] updateBatchParams = {
+                            new MySqlParameter("@quantity", newBatchQuantity),
+                            new MySqlParameter("@id", batchId)
+                        };
+                        DbHelper.ExecuteNonQuery(updateBatchQuery, updateBatchParams);
+                        
+                        totalOutboundAmount += deductQuantity * batchPrice;
+                        remainingQuantity -= deductQuantity;
+                    }
+
+                    // 获取平均出库价格（用于记录）
+                    decimal avgOutboundPrice = totalOutboundAmount / quantity;
+
+                    // 3. Add outbound record
+                    string outboundQuery = "INSERT INTO outbound_records (material_id, warehouse_id, quantity, price, remark, outbound_date, user_id) VALUES (@material_id, @warehouse_id, @quantity, @price, @remark, NOW(), 1)";
                     MySqlParameter[] outboundParams = {
                         new MySqlParameter("@material_id", materialId),
                         new MySqlParameter("@warehouse_id", warehouseId),
                         new MySqlParameter("@quantity", quantity),
+                        new MySqlParameter("@price", avgOutboundPrice),  // 使用实际出库的平均价格
                         new MySqlParameter("@remark", string.IsNullOrEmpty(remark) ? DBNull.Value : (object)remark)
                     };
                     DbHelper.ExecuteNonQuery(outboundQuery, outboundParams);
 
-                    // 3. Update inventory
+                    // 4. Update inventory
                     decimal unitPrice = Convert.ToDecimal(dt.Rows[0]["unit_price"]);
                     int newQuantity = currentQuantity - quantity;
                     decimal newAmount = newQuantity * unitPrice;
@@ -282,7 +327,7 @@ namespace WinWMS
                     string specInfo = selectedRow["spec"].ToString() ?? "";
                     string materialCode = selectedRow["material_code"].ToString() ?? "";
 
-                    MessageBox.Show($"出库成功！\n\n物料名称：{cmbMaterial.Text}\n物料规格：{specInfo}\n物料编码：{materialCode}\n出库数量：{quantity}\n剩余库存：{newQuantity}", 
+                    MessageBox.Show($"出库成功！\n\n物料名称：{cmbMaterial.Text}\n物料规格：{specInfo}\n物料编码：{materialCode}\n出库数量：{quantity}\n平均单价：{avgOutboundPrice:F2}\n出库金额：{totalOutboundAmount:F2}\n剩余库存：{newQuantity}", 
                         "出库成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     // 清空表单，准备下一次操作

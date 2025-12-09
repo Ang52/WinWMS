@@ -268,10 +268,13 @@ namespace WinWMS
         private DataTable GetOutboundSummary(DateTime startDate, DateTime endDate)
         {
             string query = @"
-                SELECT m.name, SUM(obr.quantity) AS TotalQuantity, SUM(obr.quantity * obr.price) AS TotalAmount
+                SELECT 
+                    m.name, 
+                    SUM(obr.quantity) AS TotalQuantity, 
+                    SUM(obr.quantity * COALESCE(obr.price, 0)) AS TotalAmount
                 FROM outbound_records obr
                 JOIN materials m ON obr.material_id = m.id
-                WHERE obr.outbound_date BETWEEN @start_date AND @end_date AND obr.price > 0
+                WHERE obr.outbound_date BETWEEN @start_date AND @end_date
                 GROUP BY m.name
                 ORDER BY TotalAmount DESC";
             MySqlParameter[] parameters = {

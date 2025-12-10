@@ -73,7 +73,7 @@
             sidebarPanel.Dock = DockStyle.Left;
             sidebarPanel.Location = new Point(0, 0);
             sidebarPanel.Name = "sidebarPanel";
-            sidebarPanel.Size = new Size(220, 600);
+            sidebarPanel.Size = new Size(220, 800);
             sidebarPanel.TabIndex = 0;
             // 
             // btnExit
@@ -83,7 +83,7 @@
             btnExit.FlatStyle = FlatStyle.Flat;
             btnExit.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnExit.ForeColor = Color.White;
-            btnExit.Location = new Point(0, 555);
+            btnExit.Location = new Point(0, 755);
             btnExit.Name = "btnExit";
             btnExit.Padding = new Padding(15, 0, 0, 0);
             btnExit.Size = new Size(220, 45);
@@ -307,7 +307,7 @@
             topPanel.Location = new Point(220, 0);
             topPanel.MinimumSize = new Size(600, 60);
             topPanel.Name = "topPanel";
-            topPanel.Size = new Size(980, 60);
+            topPanel.Size = new Size(1180, 60);
             topPanel.TabIndex = 1;
             // 
             // lblPageTitle
@@ -317,7 +317,7 @@
             lblPageTitle.ForeColor = Color.White;
             lblPageTitle.Location = new Point(60, 0);
             lblPageTitle.Name = "lblPageTitle";
-            lblPageTitle.Size = new Size(920, 60);
+            lblPageTitle.Size = new Size(1120, 60);
             lblPageTitle.TabIndex = 1;
             lblPageTitle.Text = "欢迎使用仓储管理系统";
             lblPageTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -338,23 +338,24 @@
             // 
             // mainPanel
             // 
-            mainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             mainPanel.AutoScroll = true;
             mainPanel.BackColor = Color.FromArgb(255, 240, 245);
+            mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(220, 60);
             mainPanel.MinimumSize = new Size(600, 400);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(980, 518);
+            mainPanel.Size = new Size(1180, 714);
             mainPanel.TabIndex = 2;
             // 
             // statusStrip1
             // 
             statusStrip1.BackColor = Color.FromArgb(255, 182, 193);
+            statusStrip1.Dock = DockStyle.Bottom;
             statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
-            statusStrip1.Location = new Point(220, 574);
+            statusStrip1.Location = new Point(220, 774);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(980, 26);
+            statusStrip1.Size = new Size(1180, 26);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -371,7 +372,7 @@
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 182, 193);
-            ClientSize = new Size(1200, 600);
+            ClientSize = new Size(1400, 800);
             Controls.Add(mainPanel);
             Controls.Add(statusStrip1);
             Controls.Add(topPanel);

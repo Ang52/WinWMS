@@ -32,17 +32,19 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.cmbWarehouse = new System.Windows.Forms.ComboBox();
-            this.lblWarehouse = new System.Windows.Forms.Label();
-            this.txtSpec = new System.Windows.Forms.TextBox();
-            this.lblSpec = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.lblName = new System.Windows.Forms.Label();
-            this.txtMaterialCode = new System.Windows.Forms.TextBox();
+            this.searchFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.lblMaterialCode = new System.Windows.Forms.Label();
+            this.txtMaterialCode = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblSpec = new System.Windows.Forms.Label();
+            this.txtSpec = new System.Windows.Forms.TextBox();
+            this.lblWarehouse = new System.Windows.Forms.Label();
+            this.cmbWarehouse = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.searchFlowPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -93,117 +95,149 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Controls.Add(this.cmbWarehouse);
-            this.panel1.Controls.Add(this.lblWarehouse);
-            this.panel1.Controls.Add(this.txtSpec);
-            this.panel1.Controls.Add(this.lblSpec);
-            this.panel1.Controls.Add(this.txtName);
-            this.panel1.Controls.Add(this.lblName);
-            this.panel1.Controls.Add(this.txtMaterialCode);
-            this.panel1.Controls.Add(this.lblMaterialCode);
+            this.panel1.Controls.Add(this.searchFlowPanel);
             this.panel1.Location = new System.Drawing.Point(20, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(20);
+            this.panel1.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
             this.panel1.Size = new System.Drawing.Size(960, 65);
             this.panel1.TabIndex = 10;
             // 
+            // searchFlowPanel
+            // 
+            this.searchFlowPanel.AutoSize = true;
+            this.searchFlowPanel.Controls.Add(this.lblMaterialCode);
+            this.searchFlowPanel.Controls.Add(this.txtMaterialCode);
+            this.searchFlowPanel.Controls.Add(this.lblName);
+            this.searchFlowPanel.Controls.Add(this.txtName);
+            this.searchFlowPanel.Controls.Add(this.lblSpec);
+            this.searchFlowPanel.Controls.Add(this.txtSpec);
+            this.searchFlowPanel.Controls.Add(this.lblWarehouse);
+            this.searchFlowPanel.Controls.Add(this.cmbWarehouse);
+            this.searchFlowPanel.Controls.Add(this.btnSearch);
+            this.searchFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchFlowPanel.Location = new System.Drawing.Point(15, 10);
+            this.searchFlowPanel.Name = "searchFlowPanel";
+            this.searchFlowPanel.Size = new System.Drawing.Size(930, 45);
+            this.searchFlowPanel.TabIndex = 0;
+            this.searchFlowPanel.WrapContents = true;
+            // 
+            // lblMaterialCode
+            // 
+            this.lblMaterialCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblMaterialCode.AutoSize = true;
+            this.lblMaterialCode.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.lblMaterialCode.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            this.lblMaterialCode.Location = new System.Drawing.Point(3, 12);
+            this.lblMaterialCode.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.lblMaterialCode.Name = "lblMaterialCode";
+            this.lblMaterialCode.Size = new System.Drawing.Size(79, 20);
+            this.lblMaterialCode.TabIndex = 0;
+            this.lblMaterialCode.Text = "物资编号：";
+            this.lblMaterialCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtMaterialCode
+            // 
+            this.txtMaterialCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtMaterialCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMaterialCode.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.txtMaterialCode.Location = new System.Drawing.Point(88, 10);
+            this.txtMaterialCode.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.txtMaterialCode.Name = "txtMaterialCode";
+            this.txtMaterialCode.Size = new System.Drawing.Size(100, 25);
+            this.txtMaterialCode.TabIndex = 1;
+            // 
+            // lblName
+            // 
+            this.lblName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.lblName.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            this.lblName.Location = new System.Drawing.Point(201, 12);
+            this.lblName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(51, 20);
+            this.lblName.TabIndex = 2;
+            this.lblName.Text = "名称：";
+            this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtName
+            // 
+            this.txtName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtName.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.txtName.Location = new System.Drawing.Point(258, 10);
+            this.txtName.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(120, 25);
+            this.txtName.TabIndex = 3;
+            // 
+            // lblSpec
+            // 
+            this.lblSpec.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSpec.AutoSize = true;
+            this.lblSpec.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.lblSpec.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            this.lblSpec.Location = new System.Drawing.Point(391, 12);
+            this.lblSpec.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.lblSpec.Name = "lblSpec";
+            this.lblSpec.Size = new System.Drawing.Size(51, 20);
+            this.lblSpec.TabIndex = 4;
+            this.lblSpec.Text = "规格：";
+            this.lblSpec.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtSpec
+            // 
+            this.txtSpec.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSpec.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.txtSpec.Location = new System.Drawing.Point(448, 10);
+            this.txtSpec.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.txtSpec.Name = "txtSpec";
+            this.txtSpec.Size = new System.Drawing.Size(120, 25);
+            this.txtSpec.TabIndex = 5;
+            // 
+            // lblWarehouse
+            // 
+            this.lblWarehouse.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblWarehouse.AutoSize = true;
+            this.lblWarehouse.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.lblWarehouse.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            this.lblWarehouse.Location = new System.Drawing.Point(581, 12);
+            this.lblWarehouse.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.lblWarehouse.Name = "lblWarehouse";
+            this.lblWarehouse.Size = new System.Drawing.Size(51, 20);
+            this.lblWarehouse.TabIndex = 6;
+            this.lblWarehouse.Text = "仓库：";
+            this.lblWarehouse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbWarehouse
+            // 
+            this.cmbWarehouse.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWarehouse.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+            this.cmbWarehouse.FormattingEnabled = true;
+            this.cmbWarehouse.Location = new System.Drawing.Point(638, 9);
+            this.cmbWarehouse.Margin = new System.Windows.Forms.Padding(3, 3, 15, 3);
+            this.cmbWarehouse.Name = "cmbWarehouse";
+            this.cmbWarehouse.Size = new System.Drawing.Size(150, 27);
+            this.cmbWarehouse.TabIndex = 7;
+            // 
             // btnSearch
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnSearch.BackColor = System.Drawing.Color.FromArgb(255, 105, 180);
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(840, 15);
+            this.btnSearch.Location = new System.Drawing.Point(806, 5);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 38);
-            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Size = new System.Drawing.Size(100, 35);
+            this.btnSearch.TabIndex = 8;
             this.btnSearch.Text = "🔍 查询";
             this.btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // cmbWarehouse
-            // 
-            this.cmbWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbWarehouse.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.cmbWarehouse.FormattingEnabled = true;
-            this.cmbWarehouse.Location = new System.Drawing.Point(670, 20);
-            this.cmbWarehouse.Name = "cmbWarehouse";
-            this.cmbWarehouse.Size = new System.Drawing.Size(150, 27);
-            this.cmbWarehouse.TabIndex = 5;
-            // 
-            // lblWarehouse
-            // 
-            this.lblWarehouse.AutoSize = true;
-            this.lblWarehouse.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.lblWarehouse.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            this.lblWarehouse.Location = new System.Drawing.Point(610, 23);
-            this.lblWarehouse.Name = "lblWarehouse";
-            this.lblWarehouse.Size = new System.Drawing.Size(51, 20);
-            this.lblWarehouse.TabIndex = 9;
-            this.lblWarehouse.Text = "仓库：";
-            // 
-            // txtSpec
-            // 
-            this.txtSpec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSpec.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.txtSpec.Location = new System.Drawing.Point(470, 20);
-            this.txtSpec.Name = "txtSpec";
-            this.txtSpec.Size = new System.Drawing.Size(120, 25);
-            this.txtSpec.TabIndex = 4;
-            // 
-            // lblSpec
-            // 
-            this.lblSpec.AutoSize = true;
-            this.lblSpec.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.lblSpec.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            this.lblSpec.Location = new System.Drawing.Point(410, 23);
-            this.lblSpec.Name = "lblSpec";
-            this.lblSpec.Size = new System.Drawing.Size(51, 20);
-            this.lblSpec.TabIndex = 8;
-            this.lblSpec.Text = "规格：";
-            // 
-            // txtName
-            // 
-            this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtName.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.txtName.Location = new System.Drawing.Point(270, 20);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(120, 25);
-            this.txtName.TabIndex = 3;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.lblName.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            this.lblName.Location = new System.Drawing.Point(210, 23);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(51, 20);
-            this.lblName.TabIndex = 7;
-            this.lblName.Text = "名称：";
-            // 
-            // txtMaterialCode
-            // 
-            this.txtMaterialCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMaterialCode.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.txtMaterialCode.Location = new System.Drawing.Point(90, 20);
-            this.txtMaterialCode.Name = "txtMaterialCode";
-            this.txtMaterialCode.Size = new System.Drawing.Size(100, 25);
-            this.txtMaterialCode.TabIndex = 2;
-            // 
-            // lblMaterialCode
-            // 
-            this.lblMaterialCode.AutoSize = true;
-            this.lblMaterialCode.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
-            this.lblMaterialCode.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
-            this.lblMaterialCode.Location = new System.Drawing.Point(10, 23);
-            this.lblMaterialCode.Name = "lblMaterialCode";
-            this.lblMaterialCode.Size = new System.Drawing.Size(79, 20);
-            this.lblMaterialCode.TabIndex = 6;
-            this.lblMaterialCode.Text = "物资编号：";
             // 
             // InventoryQueryForm
             // 
@@ -220,6 +254,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.searchFlowPanel.ResumeLayout(false);
+            this.searchFlowPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -227,15 +263,16 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtMaterialCode;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtSpec;
-        private System.Windows.Forms.ComboBox cmbWarehouse;
-        private System.Windows.Forms.Label lblMaterialCode;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblSpec;
-        private System.Windows.Forms.Label lblWarehouse;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel searchFlowPanel;
+        private System.Windows.Forms.Label lblMaterialCode;
+        private System.Windows.Forms.TextBox txtMaterialCode;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label lblSpec;
+        private System.Windows.Forms.TextBox txtSpec;
+        private System.Windows.Forms.Label lblWarehouse;
+        private System.Windows.Forms.ComboBox cmbWarehouse;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

@@ -66,12 +66,13 @@ namespace WinWMS
 
         private void LoadMaterialSpecs(string materialName)
         {
-            // 根据物料名称加载所有规格，显示格式：规格 [编码]
+            // 根据物料名称加载所有规格，显示格式：规格 [编码] - 单价：XX元
             string query = @"SELECT 
                                 id, 
                                 spec, 
                                 material_code,
-                                CONCAT(spec, '  [编码: ', material_code, ']') as display_spec 
+                                price,
+                                CONCAT(spec, '  [编码: ', material_code, ']  - 单价: ¥', FORMAT(price, 2)) as display_spec 
                             FROM materials 
                             WHERE name = @name 
                             ORDER BY spec, material_code";
@@ -88,6 +89,7 @@ namespace WinWMS
                 emptyRow["id"] = 0;
                 emptyRow["spec"] = "";
                 emptyRow["material_code"] = "";
+                emptyRow["price"] = 0;
                 emptyRow["display_spec"] = "-- 请选择规格 --";
                 dt.Rows.InsertAt(emptyRow, 0);
                 
@@ -96,7 +98,7 @@ namespace WinWMS
                 cmbSpec.ValueMember = "id";
                 
                 // 设置下拉列表的宽度以完整显示内容
-                cmbSpec.DropDownWidth = 400;
+                cmbSpec.DropDownWidth = 500;
             }
             else
             {
@@ -168,8 +170,7 @@ namespace WinWMS
             // 重置数量
             numQuantity.Value = 0;
             
-            // 清空单价和备注
-            txtPrice.Clear();
+            // 清空备注
             txtRemark.Clear();
         }
 
@@ -204,20 +205,6 @@ namespace WinWMS
                 return;
             }
             
-            if (string.IsNullOrWhiteSpace(txtPrice.Text))
-            {
-                MessageBox.Show("请输入入库单价！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtPrice.Focus();
-                return;
-            }
-            
-            if (!decimal.TryParse(txtPrice.Text, out decimal price) || price <= 0)
-            {
-                MessageBox.Show("请输入有效的单价（必须大于0）！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtPrice.Focus();
-                return;
-            }
-            
             int materialId = (int)cmbSpec.SelectedValue;  // 从规格下拉框获取material_id
             int warehouseId = (int)cmbWarehouse.SelectedValue;
             int quantity = (int)numQuantity.Value;
@@ -225,6 +212,30 @@ namespace WinWMS
 
             try
             {
+                // 从materials表获取标准单价
+                string getPriceQuery = "SELECT price, spec, material_code FROM materials WHERE id = @material_id";
+                MySqlParameter[] priceParams = {
+                    new MySqlParameter("@material_id", materialId)
+                };
+                DataTable priceDt = DbHelper.ExecuteQuery(getPriceQuery, priceParams);
+                
+                if (priceDt.Rows.Count == 0)
+                {
+                    MessageBox.Show("无法获取物料信息！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
+                decimal price = Convert.ToDecimal(priceDt.Rows[0]["price"]);
+                string specInfo = priceDt.Rows[0]["spec"].ToString() ?? "";
+                string materialCode = priceDt.Rows[0]["material_code"].ToString() ?? "";
+                
+                if (price <= 0)
+                {
+                    MessageBox.Show("该物料的标准单价未设置！\n\n请先在物料管理中设置该物料的标准单价。", 
+                        "单价未设置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // 1. Add inbound record
                 string inboundQuery = "INSERT INTO inbound_records (material_id, warehouse_id, quantity, price, remark, inbound_date, user_id) VALUES (@material_id, @warehouse_id, @quantity, @price, @remark, NOW(), 1)";
                 MySqlParameter[] inboundParams = {
@@ -299,12 +310,7 @@ namespace WinWMS
                     DbHelper.ExecuteNonQuery(insertInventoryQuery, insertParams);
                 }
 
-                // 获取选中的规格信息用于显示
-                DataRowView selectedRow = (DataRowView)cmbSpec.SelectedItem;
-                string specInfo = selectedRow["spec"].ToString() ?? "";
-                string materialCode = selectedRow["material_code"].ToString() ?? "";
-
-                MessageBox.Show($"入库成功！\n\n物料名称：{cmbMaterial.Text}\n物料规格：{specInfo}\n物料编码：{materialCode}\n批次号：{batchNo}\n入库数量：{quantity}\n入库单价：{price:F2}", 
+                MessageBox.Show($"入库成功！\n\n物料名称：{cmbMaterial.Text}\n物料规格：{specInfo}\n物料编码：{materialCode}\n批次号：{batchNo}\n入库数量：{quantity}\n标准单价：¥{price:F2}\n总金额：¥{quantity * price:F2}", 
                     "入库成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 // 清空表单，准备下一次操作

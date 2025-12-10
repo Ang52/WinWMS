@@ -25,6 +25,8 @@
             btnDelete = new Button();
             btnUpdate = new Button();
             btnAdd = new Button();
+            txtPrice = new TextBox();
+            lblPrice = new Label();
             txtUnit = new TextBox();
             lblUnit = new Label();
             txtSpec = new TextBox();
@@ -102,6 +104,8 @@
             bottomPanel.Controls.Add(lblName);
             bottomPanel.Controls.Add(txtMaterialCode);
             bottomPanel.Controls.Add(lblMaterialCode);
+            bottomPanel.Controls.Add(txtPrice);
+            bottomPanel.Controls.Add(lblPrice);
             bottomPanel.Location = new Point(20, 400);
             bottomPanel.Name = "bottomPanel";
             bottomPanel.Padding = new Padding(25, 20, 25, 20);
@@ -155,6 +159,26 @@
             btnAdd.TabIndex = 8;
             btnAdd.Text = "➕ 添加";
             btnAdd.UseVisualStyleBackColor = false;
+            //
+            // txtPrice
+            //
+            txtPrice.BorderStyle = BorderStyle.FixedSingle;
+            txtPrice.Font = new Font("Microsoft YaHei UI", 10F);
+            txtPrice.Location = new Point(130, 125);
+            txtPrice.Name = "txtPrice";
+            txtPrice.Size = new Size(360, 25);
+            txtPrice.TabIndex = 9;
+            //
+            // lblPrice
+            //
+            lblPrice.AutoSize = true;
+            lblPrice.Font = new Font("Microsoft YaHei UI", 10F);
+            lblPrice.ForeColor = Color.FromArgb(64, 64, 64);
+            lblPrice.Location = new Point(30, 128);
+            lblPrice.Name = "lblPrice";
+            lblPrice.Size = new Size(93, 20);
+            lblPrice.TabIndex = 8;
+            lblPrice.Text = "标准单价：";
             // 
             // txtUnit
             // 
@@ -273,5 +297,7 @@
         private Label lblName;
         private Label lblSpec;
         private Label lblUnit;
+        private TextBox txtPrice;
+        private Label lblPrice;
     }
 }

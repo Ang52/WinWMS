@@ -9,6 +9,9 @@ namespace WinWMS
 {
     public partial class InventoryQueryForm : Form
     {
+        // 定义阈值宽度
+        private const int COMPACT_WIDTH_THRESHOLD = 900;
+        
         public InventoryQueryForm()
         {
             InitializeComponent();
@@ -18,8 +21,15 @@ namespace WinWMS
             
             LoadWarehouses();
             LoadInventory();
-
+            
+            // 绑定搜索按钮事件
             btnSearch.Click += BtnSearch_Click;
+            
+            // 绑定面板大小变化事件
+            panel1.SizeChanged += Panel1_SizeChanged;
+            
+            // 初始调整布局
+            AdjustLayoutForWindowSize();
         }
 
         private void LoadWarehouses()
@@ -82,6 +92,102 @@ namespace WinWMS
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             LoadInventory();
+        }
+        
+        private void Panel1_SizeChanged(object sender, EventArgs e)
+        {
+            AdjustLayoutForWindowSize();
+        }
+        
+        private void AdjustLayoutForWindowSize()
+        {
+            // 使用 panel1 的实际宽度来判断
+            bool isCompact = panel1.Width < COMPACT_WIDTH_THRESHOLD;
+            
+            if (isCompact)
+            {
+                // 紧凑模式：缩小控件尺寸
+                // 缩小输入框
+                txtMaterialCode.Size = new System.Drawing.Size(70, 23);
+                txtName.Size = new System.Drawing.Size(70, 23);
+                txtSpec.Size = new System.Drawing.Size(70, 23);
+                cmbWarehouse.Size = new System.Drawing.Size(90, 25);
+                
+                // 缩小标签字体和尺寸
+                lblMaterialCode.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+                lblName.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+                lblSpec.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+                lblWarehouse.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+                
+                // 简化标签文字
+                lblMaterialCode.Text = "编号：";
+                lblWarehouse.Text = "仓库：";
+                
+                // 搜索按钮只显示图标
+                btnSearch.Text = "🔍";
+                btnSearch.Size = new System.Drawing.Size(35, 28);
+                btnSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F, System.Drawing.FontStyle.Bold);
+                
+                // 减小边距
+                lblMaterialCode.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+                txtMaterialCode.Margin = new System.Windows.Forms.Padding(1, 2, 4, 2);
+                lblName.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+                txtName.Margin = new System.Windows.Forms.Padding(1, 2, 4, 2);
+                lblSpec.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+                txtSpec.Margin = new System.Windows.Forms.Padding(1, 2, 4, 2);
+                lblWarehouse.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+                cmbWarehouse.Margin = new System.Windows.Forms.Padding(1, 2, 5, 2);
+                btnSearch.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+                
+                // 调整面板高度和内边距
+                panel1.Height = 45;
+                panel1.Padding = new System.Windows.Forms.Padding(10, 8, 10, 8);
+            }
+            else
+            {
+                // 标准模式：恢复默认尺寸
+                // 恢复输入框大小
+                txtMaterialCode.Size = new System.Drawing.Size(100, 25);
+                txtName.Size = new System.Drawing.Size(120, 25);
+                txtSpec.Size = new System.Drawing.Size(120, 25);
+                cmbWarehouse.Size = new System.Drawing.Size(150, 27);
+                
+                // 恢复标签字体
+                lblMaterialCode.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+                lblName.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+                lblSpec.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+                lblWarehouse.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
+                
+                // 恢复标签文字
+                lblMaterialCode.Text = "物资编号：";
+                lblWarehouse.Text = "仓库：";
+                
+                // 搜索按钮显示完整文字
+                btnSearch.Text = "🔍 查询";
+                btnSearch.Size = new System.Drawing.Size(100, 35);
+                btnSearch.Font = new System.Drawing.Font("Microsoft YaHei UI", 11F, System.Drawing.FontStyle.Bold);
+                
+                // 恢复边距
+                lblMaterialCode.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+                txtMaterialCode.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+                lblName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+                txtName.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+                lblSpec.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+                txtSpec.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+                lblWarehouse.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+                cmbWarehouse.Margin = new System.Windows.Forms.Padding(3, 3, 15, 3);
+                btnSearch.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+                
+                // 恢复面板高度和内边距
+                panel1.Height = 65;
+                panel1.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
+            }
+            
+            // 强制刷新布局
+            searchFlowPanel.SuspendLayout();
+            searchFlowPanel.PerformLayout();
+            searchFlowPanel.ResumeLayout(true);
+            panel1.PerformLayout();
         }
     }
 }

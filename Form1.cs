@@ -211,72 +211,84 @@ namespace WinWMS
                 int availableWidth = Math.Max(600, welcomePanel.ClientSize.Width);
                 int availableHeight = Math.Max(400, welcomePanel.ClientSize.Height);
 
-                // 计算缩放比例 - 基于可用宽度
-                float scale = availableWidth / 1000.0f;
-                scale = Math.Max(0.6f, Math.Min(1.2f, scale));
+                // === 响应式缩放计算 ===
+                const float BASE_WIDTH = 1180f;  // 基准宽度（1400 - 220）
+                const float MIN_SCALE = 0.65f;   // 最小缩放65%
+                const float MAX_SCALE = 1.05f;   // 最大缩放105%
+                
+                float scale = availableWidth / BASE_WIDTH;
+                scale = Math.Max(MIN_SCALE, Math.Min(MAX_SCALE, scale));
 
-                // 动态调整标题字体
-                int titleSize = Math.Max(14, Math.Min(28, (int)(24 * scale)));
+                // === 字体响应式调整 ===
+                int titleSize = (int)(22 * scale);
+                titleSize = Math.Max(14, Math.Min(26, titleSize));
                 lblWelcome.Font = new Font("Microsoft YaHei UI", titleSize, FontStyle.Bold);
 
-                // 动态调整描述字体
-                int descSize = Math.Max(9, Math.Min(14, (int)(12 * scale)));
+                int descSize = (int)(11 * scale);
+                descSize = Math.Max(8, Math.Min(13, descSize));
                 lblDescription.Font = new Font("Microsoft YaHei UI", descSize);
 
-                // 动态调整页脚字体
-                int footerSize = Math.Max(8, Math.Min(11, (int)(10 * scale)));
+                int footerSize = (int)(9 * scale);
+                footerSize = Math.Max(7, Math.Min(11, footerSize));
                 lblFooter.Font = new Font("Microsoft YaHei UI", footerSize);
 
-                // 计算卡片尺寸
-                int maxGridWidth = Math.Min(availableWidth - 80, 1000);
-                int cardWidth = Math.Max(180, (maxGridWidth - 60) / 3);
-                int cardHeight = (int)(cardWidth * 0.75);
+                // === 卡片尺寸计算 ===
+                const int BASE_CARD_WIDTH = 220;
+                const int BASE_CARD_HEIGHT = 165;
                 
-                // 根据缩放调整最小尺寸
-                cardWidth = Math.Max((int)(180 * scale), cardWidth);
-                cardHeight = Math.Max((int)(135 * scale), cardHeight);
+                int cardWidth = (int)(BASE_CARD_WIDTH * scale);
+                int cardHeight = (int)(BASE_CARD_HEIGHT * scale);
                 
-                int gridWidth = cardWidth * 3 + 60;
-                int gridHeight = cardHeight * 2 + 20;
+                cardWidth = Math.Max(160, Math.Min(260, cardWidth));
+                cardHeight = Math.Max(120, Math.Min(195, cardHeight));
+                
+                int cardSpacing = (int)(18 * scale);
+                cardSpacing = Math.Max(8, Math.Min(25, cardSpacing));
+                
+                int gridWidth = cardWidth * 3 + cardSpacing * 4;
+                int gridHeight = cardHeight * 2 + cardSpacing * 3;
 
-                // 设置卡片网格大小
                 cardsPanel.Size = new Size(gridWidth, gridHeight);
+                cardsPanel.Padding = new Padding(cardSpacing);
 
-                // 计算间距
-                int spacing = Math.Max(10, (int)(20 * scale));
+                // === 间距计算 ===
+                int spacing = (int)(18 * scale);
+                spacing = Math.Max(8, Math.Min(25, spacing));
 
-                // 计算总高度
+                // === 总高度计算 ===
                 int totalHeight = 
                     lblWelcome.Height + spacing +
                     lblDescription.Height + (spacing * 2) +
                     gridHeight + (spacing * 2) +
-                    lblFooter.Height + 80;
+                    lblFooter.Height + 50;
 
-                // 计算垂直位置
-                int topMargin = Math.Max(30, (availableHeight - totalHeight) / 2);
-                if (totalHeight > availableHeight)
+                // === 垂直居中 ===
+                int topMargin = Math.Max(25, (availableHeight - totalHeight) / 2);
+                if (totalHeight > availableHeight - 50)
                 {
-                    topMargin = 30;
+                    topMargin = 25;
                 }
 
-                // 水平居中
+                // === 水平居中 ===
                 int centerX = availableWidth / 2;
 
-                // 设置各元素位置
-                lblWelcome.Location = new Point(Math.Max(0, centerX - lblWelcome.Width / 2), topMargin);
-                lblDescription.Location = new Point(Math.Max(0, centerX - lblDescription.Width / 2), lblWelcome.Bottom + spacing);
-                cardsPanel.Location = new Point(Math.Max(0, centerX - gridWidth / 2), lblDescription.Bottom + (spacing * 2));
-                lblFooter.Location = new Point(Math.Max(0, centerX - lblFooter.Width / 2), cardsPanel.Bottom + (spacing * 2));
+                // === 设置位置 ===
+                lblWelcome.Location = new Point(Math.Max(15, centerX - lblWelcome.Width / 2), topMargin);
+                lblDescription.Location = new Point(Math.Max(15, centerX - lblDescription.Width / 2), lblWelcome.Bottom + spacing);
+                cardsPanel.Location = new Point(Math.Max(15, centerX - gridWidth / 2), lblDescription.Bottom + (spacing * 2));
+                lblFooter.Location = new Point(Math.Max(15, centerX - lblFooter.Width / 2), cardsPanel.Bottom + (spacing * 2));
 
-                // 设置容器大小 - 关键修复
-                int containerHeight = Math.Max(lblFooter.Bottom + 60, totalHeight);
+                // === 设置容器大小 ===
+                int containerHeight = Math.Max(lblFooter.Bottom + 60, totalHeight + 30);
                 contentContainer.Size = new Size(availableWidth, containerHeight);
 
-                // 更新卡片大小
+                // === 更新卡片 ===
                 foreach (Control ctrl in cardsPanel.Controls)
                 {
                     if (ctrl is Panel cardPanel)
                     {
+                        cardPanel.Size = new Size(cardWidth, cardHeight);
+                        cardPanel.Margin = new Padding((int)(8 * scale));
                         UpdateCardSize(cardPanel, cardWidth, cardHeight);
                     }
                 }

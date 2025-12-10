@@ -365,7 +365,7 @@
             statusLabel.ForeColor = Color.White;
             statusLabel.Name = "statusLabel";
             statusLabel.Size = new Size(223, 20);
-            statusLabel.Text = "就绪 | WinWMS v2.0 | .NET 8.0";
+            statusLabel.Text = "就绪 | WinWMS v2.0 | .NET 8.0 | 李易远";
             // 
             // Form1
             // 

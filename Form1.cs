@@ -6,6 +6,14 @@ namespace WinWMS
     {
         private Button? currentActiveButton;
         private Form? currentChildForm;
+        
+        // 保存欢迎页面的控件引用，以便在窗口大小变化时更新布局
+        private Panel? welcomePanel;
+        private Panel? contentContainer;
+        private Label? lblWelcome;
+        private Label? lblDescription;
+        private TableLayoutPanel? cardsPanel;
+        private Label? lblFooter;
 
         // Windows API for title bar color
         [DllImport("dwmapi.dll")]
@@ -20,7 +28,20 @@ namespace WinWMS
             SetTitleBarColor();
             SetupButtonHoverEffects();
             currentActiveButton = btnHome;
+            
+            // 监听窗体大小变化事件
+            this.Resize += Form1_Resize;
+            
             ShowWelcomePage();
+        }
+        
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            // 当窗体大小变化时，如果当前显示的是欢迎页面，则更新其布局
+            if (currentChildForm == null && welcomePanel != null && !welcomePanel.IsDisposed)
+            {
+                UpdateWelcomeLayout(welcomePanel, contentContainer!, lblWelcome!, lblDescription!, cardsPanel!, lblFooter!);
+            }
         }
 
         private void SetTitleBarColor()
@@ -79,7 +100,7 @@ namespace WinWMS
             mainPanel.Controls.Clear();
 
             // 主容器面板 - 启用自动滚动
-            Panel welcomePanel = new Panel
+            welcomePanel = new Panel
             {
                 Dock = DockStyle.Fill,
                 BackColor = Color.White,
@@ -87,7 +108,7 @@ namespace WinWMS
             };
 
             // 内容容器 - 使用绝对定位
-            Panel contentContainer = new Panel
+            contentContainer = new Panel
             {
                 BackColor = Color.White,
                 AutoScroll = false,
@@ -95,7 +116,7 @@ namespace WinWMS
             };
 
             // 标题
-            Label lblWelcome = new Label
+            lblWelcome = new Label
             {
                 Text = "欢迎使用 WinWMS 仓储管理系统 ✨",
                 Font = new Font("Microsoft YaHei UI", 24, FontStyle.Bold),
@@ -105,7 +126,7 @@ namespace WinWMS
             };
 
             // 描述
-            Label lblDescription = new Label
+            lblDescription = new Label
             {
                 Text = "现代化粉色主题 · 响应式设计 · 优雅的仓储管理",
                 Font = new Font("Microsoft YaHei UI", 12),
@@ -115,7 +136,7 @@ namespace WinWMS
             };
 
             // 卡片网格容器 - 固定3列2行
-            TableLayoutPanel cardsPanel = new TableLayoutPanel
+            cardsPanel = new TableLayoutPanel
             {
                 ColumnCount = 3,
                 RowCount = 2,
@@ -156,7 +177,7 @@ namespace WinWMS
             }
 
             // 页脚提示
-            Label lblFooter = new Label
+            lblFooter = new Label
             {
                 Text = "💡 提示：请从左侧菜单选择功能开始使用 | 支持多分辨率自适应",
                 Font = new Font("Microsoft YaHei UI", 10),
@@ -383,21 +404,27 @@ namespace WinWMS
                 {
                     if (lbl.Name == "lblIcon")
                     {
-                        lbl.Font = new Font("Segoe UI Emoji", Math.Max(32, height / 5));
-                        lbl.Size = new Size(width - 20, (int)(height * 0.45));
-                        lbl.Location = new Point(10, (int)(height * 0.1));
+                        // 图标字体：最小24pt，最大48pt，根据高度缩放
+                        int iconSize = Math.Max(24, Math.Min(48, height / 4));
+                        lbl.Font = new Font("Segoe UI Emoji", iconSize);
+                        lbl.Size = new Size(width - 20, (int)(height * 0.40));
+                        lbl.Location = new Point(10, (int)(height * 0.08));
                     }
                     else if (lbl.Name == "lblTitle")
                     {
-                        lbl.Font = new Font("Microsoft YaHei UI", Math.Max(11, width / 22), FontStyle.Bold);
-                        lbl.Size = new Size(width - 20, (int)(height * 0.15));
-                        lbl.Location = new Point(10, (int)(height * 0.55));
+                        // 标题字体：最小9pt，最大14pt
+                        int titleSize = Math.Max(9, Math.Min(14, width / 20));
+                        lbl.Font = new Font("Microsoft YaHei UI", titleSize, FontStyle.Bold);
+                        lbl.Size = new Size(width - 20, (int)(height * 0.18));
+                        lbl.Location = new Point(10, (int)(height * 0.50));
                     }
                     else if (lbl.Name == "lblDesc")
                     {
-                        lbl.Font = new Font("Microsoft YaHei UI", Math.Max(8, width / 30));
-                        lbl.Size = new Size(width - 20, (int)(height * 0.25));
-                        lbl.Location = new Point(10, (int)(height * 0.70));
+                        // 描述字体：最小7pt，最大10pt
+                        int descSize = Math.Max(7, Math.Min(10, width / 28));
+                        lbl.Font = new Font("Microsoft YaHei UI", descSize);
+                        lbl.Size = new Size(width - 20, (int)(height * 0.28));
+                        lbl.Location = new Point(10, (int)(height * 0.68));
                     }
                 }
             }

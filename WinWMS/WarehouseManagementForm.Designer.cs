@@ -30,21 +30,20 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
-            panel1 = new Panel();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            bottomPanel = new Panel();
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnAdd = new Button();
+            txtLocation = new TextBox();
             lblLocation = new Label();
             txtName = new TextBox();
             lblName = new Label();
-            txtLocation = new TextBox();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            btnAdd = new Button();
-            btnUpdate = new Button();
-            btnDelete = new Button();
+            picLogo = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            panel1.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
+            bottomPanel.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -59,7 +58,7 @@
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 182, 193);
-            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(255, 182, 193);
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
@@ -78,126 +77,128 @@
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.FromArgb(255, 218, 224);
-            dataGridView1.Location = new Point(26, 24);
-            dataGridView1.Margin = new Padding(4, 4, 4, 4);
+            dataGridView1.Location = new Point(20, 20);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 10F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 218, 224);
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 40;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1234, 447);
+            dataGridView1.Size = new Size(960, 360);
             dataGridView1.TabIndex = 0;
             // 
-            // panel1
+            // bottomPanel
             // 
-            panel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.BackColor = Color.White;
-            panel1.Controls.Add(tableLayoutPanel1);
-            panel1.Location = new Point(26, 494);
-            panel1.Margin = new Padding(4, 4, 4, 4);
-            panel1.Name = "panel1";
-            panel1.Padding = new Padding(26, 24, 26, 24);
-            panel1.Size = new Size(1234, 188);
-            panel1.TabIndex = 8;
+            bottomPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            bottomPanel.BackColor = Color.White;
+            bottomPanel.Location = new Point(20, 400);
+            bottomPanel.Name = "bottomPanel";
+            bottomPanel.Padding = new Padding(25, 20, 25, 20);
+            bottomPanel.Size = new Size(960, 180);
+            bottomPanel.TabIndex = 1;
+            
+            // 创建左侧输入区域的FlowLayoutPanel
+            FlowLayoutPanel leftInputPanel = new FlowLayoutPanel();
+            leftInputPanel.Dock = DockStyle.Left;
+            leftInputPanel.FlowDirection = FlowDirection.LeftToRight;
+            leftInputPanel.WrapContents = true;
+            leftInputPanel.Width = 650;
+            leftInputPanel.Padding = new Padding(0, 38, 0, 0);  // 添加顶部内边距，使2行输入框垂直居中
+            
+            // 创建右侧按钮区域的TableLayoutPanel
+            TableLayoutPanel buttonPanel = new TableLayoutPanel();
+            buttonPanel.Dock = DockStyle.Fill;
+            buttonPanel.ColumnCount = 2;
+            buttonPanel.RowCount = 2;
+            buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            buttonPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            buttonPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            buttonPanel.Padding = new Padding(20, 10, 20, 10);
+            
+            // 添加到bottomPanel
+            bottomPanel.Controls.Add(buttonPanel);
+            bottomPanel.Controls.Add(leftInputPanel);
+            
+            // 添加控件到leftInputPanel
+            leftInputPanel.Controls.Add(lblName);
+            leftInputPanel.Controls.Add(txtName);
+            leftInputPanel.Controls.Add(lblLocation);
+            leftInputPanel.Controls.Add(txtLocation);
+            
+            // 添加按钮到buttonPanel (2x2布局)
+            buttonPanel.Controls.Add(btnAdd, 0, 0);
+            buttonPanel.Controls.Add(btnUpdate, 1, 0);
+            buttonPanel.Controls.Add(btnDelete, 0, 1);
+            buttonPanel.Controls.Add(picLogo, 1, 1);
+            
+            // lblName
+            lblName.Anchor = AnchorStyles.Left;
+            lblName.AutoSize = false;
+            lblName.Font = new Font("Microsoft YaHei UI", 10F);
+            lblName.ForeColor = Color.FromArgb(64, 64, 64);
+            lblName.Margin = new Padding(5, 5, 3, 5);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(95, 25);
+            lblName.TabIndex = 0;
+            lblName.Text = "仓库名称：";
+            lblName.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // tableLayoutPanel1
+            // txtName
             // 
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 129F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 489F));
-            tableLayoutPanel1.Controls.Add(lblLocation, 0, 1);
-            tableLayoutPanel1.Controls.Add(txtName, 1, 0);
-            tableLayoutPanel1.Controls.Add(lblName, 0, 0);
-            tableLayoutPanel1.Controls.Add(txtLocation, 1, 1);
-            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 2, 0);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(26, 24);
-            tableLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 53F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 53F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1182, 140);
-            tableLayoutPanel1.TabIndex = 0;
+            txtName.BorderStyle = BorderStyle.FixedSingle;
+            txtName.Font = new Font("Microsoft YaHei UI", 10F);
+            txtName.Margin = new Padding(0, 5, 15, 5);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(510, 25);
+            txtName.TabIndex = 1;
+            leftInputPanel.SetFlowBreak(txtName, true);
             // 
             // lblLocation
             // 
             lblLocation.Anchor = AnchorStyles.Left;
-            lblLocation.AutoSize = true;
-            lblLocation.Font = new Font("Microsoft YaHei UI", 11F);
+            lblLocation.AutoSize = false;
+            lblLocation.Font = new Font("Microsoft YaHei UI", 10F);
             lblLocation.ForeColor = Color.FromArgb(64, 64, 64);
-            lblLocation.Location = new Point(4, 67);
-            lblLocation.Margin = new Padding(4, 0, 4, 0);
+            lblLocation.Margin = new Padding(5, 5, 3, 5);
             lblLocation.Name = "lblLocation";
-            lblLocation.Size = new Size(107, 25);
-            lblLocation.TabIndex = 7;
+            lblLocation.Size = new Size(95, 25);
+            lblLocation.TabIndex = 2;
             lblLocation.Text = "仓库位置：";
-            // 
-            // txtName
-            // 
-            txtName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtName.BorderStyle = BorderStyle.FixedSingle;
-            txtName.Font = new Font("Microsoft YaHei UI", 11F);
-            txtName.Location = new Point(133, 11);
-            txtName.Margin = new Padding(4, 4, 4, 4);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(556, 31);
-            txtName.TabIndex = 4;
-            // 
-            // lblName
-            // 
-            lblName.Anchor = AnchorStyles.Left;
-            lblName.AutoSize = true;
-            lblName.Font = new Font("Microsoft YaHei UI", 11F);
-            lblName.ForeColor = Color.FromArgb(64, 64, 64);
-            lblName.Location = new Point(4, 14);
-            lblName.Margin = new Padding(4, 0, 4, 0);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(107, 25);
-            lblName.TabIndex = 6;
-            lblName.Text = "仓库名称：";
+            lblLocation.TextAlign = ContentAlignment.MiddleRight;
             // 
             // txtLocation
             // 
-            txtLocation.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtLocation.BorderStyle = BorderStyle.FixedSingle;
-            txtLocation.Font = new Font("Microsoft YaHei UI", 11F);
-            txtLocation.Location = new Point(133, 64);
-            txtLocation.Margin = new Padding(4, 4, 4, 4);
+            txtLocation.Font = new Font("Microsoft YaHei UI", 10F);
+            txtLocation.Margin = new Padding(0, 5, 15, 5);
             txtLocation.Name = "txtLocation";
-            txtLocation.Size = new Size(556, 31);
-            txtLocation.TabIndex = 5;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(btnAdd);
-            flowLayoutPanel1.Controls.Add(btnUpdate);
-            flowLayoutPanel1.Controls.Add(btnDelete);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(697, 4);
-            flowLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            tableLayoutPanel1.SetRowSpan(flowLayoutPanel1, 2);
-            flowLayoutPanel1.Size = new Size(481, 98);
-            flowLayoutPanel1.TabIndex = 8;
+            txtLocation.Size = new Size(510, 25);
+            txtLocation.TabIndex = 3;
+            leftInputPanel.SetFlowBreak(txtLocation, true);
             // 
             // btnAdd
             // 
             btnAdd.BackColor = Color.FromArgb(255, 105, 180);
             btnAdd.Cursor = Cursors.Hand;
+            btnAdd.Dock = DockStyle.Fill;
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnAdd.ForeColor = Color.White;
-            btnAdd.Location = new Point(13, 9);
-            btnAdd.Margin = new Padding(13, 9, 13, 9);
+            btnAdd.Margin = new Padding(5);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(141, 47);
-            btnAdd.TabIndex = 1;
+            btnAdd.Size = new Size(120, 50);
+            btnAdd.TabIndex = 4;
             btnAdd.Text = "➕ 添加";
             btnAdd.UseVisualStyleBackColor = false;
             // 
@@ -205,15 +206,15 @@
             // 
             btnUpdate.BackColor = Color.FromArgb(255, 182, 193);
             btnUpdate.Cursor = Cursors.Hand;
+            btnUpdate.Dock = DockStyle.Fill;
             btnUpdate.FlatAppearance.BorderSize = 0;
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(180, 9);
-            btnUpdate.Margin = new Padding(13, 9, 13, 9);
+            btnUpdate.Margin = new Padding(5);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(141, 47);
-            btnUpdate.TabIndex = 2;
+            btnUpdate.Size = new Size(120, 50);
+            btnUpdate.TabIndex = 5;
             btnUpdate.Text = "✏️ 更新";
             btnUpdate.UseVisualStyleBackColor = false;
             // 
@@ -221,52 +222,71 @@
             // 
             btnDelete.BackColor = Color.FromArgb(219, 112, 147);
             btnDelete.Cursor = Cursors.Hand;
+            btnDelete.Dock = DockStyle.Fill;
             btnDelete.FlatAppearance.BorderSize = 0;
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(13, 74);
-            btnDelete.Margin = new Padding(13, 9, 13, 9);
+            btnDelete.Margin = new Padding(5);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(141, 47);
-            btnDelete.TabIndex = 3;
+            btnDelete.Size = new Size(120, 50);
+            btnDelete.TabIndex = 6;
             btnDelete.Text = "🗑️ 删除";
             btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // picLogo - 系统Logo
+            // 
+            picLogo.BackColor = Color.FromArgb(255, 240, 245);
+            picLogo.Dock = DockStyle.Fill;
+            picLogo.Margin = new Padding(5);
+            picLogo.Name = "picLogo";
+            picLogo.Size = new Size(120, 50);
+            picLogo.TabIndex = 7;
+            
+            // 创建单个Label显示完整Logo
+            Label lblCompleteLogo = new Label
+            {
+                Text = "🏢 WMS",
+                Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(255, 105, 180),
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = Color.Transparent
+            };
+            
+            picLogo.Controls.Add(lblCompleteLogo);
+            
             // 
             // WarehouseManagementForm
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 240, 245);
-            ClientSize = new Size(1286, 706);
-            Controls.Add(panel1);
+            ClientSize = new Size(1000, 600);
+            Controls.Add(bottomPanel);
             Controls.Add(dataGridView1);
             Font = new Font("Microsoft YaHei UI", 9F);
-            Margin = new Padding(4, 4, 4, 4);
-            MinimumSize = new Size(1023, 580);
+            MinimumSize = new Size(800, 500);
             Name = "WarehouseManagementForm";
             Text = "仓库管理";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            panel1.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
+            bottomPanel.ResumeLayout(false);
+            bottomPanel.PerformLayout();
             ResumeLayout(false);
-
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtLocation;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblLocation;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private DataGridView dataGridView1;
+        private Panel bottomPanel;
+        private Button btnAdd;
+        private Button btnUpdate;
+        private Button btnDelete;
+        private TextBox txtName;
+        private TextBox txtLocation;
+        private Label lblName;
+        private Label lblLocation;
+        private PictureBox picLogo;
     }
 }

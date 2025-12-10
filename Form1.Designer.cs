@@ -139,7 +139,7 @@
             btnMaterialManagement.Padding = new Padding(15, 0, 0, 0);
             btnMaterialManagement.Size = new Size(220, 45);
             btnMaterialManagement.TabIndex = 8;
-            btnMaterialManagement.Text = "📦  物资管理";
+            btnMaterialManagement.Text = "📦  物料管理";
             btnMaterialManagement.TextAlign = ContentAlignment.MiddleLeft;
             btnMaterialManagement.UseVisualStyleBackColor = true;
             btnMaterialManagement.Click += MaterialManagementToolStripMenuItem_Click;

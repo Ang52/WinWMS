@@ -229,8 +229,8 @@ namespace WinWMS
                 contentContainer.SuspendLayout();
 
                 // 获取可用区域（限制最小宽高，避免过小导致布局异常）
-                int availableWidth = Math.max(600, welcomePanel.ClientSize.Width);
-                int availableHeight = Math.max(400, welcomePanel.ClientSize.Height);
+                int availableWidth = Math.Max(600, welcomePanel.ClientSize.Width);
+                int availableHeight = Math.Max(400, welcomePanel.ClientSize.Height);
 
                 // === 响应式缩放计算 ===
                 const float BASE_WIDTH = 1180f;  // 基准宽度（根据设计稿估算）

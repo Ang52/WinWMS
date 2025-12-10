@@ -29,31 +29,6 @@
 - 一个 `inbound_records`（入库记录）可以生成一个或多个 `inventory_batches`（库存批次）：
   - `inbound_records (1) —— (N) inventory_batches`
 
-### 简易 ER 图（Markdown 直接可见）
-
-```text
- [users]            [warehouses]            [materials]
-    |                    |                      |
-    |1                 1 |                    1 |
-    |                  \ | /                    |
-    |                   \|/                     |
-    |                [inbound_records]          |
-    |                     |                     |
-    |                     |                     |
-    |1                    |1                    |1
-    |                     |                     |
- [outbound_records]   [inventory]         [inventory_batches]
-                          ^  ^                 ^   ^   ^
-                          |  |                 |   |   |
-                          |  +-----------------+   |   |
-                          |                        |   |
-                          +------------------------+   |
-                                                       |
-                                                       +-- 引用 [inbound_records]
-```
-
-> 说明：上图为简化的 ER 结构示意，用于在普通 Markdown 预览中快速理解各表关系，详细字段及外键说明见后文。
-
 ### 逻辑关系图（Mermaid 文本，可复制到支持 Mermaid 的工具中渲染）
 
 ```mermaid
@@ -264,4 +239,10 @@ erDiagram
 | `warehouse_id` | `INT` | NOT NULL, FOREIGN KEY → `warehouses(id)` | 仓库ID (外键) |
 | `quantity` | `INT` | NOT NULL | 当前总库存数量 |
 | `unit_price` | `DECIMAL(10, 2)` | NOT NULL | 加权平均单价 |
-| `total_amount` | `DECIMAL(12, 2)` | NOT NULL | 四川 gumawa stock  |
+| `total_amount` | `DECIMAL(12, 2)` | NOT NULL | 库存总金额 |
+| `last_updated` | `TIMESTAMP` | NOT NULL, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP | 最后更新时间 |
+| *Unique Key* | `(material_id, warehouse_id)` | | 物料和仓库的组合必须唯一 |
+
+**业务说明：**
+- 作为汇总表，保存的是当前时点的库存数量与金额信息。
+- 一般在每次入库、出库时，由应用程序通过事务同步更新。

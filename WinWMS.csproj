@@ -6,12 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UseSharedCompilation>false</UseSharedCompilation>
+    <Deterministic>false</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="MySql.Data" Version="9.5.0" />
-    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.27" />
+    <PackageReference Include="MySql.Data" Version="9.2.0" />
   </ItemGroup>
 
   <ItemGroup>

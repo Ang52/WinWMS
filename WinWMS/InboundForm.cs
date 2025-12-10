@@ -121,6 +121,31 @@ namespace WinWMS
             cmbWarehouse.ValueMember = "id";
         }
 
+        private string GenerateBatchNo(int materialId, int warehouseId)
+        {
+            // 生成批次号: PC + 物料ID(4位) + 仓库ID(2位) + 日期(8位) + 序号(3位)
+            string dateStr = DateTime.Now.ToString("yyyyMMdd");
+            
+            // 查询当天该物料在该仓库的入库次数
+            string query = @"SELECT COUNT(*) FROM inventory_batches 
+                           WHERE material_id = @material_id 
+                           AND warehouse_id = @warehouse_id
+                           AND DATE(inbound_date) = CURDATE()";
+            MySqlParameter[] parameters = {
+                new MySqlParameter("@material_id", materialId),
+                new MySqlParameter("@warehouse_id", warehouseId)
+            };
+            
+            DataTable dt = DbHelper.ExecuteQuery(query, parameters);
+            int seq = 1;
+            if (dt.Rows.Count > 0)
+            {
+                seq = Convert.ToInt32(dt.Rows[0][0]) + 1;
+            }
+            
+            return $"PC{materialId:D4}{warehouseId:D2}{dateStr}{seq:D3}";
+        }
+
         private void ClearForm()
         {
             // 重置物料选择
@@ -210,8 +235,30 @@ namespace WinWMS
                     new MySqlParameter("@remark", string.IsNullOrEmpty(remark) ? DBNull.Value : (object)remark)
                 };
                 DbHelper.ExecuteNonQuery(inboundQuery, inboundParams);
+                
+                // 获取刚插入的入库记录ID
+                string getLastIdQuery = "SELECT LAST_INSERT_ID()";
+                DataTable lastIdDt = DbHelper.ExecuteQuery(getLastIdQuery);
+                int inboundRecordId = Convert.ToInt32(lastIdDt.Rows[0][0]);
 
-                // 2. Update inventory
+                // 2. 生成批次号并创建批次记录
+                string batchNo = GenerateBatchNo(materialId, warehouseId);
+                string batchQuery = @"INSERT INTO inventory_batches 
+                                     (material_id, warehouse_id, batch_no, quantity, unit_price, total_amount, inbound_date, inbound_record_id, remark) 
+                                     VALUES (@material_id, @warehouse_id, @batch_no, @quantity, @unit_price, @total_amount, NOW(), @inbound_record_id, @remark)";
+                MySqlParameter[] batchParams = {
+                    new MySqlParameter("@material_id", materialId),
+                    new MySqlParameter("@warehouse_id", warehouseId),
+                    new MySqlParameter("@batch_no", batchNo),
+                    new MySqlParameter("@quantity", quantity),
+                    new MySqlParameter("@unit_price", price),
+                    new MySqlParameter("@total_amount", quantity * price),
+                    new MySqlParameter("@inbound_record_id", inboundRecordId),
+                    new MySqlParameter("@remark", string.IsNullOrEmpty(remark) ? DBNull.Value : (object)remark)
+                };
+                DbHelper.ExecuteNonQuery(batchQuery, batchParams);
+
+                // 3. Update inventory (仍然保持加权平均价格用于快速查询)
                 string checkInventoryQuery = "SELECT quantity, total_amount FROM inventory WHERE material_id = @material_id AND warehouse_id = @warehouse_id";
                 MySqlParameter[] checkParams = {
                     new MySqlParameter("@material_id", materialId),
@@ -257,7 +304,7 @@ namespace WinWMS
                 string specInfo = selectedRow["spec"].ToString() ?? "";
                 string materialCode = selectedRow["material_code"].ToString() ?? "";
 
-                MessageBox.Show($"入库成功！\n\n物料名称：{cmbMaterial.Text}\n物料规格：{specInfo}\n物料编码：{materialCode}\n入库数量：{quantity}\n入库单价：{price:F2}", 
+                MessageBox.Show($"入库成功！\n\n物料名称：{cmbMaterial.Text}\n物料规格：{specInfo}\n物料编码：{materialCode}\n批次号：{batchNo}\n入库数量：{quantity}\n入库单价：{price:F2}", 
                     "入库成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 // 清空表单，准备下一次操作

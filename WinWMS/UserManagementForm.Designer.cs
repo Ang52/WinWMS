@@ -44,9 +44,9 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView1.BorderStyle = BorderStyle.FixedSingle;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 182, 193);
             dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
@@ -67,7 +67,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.FromArgb(255, 218, 224);
+            dataGridView1.GridColor = Color.FromArgb(255, 182, 193);
             dataGridView1.Location = new Point(20, 20);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
@@ -99,21 +99,32 @@
             
             // 创建主容器Panel，用于居中显示内容
             Panel centerPanel = new Panel();
-            centerPanel.Width = 580;  // 固定宽度包含输入框和按钮
+            centerPanel.Width = 660;  // 增加宽度以容纳等宽间距
             centerPanel.Height = 140;
             centerPanel.Left = (bottomPanel.Width - centerPanel.Width) / 2;  // 水平居中
             centerPanel.Top = (bottomPanel.Height - centerPanel.Height) / 2;  // 垂直居中
             centerPanel.Anchor = AnchorStyles.None;  // 保持居中
             
-            // 创建左侧输入区域的FlowLayoutPanel
+            // 创建左侧输入区域的Panel（使用固定定位）
+            Panel leftInputContainer = new Panel();
+            leftInputContainer.Location = new Point(40, 0);  // 左边距40px
+            leftInputContainer.Size = new Size(330, 140);
+            
+            // 创建FlowLayoutPanel用于输入框布局
             FlowLayoutPanel leftInputPanel = new FlowLayoutPanel();
-            leftInputPanel.Dock = DockStyle.Left;
+            leftInputPanel.Dock = DockStyle.Fill;
             leftInputPanel.FlowDirection = FlowDirection.LeftToRight;
             leftInputPanel.WrapContents = true;
-            leftInputPanel.Width = 330;
-            leftInputPanel.Padding = new Padding(0, 10, 0, 0);  // 减少顶部内边距
+            leftInputPanel.Padding = new Padding(0, 10, 0, 0);
             
-            // 创建右侧按钮区域的TableLayoutPanel
+            leftInputContainer.Controls.Add(leftInputPanel);
+            
+            // 创建右侧按钮区域的Panel（使用固定定位）
+            Panel buttonContainer = new Panel();
+            buttonContainer.Location = new Point(410, 0);  // 中间间距40px (370 + 40)
+            buttonContainer.Size = new Size(210, 140);
+            
+            // 创建TableLayoutPanel用于按钮布局
             TableLayoutPanel buttonPanel = new TableLayoutPanel();
             buttonPanel.Dock = DockStyle.Fill;
             buttonPanel.ColumnCount = 2;
@@ -122,11 +133,13 @@
             buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             buttonPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             buttonPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            buttonPanel.Padding = new Padding(10, 5, 0, 5);  // 减少上下内边距
+            buttonPanel.Padding = new Padding(0, 5, 0, 5);
+            
+            buttonContainer.Controls.Add(buttonPanel);
             
             // 添加到centerPanel
-            centerPanel.Controls.Add(buttonPanel);
-            centerPanel.Controls.Add(leftInputPanel);
+            centerPanel.Controls.Add(buttonContainer);
+            centerPanel.Controls.Add(leftInputContainer);
             
             // 添加centerPanel到bottomPanel
             bottomPanel.Controls.Add(centerPanel);

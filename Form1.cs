@@ -32,9 +32,42 @@ namespace WinWMS
             // 监听窗体大小变化事件，用于动态调整欢迎页布局
             this.Resize += Form1_Resize;
             
+            // 根据用户角色设置权限
+            ApplyRolePermissions();
+            
             ShowWelcomePage();
         }
         
+        /// <summary>
+        /// 根据用户角色应用权限控制
+        /// </summary>
+        private void ApplyRolePermissions()
+        {
+            // 在状态栏显示当前登录用户信息
+            string roleName = UserSession.IsAdmin ? "管理员" : "操作员";
+            statusLabel.Text = $"当前用户：{UserSession.Username} [{roleName}] | WinWMS v2.0 | .NET 8.0 | 李易远";
+            
+            // 如果是操作员，隐藏管理员专属功能
+            if (UserSession.IsOperator)
+            {
+                // 隐藏物料管理按钮
+                btnMaterialManagement.Visible = false;
+                
+                // 隐藏仓库管理按钮
+                btnWarehouseManagement.Visible = false;
+                
+                // 隐藏用户管理按钮
+                btnUserManagement.Visible = false;
+            }
+            else if (UserSession.IsAdmin)
+            {
+                // 管理员拥有所有权限，显示所有按钮
+                btnMaterialManagement.Visible = true;
+                btnWarehouseManagement.Visible = true;
+                btnUserManagement.Visible = true;
+            }
+        }
+
         private void Form1_Resize(object sender, EventArgs e)
         {
             // 当窗体大小变化时，如果当前显示的是欢迎页面，则更新其布局
@@ -554,6 +587,8 @@ namespace WinWMS
             if (MessageBox.Show("确定要退出系统吗？", "退出确认",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                // 清空用户会话
+                UserSession.Clear();
                 this.Close();
             }
         }

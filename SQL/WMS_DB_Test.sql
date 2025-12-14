@@ -1,7 +1,8 @@
 ﻿-- =================================================================================
 -- WinWMS 仓储管理系统 - MySQL 数据库初始化脚本
--- 版本: 1.0
+-- 版本: 2.0
 -- 描述: 该脚本用于创建 `winwms` 数据库、所有必要的表结构，并插入初始测试数据。
+-- 更新: 集成登录功能，使用 SHA256 密码哈希
 -- =================================================================================
 
 -- ----------------------------
@@ -19,13 +20,14 @@ USE `winwms`;
 -- ----------------------------
 -- 1. 用户表 (users)
 -- 描述: 存储系统用户信息，包括登录凭证和角色。
+-- 注意: 密码使用 SHA256 哈希存储
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '用户ID，主键',
   `username` VARCHAR(50) NOT NULL COMMENT '用户名，必须唯一',
-  `password_hash` VARCHAR(255) NOT NULL COMMENT '加密后的密码哈希 (使用 BCrypt)',
-  `role` VARCHAR(20) NOT NULL DEFAULT 'Operator' COMMENT '用户角色 (例如: Admin, Operator)',
+  `password_hash` VARCHAR(255) NOT NULL COMMENT '加密后的密码哈希 (使用 SHA256)',
+  `role` VARCHAR(20) NOT NULL DEFAULT 'Operator' COMMENT '用户角色 (Admin=管理员, Operator=操作员)',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_username` (`username`)
@@ -79,6 +81,8 @@ CREATE TABLE `inbound_records` (
   PRIMARY KEY (`id`),
   KEY `idx_material_id` (`material_id`),
   KEY `idx_warehouse_id` (`warehouse_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_inbound_date` (`inbound_date`),
   CONSTRAINT `fk_inbound_material` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_inbound_warehouse` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_inbound_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT
@@ -101,6 +105,8 @@ CREATE TABLE `outbound_records` (
   PRIMARY KEY (`id`),
   KEY `idx_material_id` (`material_id`),
   KEY `idx_warehouse_id` (`warehouse_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_outbound_date` (`outbound_date`),
   CONSTRAINT `fk_outbound_material` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_outbound_warehouse` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_outbound_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT
@@ -125,6 +131,7 @@ CREATE TABLE `inventory_batches` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_batch_no` (`batch_no`),
   KEY `idx_material_warehouse` (`material_id`, `warehouse_id`),
+  KEY `idx_inbound_date` (`inbound_date`),
   CONSTRAINT `fk_batch_material` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_batch_warehouse` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_batch_inbound_record` FOREIGN KEY (`inbound_record_id`) REFERENCES `inbound_records` (`id`) ON DELETE CASCADE
@@ -156,11 +163,16 @@ CREATE TABLE `inventory` (
 
 -- ----------------------------
 -- 1. 插入用户数据
--- 密码 "123456" 的 BCrypt 哈希值
+-- 密码: "123456" 的 SHA256 哈希值: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+-- 注意: 这些是测试账户，生产环境请务必修改密码！
 -- ----------------------------
-INSERT INTO `users` (`id`, `username`, `password_hash`, `role`) VALUES
-(1, 'admin', '$2a$11$D.f5jXJ4x4gH.wO9.p5s9.SjL4wJg2pG3j.X/lY.z.f8U.zH.zH.z', 'Admin'),
-(2, 'operator01', '$2a$11$D.f5jXJ4x4gH.wO9.p5s9.SjL4wJg2pG3j.X/lY.z.f8U.zH.zH.z', 'Operator');
+INSERT INTO `users` (`id`, `username`, `password_hash`, `role`, `created_at`) VALUES
+(1, 'admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'Admin', NOW()),
+(2, 'operator', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'Operator', NOW());
+
+-- 用户说明:
+-- admin (管理员): 拥有所有权限 - 入库、出库、查询、报表、物料管理、仓库管理、用户管理
+-- operator (操作员): 拥有部分权限 - 入库、出库、查询、报表 (无物料/仓库/用户管理权限)
 
 -- ----------------------------
 -- 2. 插入仓库数据
@@ -185,42 +197,109 @@ INSERT INTO `materials` (`id`, `material_code`, `name`, `spec`, `unit`, `price`)
 -- 4. 插入入库、批次和库存数据 (模拟操作)
 -- 这是一个简化的过程，实际应用中应由程序通过事务完成
 -- ----------------------------
--- 第一次入库: 10个 i7-13700K 到主仓库A
-INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES (1, 1, 1, 1, 10, 2800.00, '2023-10-01 10:00:00');
-INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES (1, 1, 1, 1, 'PC00010120231001001', 10, 2800.00, 28000.00, '2023-10-01 10:00:00');
-INSERT INTO `inventory` (`material_id`, `warehouse_id`, `quantity`, `unit_price`, `total_amount`) VALUES (1, 1, 10, 2800.00, 28000.00);
+-- 第一次入库: 10个 i7-13700K 到主仓库A (管理员操作)
+INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES 
+(1, 1, 1, 1, 10, 2800.00, '2023-10-01 10:00:00');
 
--- 第二次入库: 20条 16G内存 到主仓库A
-INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES (2, 3, 1, 2, 20, 350.50, '2023-10-02 11:00:00');
-INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES (2, 3, 1, 2, 'PC00030120231002001', 20, 350.50, 7010.00, '2023-10-02 11:00:00');
-INSERT INTO `inventory` (`material_id`, `warehouse_id`, `quantity`, `unit_price`, `total_amount`) VALUES (3, 1, 20, 350.50, 7010.00);
+INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES 
+(1, 1, 1, 1, 'PC00010120231001001', 10, 2800.00, 28000.00, '2023-10-01 10:00:00');
 
--- 第三次入库: 5个 i7-13700K 到主仓库A (价格上涨)
-INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES (3, 1, 1, 1, 5, 2850.00, '2023-10-10 09:30:00');
-INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES (3, 1, 1, 3, 'PC00010120231010001', 5, 2850.00, 14250.00, '2023-10-10 09:30:00');
+INSERT INTO `inventory` (`material_id`, `warehouse_id`, `quantity`, `unit_price`, `total_amount`) VALUES 
+(1, 1, 10, 2800.00, 28000.00);
+
+-- 第二次入库: 20条 16G内存 到主仓库A (操作员操作)
+INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES 
+(2, 3, 1, 2, 20, 350.50, '2023-10-02 11:00:00');
+
+INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES 
+(2, 3, 1, 2, 'PC00030120231002001', 20, 350.50, 7010.00, '2023-10-02 11:00:00');
+
+INSERT INTO `inventory` (`material_id`, `warehouse_id`, `quantity`, `unit_price`, `total_amount`) VALUES 
+(3, 1, 20, 350.50, 7010.00);
+
+-- 第三次入库: 5个 i7-13700K 到主仓库A (价格上涨, 管理员操作)
+INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES 
+(3, 1, 1, 1, 5, 2850.00, '2023-10-10 09:30:00');
+
+INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES 
+(3, 1, 1, 3, 'PC00010120231010001', 5, 2850.00, 14250.00, '2023-10-10 09:30:00');
+
 -- 更新库存汇总 (加权平均)
 -- (10*2800 + 5*2850) / (10+5) = 2816.67
-UPDATE `inventory` SET `quantity` = 15, `total_amount` = 42250.00, `unit_price` = 2816.67 WHERE `material_id` = 1 AND `warehouse_id` = 1;
+UPDATE `inventory` SET `quantity` = 15, `total_amount` = 42250.00, `unit_price` = 2816.67 
+WHERE `material_id` = 1 AND `warehouse_id` = 1;
 
--- 第四次入库: 5张 RTX 4070 到备用仓库B
-INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES (4, 7, 2, 2, 5, 4799.00, '2023-10-11 14:00:00');
-INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES (4, 7, 2, 4, 'PC00070220231011001', 5, 4799.00, 23995.00, '2023-10-11 14:00:00');
-INSERT INTO `inventory` (`material_id`, `warehouse_id`, `quantity`, `unit_price`, `total_amount`) VALUES (7, 2, 5, 4799.00, 23995.00);
+-- 第四次入库: 5张 RTX 4070 到备用仓库B (操作员操作)
+INSERT INTO `inbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `inbound_date`) VALUES 
+(4, 7, 2, 2, 5, 4799.00, '2023-10-11 14:00:00');
+
+INSERT INTO `inventory_batches` (`id`, `material_id`, `warehouse_id`, `inbound_record_id`, `batch_no`, `quantity`, `unit_price`, `total_amount`, `inbound_date`) VALUES 
+(4, 7, 2, 4, 'PC00070220231011001', 5, 4799.00, 23995.00, '2023-10-11 14:00:00');
+
+INSERT INTO `inventory` (`material_id`, `warehouse_id`, `quantity`, `unit_price`, `total_amount`) VALUES 
+(7, 2, 5, 4799.00, 23995.00);
 
 
 -- ----------------------------
 -- 5. 插入出库数据 (模拟操作)
 -- 这是一个简化的过程，实际应用中应由程序通过事务完成
 -- ----------------------------
--- 第一次出库: 2个 i7-13700K 从主仓库A
+-- 第一次出库: 2个 i7-13700K 从主仓库A (操作员操作)
 -- FIFO: 从第一批出库，成本2800.00
-INSERT INTO `outbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `outbound_date`) VALUES (1, 1, 1, 2, 2, 2800.00, '2023-10-15 16:00:00');
+INSERT INTO `outbound_records` (`id`, `material_id`, `warehouse_id`, `user_id`, `quantity`, `price`, `outbound_date`) VALUES 
+(1, 1, 1, 2, 2, 2800.00, '2023-10-15 16:00:00');
+
 -- 更新第一批次数量
 UPDATE `inventory_batches` SET `quantity` = 8, `total_amount` = 22400.00 WHERE `id` = 1;
+
 -- 更新库存汇总
 -- (8*2800 + 5*2850) / (8+5) = 2819.23
-UPDATE `inventory` SET `quantity` = 13, `total_amount` = 36650.00, `unit_price` = 2819.23 WHERE `material_id` = 1 AND `warehouse_id` = 1;
+UPDATE `inventory` SET `quantity` = 13, `total_amount` = 36650.00, `unit_price` = 2819.23 
+WHERE `material_id` = 1 AND `warehouse_id` = 1;
 
 
--- 脚本结束
-SELECT '数据库和测试数据创建成功！' AS '状态';
+-- =================================================================================
+-- 脚本执行完成
+-- =================================================================================
+SELECT '✅ 数据库初始化成功！' AS '状态',
+       'winwms' AS '数据库名称',
+       '2 个用户 (admin/operator)' AS '测试用户',
+       '所有密码: 123456' AS '默认密码',
+       '7 种物料, 2 个仓库' AS '基础数据',
+       '4 条入库记录, 1 条出库记录' AS '测试数据';
+
+-- 显示测试账户信息
+SELECT '=' AS '', '测试账户信息' AS '', '=' AS '';
+SELECT 
+    username AS '用户名',
+    role AS '角色',
+    CASE 
+        WHEN role = 'Admin' THEN '✅ 全部权限'
+        WHEN role = 'Operator' THEN '⚠️ 部分权限（无管理功能）'
+        ELSE '未知'
+    END AS '权限说明',
+    '123456' AS '密码'
+FROM users
+ORDER BY id;
+
+-- 显示当前库存概况
+SELECT '=' AS '', '当前库存概况' AS '', '=' AS '';
+SELECT 
+    m.material_code AS '物料编码',
+    m.name AS '物料名称',
+    m.spec AS '规格',
+    w.name AS '仓库',
+    i.quantity AS '库存数量',
+    CONCAT('¥', FORMAT(i.unit_price, 2)) AS '平均单价',
+    CONCAT('¥', FORMAT(i.total_amount, 2)) AS '库存总额'
+FROM inventory i
+JOIN materials m ON i.material_id = m.id
+JOIN warehouses w ON i.warehouse_id = w.id
+ORDER BY m.id, w.id;
+
+-- 提示信息
+SELECT '=' AS '', '重要提示' AS '', '=' AS '';
+SELECT 
+    '🔐 生产环境请务必修改默认密码！' AS '安全提示',
+    '📖 详细使用说明请查看 LOGIN_README.md' AS '文档位置',
+    '🔧 手动修改说明请查看 MANUAL_CHANGES_REQUIRED.md' AS '配置指南';
